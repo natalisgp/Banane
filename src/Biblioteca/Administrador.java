@@ -157,7 +157,7 @@ public class Administrador extends JFrame {
 		btnBajaUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new AñadirUsuario().setVisible(true);
+				new AnadirUsuario().setVisible(true);
 				Administrador.this.dispose();
 				System.out.println("Voy a añadir un nuevo usuario");
 				

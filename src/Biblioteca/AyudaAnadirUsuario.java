@@ -20,7 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class AyudaAñadirUsuario extends JFrame {
+public class AyudaAnadirUsuario extends JFrame {
 
 	private JPanel contentPane;
 
@@ -31,7 +31,7 @@ public class AyudaAñadirUsuario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AyudaAñadirUsuario frame = new AyudaAñadirUsuario();
+					AyudaAnadirUsuario frame = new AyudaAnadirUsuario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +43,7 @@ public class AyudaAñadirUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AyudaAñadirUsuario() {
+	public AyudaAnadirUsuario() {
 		setTitle("Ayuda A\u00F1adir Usuario");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,8 +73,8 @@ public class AyudaAñadirUsuario extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				
-				new AñadirUsuario().setVisible(true);
-				AyudaAñadirUsuario.this.dispose(); //hago "invisible la clase login"
+				new AnadirUsuario().setVisible(true);
+				AyudaAnadirUsuario.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		label_2.setForeground(Color.LIGHT_GRAY);

@@ -24,7 +24,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class AñadirUsuario extends JFrame {
+public class AnadirUsuario extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nombre;
@@ -41,7 +41,7 @@ public class AñadirUsuario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AñadirUsuario frame = new AñadirUsuario();
+					AnadirUsuario frame = new AnadirUsuario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +53,7 @@ public class AñadirUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AñadirUsuario() {
+	public AnadirUsuario() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -156,7 +156,7 @@ public class AñadirUsuario extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				
 				new Administrador().setVisible(true);
-				AñadirUsuario.this.dispose(); //hago "invisible la clase login"
+				AnadirUsuario.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		lblAtras.setForeground(Color.LIGHT_GRAY);
@@ -200,8 +200,8 @@ public class AñadirUsuario extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new AyudaAñadirUsuario().setVisible(true); //Voy a crear usuario
-				AñadirUsuario.this.dispose(); //hago "invisible la clase login"
+				new AyudaAnadirUsuario().setVisible(true); //Voy a crear usuario
+				AnadirUsuario.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		button.setBounds(349, 201, 75, 23);
