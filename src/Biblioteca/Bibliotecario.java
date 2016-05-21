@@ -24,9 +24,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-public class Administrador extends JFrame {
+public class Bibliotecario extends JFrame {
 
-/////////
+
 	private JPanel contentPane;
 
 	/**
@@ -36,7 +36,7 @@ public class Administrador extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Administrador frame = new Administrador();
+					Bibliotecario frame = new Bibliotecario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class Administrador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Administrador() {
+	public Bibliotecario() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 554, 399);
@@ -65,7 +65,7 @@ public class Administrador extends JFrame {
 			
 					
 					new login().setVisible(true);
-					Administrador.this.dispose(); //hago "invisible la clase login"
+					Bibliotecario.this.dispose(); //hago "invisible la clase login"
 				
 			}
 		});
@@ -75,18 +75,18 @@ public class Administrador extends JFrame {
 		label_1.setBounds(397, 321, 69, 14);
 		contentPane.add(label_1);
 		
-		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
-		lblAdministrador.setForeground(Color.LIGHT_GRAY);
-		lblAdministrador.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAdministrador.setBounds(10, 11, 102, 14);
-		contentPane.add(lblAdministrador);
+		JLabel lblBibliotecario = new JLabel("BIBLIOTECARIO");
+		lblBibliotecario.setForeground(Color.LIGHT_GRAY);
+		lblBibliotecario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblBibliotecario.setBounds(10, 11, 102, 14);
+		contentPane.add(lblBibliotecario);
 		
 		JButton btnModificarDatosUsuario = new JButton("Modificar datos usuario");
 		btnModificarDatosUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				new ModificarUsuario().setVisible(true);
-				Administrador.this.dispose();
+				Bibliotecario.this.dispose();
 				System.out.println("Voy a modificar un usuario");
 				
 				
@@ -101,7 +101,7 @@ public class Administrador extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				new EliminarUsuario().setVisible(true);
-				Administrador.this.dispose();
+				Bibliotecario.this.dispose();
 				System.out.println("Voy a eliminar a un usuario");
 				
 				
@@ -145,7 +145,7 @@ public class Administrador extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				new BuscarUsuario().setVisible(true);
-				Administrador.this.dispose();
+				Bibliotecario.this.dispose();
 				System.out.println("Voy a buscar un usuario");
 			
 			}
@@ -158,7 +158,7 @@ public class Administrador extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				new AnadirUsuario().setVisible(true);
-				Administrador.this.dispose();
+				Bibliotecario.this.dispose();
 				System.out.println("Voy a añadir un nuevo usuario");
 				
 				
@@ -232,7 +232,7 @@ public class Administrador extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				new AyudaAdministrador().setVisible(true); //Voy a crear usuario
-				Administrador.this.dispose(); //hago "invisible la clase login"
+			    Bibliotecario.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		
