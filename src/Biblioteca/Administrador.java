@@ -26,7 +26,7 @@ import java.sql.SQLException;
 
 public class Administrador extends JFrame {
 
-/////////
+/////////hola gola giilhjvtfc
 	private JPanel contentPane;
 
 	/**
