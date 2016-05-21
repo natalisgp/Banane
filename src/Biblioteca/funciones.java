@@ -23,7 +23,7 @@ public class funciones {
 	static String gname;
 	static String gid;
 	static String gcantidad;
-	static Connection db = Connect("joyeria", "natalia3");
+	static Connection db = Connect("BANANE6", "natalia3");
   
 	public static Connection Connect(String username, String password){
 		Connection connection=null;
@@ -77,6 +77,62 @@ public class funciones {
 		return result;
 	}
 
+	//getUsuarios
+	
+	static String[] getUsuario(String dni) throws SQLException{
+		
+		gdni=dni;
+	  	String query="SELECT * FROM USUARIO WHERE DNI = '"+dni+"'";
+		ResultSet rs = ejecutar(query, db);
+		String nombre = null;
+		String apellidos = null;
+		String username =null;
+		String permisos = null;
+		String password = null;
+		
+		
+		while (rs.next()){
+			nombre = rs.getString("nombre");
+			apellidos = rs.getString("apellidos");
+			username = rs.getString("username");
+			permisos= rs.getInt("permisos")+"";
+			password= rs.getString("password");
+		}
+		gname=nombre;
+		String[] result ={nombre, apellidos, username,permisos,password};
+		return result;
+	}
+	
+	//bibliotecario
+	
+	//getUsuarios
+	
+		static String[] getBibliotecario(String dni) throws SQLException{
+			
+			gdni=dni;
+		  	String query="SELECT * FROM BIBLIOTECARIO WHERE DNI = '"+dni+"'";
+			ResultSet rs = ejecutar(query, db);
+			String nombre = null;
+			String apellidos = null;
+			String username =null;
+			String permisos = null;
+			String password = null;
+			
+			
+			while (rs.next()){
+				nombre = rs.getString("nombre");
+				apellidos = rs.getString("apellidos");
+				username = rs.getString("username");
+				permisos= rs.getInt("permisos")+"";
+				password= rs.getString("password");
+			}
+			gname=nombre;
+			String[] result ={nombre, apellidos, username,permisos,password};
+			return result;
+		}
+
+	
+	
 	//Funcion que coge los datos de la base de datos de la tabla catalogo
 	static String[] getCatalogo(String id) throws SQLException{
 		
@@ -119,28 +175,13 @@ public class funciones {
 	}
 
 	
-	//getUsuarios
 	
-	static ArrayList<String> getUsuarios() throws SQLException{
-		
-	  	String query="SELECT * FROM ADMINISTRADOR";
-		ResultSet rs = ejecutar(query, db);
-		
-		ArrayList<String> resultado = new ArrayList<String>();
-		while (rs.next()){
-			
-			java.sql.ResultSetMetaData rsmd = rs.getMetaData();
-			int numberOfColumns = rsmd.getColumnCount();
-			String data = null;
-			
-			for(int columnIndex = 1; columnIndex <= numberOfColumns; columnIndex ++){
-				data = data+"-"+rs.getObject(columnIndex);
-			}
-			resultado.add(data.substring(2, data.length()));
-			
-		}
-		return resultado;
-	}
+
+	
+	
+	
+	
+	
 	
 	
 	
@@ -173,14 +214,22 @@ public class funciones {
 	
 	
 	public static void añadirNuevoUsuario(String dni, String nombre, String apellidos, String username, String permisos , String password) throws SQLException {
-		String query="INSERT INTO ADMINISTRADOR (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+password+"')";
+		String query="INSERT INTO USUARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+password+"')";
 		ejecutar(query, db);
 		
 	}
 	
 	public static void crearNuevoUsuario(String dni, String nombre, String apellidos, String username,String permisos, String password) throws SQLException {
-		String query="INSERT INTO ADMINISTRADOR (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+1+" , '"+password+"')";
+		String query="INSERT INTO USUARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+password+"')";
 		ejecutar(query, db);
+		
+	}
+	
+	//BIBLIOTECARIO
+	public static void crearNuevoBibliotecario(String dni, String nombre, String apellidos, String username,String permisos, String password) throws SQLException {
+		String query="INSERT INTO BIBLIOTECARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+password+"')";
+		ejecutar(query, db);
+		
 		
 	}
 	
@@ -188,13 +237,13 @@ public class funciones {
 	public static void modificarUsuarios(String dni,String nombre, String apellidos, String username, String permisos , String password) throws SQLException {
 
 		
-			String query="UPDATE ADMINISTRADOR SET NOMBRE = '"+nombre+"', APELLIDOS= '"+apellidos+"', USERNAME= '"+username+"', PERMISOS= "+permisos+" , PASSWORD= '"+password+"' WHERE DNI= '"+dni+"'";
+			String query="UPDATE USUARIO SET NOMBRE = '"+nombre+"', APELLIDOS= '"+apellidos+"', USERNAME= '"+username+"', PERMISOS= "+permisos+" , PASSWORD= '"+password+"' WHERE DNI= '"+dni+"'";
 			ejecutar(query, db);
 		
 	}
 
 	public static void removeUser(String dni) throws SQLException {
-		String query="DELETE FROM ADMINISTRADOR WHERE DNI = '"+dni+"'";
+		String query="DELETE FROM USUARIO WHERE DNI = '"+dni+"'";
 		ejecutar(query, db);
 	}
 
@@ -217,6 +266,29 @@ public class funciones {
 		 bw.close();
 		
 	}
+	
+	
+	static ArrayList<String> getUsuarios() throws SQLException{
+	    
+	      String query="SELECT * FROM ADMINISTRADOR";
+	    ResultSet rs = ejecutar(query, db);
+	    
+	    ArrayList<String> resultado = new ArrayList<String>();
+	    while (rs.next()){
+	      
+	      java.sql.ResultSetMetaData rsmd = rs.getMetaData();
+	      int numberOfColumns = rsmd.getColumnCount();
+	      String data = null;
+	      
+	      for(int columnIndex = 1; columnIndex <= numberOfColumns; columnIndex ++){
+	        data = data+"-"+rs.getObject(columnIndex);
+	      }
+	      resultado.add(data.substring(2, data.length()));
+	      
+	    }
+	    return resultado;
+	  }
+	
 	
 	
 	public static void hacerBackupUsuarios(File archivo2) throws IOException, SQLException {
@@ -296,6 +368,8 @@ public class funciones {
         
 		
 	}
+
+	
 	
 	
 

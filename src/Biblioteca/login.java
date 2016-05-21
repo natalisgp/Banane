@@ -92,7 +92,7 @@ public class login extends JFrame {
 		contentPane.add(ayuda);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\Trabajo Inge\\Rovina.jpg"));
+		label.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\fondo.jpg"));
 		label.setBounds(85, -136, 327, 365);
 		contentPane.add(label);
 		btnCrearUsuario.setBackground(Color.WHITE);
@@ -120,34 +120,48 @@ public class login extends JFrame {
 					
 					//llamo a la funcion obtener usuario
 					try {
-						String[] usuario = funciones.getAdministrador(ndni);
+						String[] admin = funciones.getAdministrador(ndni);
+						String[] usuario =funciones.getUsuario(ndni);
+						String[] bibliotecario =funciones.getBibliotecario(ndni);
 						
-						if(pass.equals(usuario[4])){
+						System.out.println(admin[4]);
+						System.out.println(usuario[4]);
+						System.out.println(bibliotecario[4]);
+						
+						//si el dni es el del administrador
+						if(pass.equals(admin[4])){
 							
-							
-							if(usuario[3].equals("1")){  //El permiso 1 para el usuario
-								
-								new Usuario().setVisible(true);
-								login.this.dispose();
-								System.out.println("Hola soy el usuario");
-								
-							}else if(usuario[3].equals("2")){ //El permiso 2 para el administrador
+
+							//ADMINISTRADOR
+							if(admin[3].equals("1")){  //El permiso 1 para el usuario
 								
 								new Administrador().setVisible(true);
 								login.this.dispose(); //hago "invisible la clase login"
 								
 								//new nombredelaclase.setVisible(true);
 								System.out.println("Hola soy el administrador");
+							}
+							//USUARIO	
+						}
+						if(pass.equals(usuario[4])){ //El permiso 2 para el administrador
+								  	
+								new Usuario().setVisible(true);
+								login.this.dispose();
+								System.out.println("Hola soy el usuario");
+						
+						}			
+								
+							//BIBLIOTECARIO	
+						if(pass.equals(bibliotecario[4])){ //El permiso 2 para el administrador
+								
+								new Bibliotecario().setVisible(true);
+								login.this.dispose(); //hago "invisible la clase login"
+								
+								//new nombredelaclase.setVisible(true);
+								System.out.println("Hola soy el bibliotecario");
 									
 								
-								
-							}else{
-								
-								System.out.println("Hola somos otros");
-							}
 							
-						}else{
-							JOptionPane.showMessageDialog(null, "Error dni o contraseña incorrectos.");
 						}
 						
 					} catch (SQLException e) {
@@ -178,7 +192,7 @@ public class login extends JFrame {
 		contentPane.add(lblContrasea);
 		
 		JLabel ImagenLogin = new JLabel("");
-		ImagenLogin.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\diam.jpg"));
+		ImagenLogin.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\fondo.jpg"));
 		ImagenLogin.setBounds(-15, -78, 568, 365);
 		contentPane.add(ImagenLogin);
 	}

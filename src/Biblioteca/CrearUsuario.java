@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,7 +23,8 @@ import javax.swing.ImageIcon;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import com.aeat.valida.Validador;
+import javax.swing.JComboBox;
 
 public class CrearUsuario extends JFrame {
 
@@ -32,11 +34,27 @@ public class CrearUsuario extends JFrame {
 	private JTextField apellidos;
 	private JTextField username;
 	private JTextField password;
-	private JTextField permisos;
+	private JRadioButton men,woman;
+	JComboBox comboBox = new JComboBox();
 
 	/**
 	 * Launch the application.
 	 */
+	
+public JRadioButton getMenOrWoman(String s){
+		
+		if(s.equals("woman")){
+			return woman;
+		}else if(s.equals("men")){
+			return men;
+		}else{
+			return null;
+		}
+		
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,6 +71,7 @@ public class CrearUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	public CrearUsuario() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -63,13 +82,14 @@ public class CrearUsuario extends JFrame {
 		
 		JLabel lblEliminarUsuario = new JLabel("Crear usuario");
 		lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEliminarUsuario.setForeground(Color.LIGHT_GRAY);
+		lblEliminarUsuario.setForeground(Color.BLACK);
 		lblEliminarUsuario.setBounds(10, 11, 95, 20);
 		contentPane.add(lblEliminarUsuario);
 		
 		JLabel label = new JLabel("DNI");
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label.setForeground(Color.LIGHT_GRAY);
+	
+		label.setForeground(Color.BLACK);
 		label.setBounds(74, 42, 46, 14);
 		contentPane.add(label);
 		
@@ -87,70 +107,113 @@ public class CrearUsuario extends JFrame {
 				String nnombre = nombre.getText();
 				String napellidos = apellidos.getText();
 				String nusername = username.getText();
-				String npermisos =permisos.getText();
+				String npermisos = (String)comboBox.getSelectedItem();
 				String npassword = password.getText();
+				boolean valid = checkDNI(dni.getText());
 				
 				if(ndni.length()>0 && nnombre.length()>0 && napellidos.length()>0 && nusername.length()>0 && npassword.length()>0){ 
 					
 					if(ndni.equals(nusername)){
 						
-						try{
-							
-					
-							funciones.crearNuevoUsuario(ndni, nnombre, napellidos, nusername, npermisos, npassword);							
-							//new Usuario().setVisible(true);
-						//	ModificarUsuario1.this.dispose();
-							System.out.println("Estoy modificando los datos del usuario");
-							
-							JOptionPane.showMessageDialog(null, "Se ha creado un nuevo usuario");
-							
-							
-							
-						} catch (SQLException er) {
-							// TODO Auto-generated catch block
-							er.printStackTrace();
-						}
+						if(valid){
 						
+						    //Usuario
+							if(npermisos.equals("2")){
+								try{
+							
+					    
+									funciones.crearNuevoUsuario(ndni, nnombre, napellidos, nusername, npermisos, npassword);							
+									//new Usuario().setVisible(true);
+									//	ModificarUsuario1.this.dispose();
+									System.out.println("Estoy modificando los datos del usuario");
+							
+									JOptionPane.showMessageDialog(null, "Se ha creado un nuevo usuario");
+							
+							
+							
+									} catch (SQLException er) {
+										// TODO Auto-generated catch block
+										er.printStackTrace();
+									}
+								//new Usuario().setVisible(true);
+								//CrearUsuario.this.dispose();
+								System.out.println("Estoy creando un nuevo usuario");
+							
+							//Bibliotecario	
+							}else if(npermisos.equals("3")){
+								
+								try{
+									
+								    
+									funciones.crearNuevoBibliotecario(ndni, nnombre, napellidos, nusername, npermisos, npassword);							
+									//new Usuario().setVisible(true);
+									//	ModificarUsuario1.this.dispose();
+									System.out.println("Estoy modificando los datos del bibliotecario");
+							
+									JOptionPane.showMessageDialog(null, "Se ha creado un nuevo bibliotecario");
+							
+							
+							
+									} catch (SQLException er) {
+										// TODO Auto-generated catch block
+										er.printStackTrace();
+									}
+								//new Usuario().setVisible(true);
+								//CrearUsuario.this.dispose();
+								System.out.println("Estoy creando un nuevo bibliotecario");
+								
+							}
+						}else{
+							JOptionPane.showMessageDialog( null,"DNI no válido" , "DNI falso" ,JOptionPane.ERROR_MESSAGE );
+						
+						}
+					
+					
 					}else{
 						JOptionPane.showMessageDialog(null, "Error: El DNI tiene que ser igual que el USERNAME");
-					}		
-						
-						
-
-					//new Usuario().setVisible(true);
-					//CrearUsuario.this.dispose();
-					System.out.println("Estoy creando un nuevo usuario");
 					
+					
+					}
 				
 				}else{
 					JOptionPane.showMessageDialog(null, "Error algun campo esta vacio ");
 				}
 				
 			}
+
+			private boolean checkDNI(String s) {
+				  Validador validador = new Validador();
+			        int e = validador.checkNif(s);
+			 
+			        if (e > 0)
+			            return true;
+			        else
+			            return false;
+			}
 		});
 		btnEliminar.setBounds(144, 228, 89, 23);
 		contentPane.add(btnEliminar);
 		
 		JLabel lblNombre = new JLabel("NOMBRE");
-		lblNombre.setForeground(Color.LIGHT_GRAY);
+		lblNombre.setForeground(Color.BLACK);
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNombre.setBounds(74, 72, 69, 14);
 		contentPane.add(lblNombre);
 		
 		JLabel lblApellidos = new JLabel("APELLIDOS");
-		lblApellidos.setForeground(Color.LIGHT_GRAY);
+		lblApellidos.setForeground(Color.BLACK);
 		lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblApellidos.setBounds(74, 104, 69, 14);
 		contentPane.add(lblApellidos);
 		
 		JLabel lblUsername = new JLabel("USERNAME");
-		lblUsername.setForeground(Color.LIGHT_GRAY);
+		lblUsername.setForeground(Color.BLACK);
 		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblUsername.setBounds(74, 137, 69, 14);
 		contentPane.add(lblUsername);
 		
 		JLabel lblAtras = new JLabel("ATRAS");
-		lblAtras.setBackground(Color.WHITE);
+		lblAtras.setBackground(Color.BLACK);
 		lblAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -159,7 +222,7 @@ public class CrearUsuario extends JFrame {
 				CrearUsuario.this.dispose(); //hago "invisible la clase login"
 			}
 		});
-		lblAtras.setForeground(Color.LIGHT_GRAY);
+		lblAtras.setForeground(Color.BLACK);
 		lblAtras.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblAtras.setBounds(365, 232, 69, 14);
 		contentPane.add(lblAtras);
@@ -188,6 +251,13 @@ public class CrearUsuario extends JFrame {
 				CrearUsuario.this.dispose(); //hago "invisible la clase login"
 			}
 		});
+		
+
+		
+		comboBox.addItem("2");
+        comboBox.addItem("3");
+		comboBox.setBounds(206, 171, 114, 20);
+		contentPane.add(comboBox);
 		button.setBounds(339, 201, 85, 23);
 		contentPane.add(button);
 		
@@ -209,22 +279,17 @@ public class CrearUsuario extends JFrame {
 		
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPassword.setForeground(Color.LIGHT_GRAY);
+		lblPassword.setForeground(Color.BLACK);
 		lblPassword.setBounds(74, 205, 69, 14);
 		contentPane.add(lblPassword);
 		
-		permisos = new JTextField();
-		permisos.setEditable(false);
-		permisos.setBackground(SystemColor.control);
-		permisos.setText("1");
-		permisos.setBounds(206, 171, 114, 20);
-		contentPane.add(permisos);
-		permisos.setColumns(10);
+		
+		
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setForeground(Color.LIGHT_GRAY);
+		label_1.setForeground(Color.BLACK);
 		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_1.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\diam.jpg"));
+		label_1.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\fondo.jpg"));
 		label_1.setBounds(-29, -49, 568, 365);
 		contentPane.add(label_1);
 	}

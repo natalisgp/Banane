@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.aeat.valida.Validador;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -33,7 +36,7 @@ public class AnadirUsuario extends JFrame {
 	private JTextField username;
 	private JTextField password;
 	private JTextField permisos;
-
+   
 	/**
 	 * Launch the application.
 	 */
@@ -89,49 +92,65 @@ public class AnadirUsuario extends JFrame {
 				String nusername = username.getText();
 				String npermisos =permisos.getText();
 				String npassword = password.getText();
+				boolean valid = checkDNI(dni.getText());
 				
 				if(ndni.length()>0 && nnombre.length()>0 && napellidos.length()>0 && nusername.length()>0 && npassword.length()>0){ 
 					
 					if(ndni.equals(nusername)){
 						
-						try{
+						if(valid){
+						
+							try{
 							
 					
-							funciones.crearNuevoUsuario(ndni, nnombre, napellidos, nusername, npermisos, npassword);							
+								funciones.crearNuevoUsuario(ndni, nnombre, napellidos, nusername, npermisos, npassword);							
+								//new Usuario().setVisible(true);
+								//	ModificarUsuario1.this.dispose();
+								System.out.println("Estoy modificando los datos del usuario");
+							
+								JOptionPane.showMessageDialog(null, "Se ha creado un nuevo usuario");
+							
+							
+							
+							} catch (SQLException er) {
+								// TODO Auto-generated catch block
+								er.printStackTrace();
+							}
 							//new Usuario().setVisible(true);
-						//	ModificarUsuario1.this.dispose();
-							System.out.println("Estoy modificando los datos del usuario");
+							//CrearUsuario.this.dispose();
+							System.out.println("Estoy creando un nuevo usuario");
 							
-							JOptionPane.showMessageDialog(null, "Se ha creado un nuevo usuario");
-							
-							
-							
-						} catch (SQLException er) {
-							// TODO Auto-generated catch block
-							er.printStackTrace();
+						}else{
+							JOptionPane.showMessageDialog( null,"DNI no válido" , "DNI falso" ,JOptionPane.ERROR_MESSAGE );
+						
 						}
 						
 					}else{
 						JOptionPane.showMessageDialog(null, "Error: El DNI tiene que ser igual que el USERNAME");
 					}		
 						
-						
-
-					//new Usuario().setVisible(true);
-					//CrearUsuario.this.dispose();
-					System.out.println("Estoy creando un nuevo usuario");
 					
-				
 				}else{
 					JOptionPane.showMessageDialog(null, "Error algun campo esta vacio ");
 				}
 				
+			}
+
+			private boolean checkDNI(String s) {
+				  Validador validador = new Validador();
+			        int e = validador.checkNif(s);
+			 
+			        if (e > 0)
+			            return true;
+			        else
+			            return false;
 			}
 		});
 		btnEliminar.setBounds(144, 228, 89, 23);
 		contentPane.add(btnEliminar);
 		
 		JLabel lblNombre = new JLabel("NOMBRE");
+		
 		lblNombre.setForeground(Color.LIGHT_GRAY);
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNombre.setBounds(74, 72, 69, 14);
@@ -140,6 +159,7 @@ public class AnadirUsuario extends JFrame {
 		JLabel lblApellidos = new JLabel("APELLIDOS");
 		lblApellidos.setForeground(Color.LIGHT_GRAY);
 		lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
+		//lblApellidos.setPrompt("Escriba aquí",20);
 		lblApellidos.setBounds(74, 104, 69, 14);
 		contentPane.add(lblApellidos);
 		
