@@ -213,7 +213,7 @@ public class funciones {
 	}
 	
 	
-	public static void añadirNuevoUsuario(String dni, String nombre, String apellidos, String username, String permisos , String password) throws SQLException {
+	public static void anadirNuevoUsuario(String dni, String nombre, String apellidos, String username, String permisos , String password) throws SQLException {
 		String query="INSERT INTO USUARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+password+"')";
 		ejecutar(query, db);
 		

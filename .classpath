@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="lib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="C:/Users/Natalia/Desktop/Informática 5º/2º Cuatrimestre/EDI/WORKSPACE/InsoRovina/ojdbc6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Natalia/Desktop/Informática 5º/2º Cuatrimestre/EDI/WORKSPACE/InsoRovina/valnif.jar"/>
+	<classpathentry kind="lib" path="C:/Users/barbara/git/Banane/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/barbara/git/Banane/valnif.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

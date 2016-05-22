@@ -31,7 +31,7 @@ public class login extends JFrame {
 	//
 	private JPanel contentPane;
 	private JTextField DNI;
-	private JTextField Contraseña;
+	private JTextField Contrasena;
 
 	/**
 	 * Launch the application.
@@ -105,16 +105,16 @@ public class login extends JFrame {
 		contentPane.add(DNI);
 		DNI.setColumns(10);
 		
-		Contraseña = new JTextField();
-		Contraseña.setBounds(217, 147, 114, 20);
-		contentPane.add(Contraseña);
-		Contraseña.setColumns(10);
+		Contrasena = new JTextField();
+		Contrasena.setBounds(217, 147, 114, 20);
+		contentPane.add(Contrasena);
+		Contrasena.setColumns(10);
 		
 		JButton BotonEntrar = new JButton("Entrar");
 		BotonEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String ndni = DNI.getText();
-				String pass = Contraseña.getText();
+				String pass = Contrasena.getText();
 				
 				if(ndni.length()>0 && pass.length()>0){
 					
