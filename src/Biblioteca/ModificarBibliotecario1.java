@@ -41,7 +41,8 @@ public class ModificarBibliotecario1 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ModificarUsuario1 frame = new ModificarUsuario1();
+					ModificarBibliotecario1 frame = new ModificarBibliotecario1();
+		
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,7 +57,7 @@ public class ModificarBibliotecario1 extends JFrame {
 	public ModificarBibliotecario1() {
 		
 		try{
-			String[] datos = funciones.getAdministrador(ModificarUsuario.ndni);
+			String[] datos = funciones.getBibliotecario(ModificarBibliotecario.ndni);
 
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 450, 300);
@@ -65,7 +66,7 @@ public class ModificarBibliotecario1 extends JFrame {
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
 			
-			JButton label_2 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+			JButton label_2 = new JButton(new ImageIcon(getClass().getResource("/Imagenes/flecha.jpg")));
 			label_2.setBorderPainted(false);
 			label_2.addMouseListener(new MouseAdapter() {
 				@Override

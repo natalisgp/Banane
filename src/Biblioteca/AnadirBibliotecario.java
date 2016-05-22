@@ -47,7 +47,7 @@ public class AnadirBibliotecario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AnadirUsuario frame = new AnadirUsuario();
+					AnadirBibliotecario frame = new AnadirBibliotecario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,10 +67,10 @@ public class AnadirBibliotecario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblEliminarUsuario = new JLabel("A\u00F1adir usuario");
+		JLabel lblEliminarUsuario = new JLabel("A\u00F1adir bibliotecario");
 		lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblEliminarUsuario.setForeground(Color.BLACK);
-		lblEliminarUsuario.setBounds(130, 11, 133, 20);
+		lblEliminarUsuario.setBounds(130, 11, 158, 20);
 		contentPane.add(lblEliminarUsuario);
 		
 		JLabel label = new JLabel("DNI");
@@ -174,7 +174,7 @@ public class AnadirBibliotecario extends JFrame {
 		lblUsername.setBounds(74, 122, 69, 14);
 		contentPane.add(lblUsername);
 		
-		JButton lblAtras = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		JButton lblAtras = new JButton(new ImageIcon(this.getClass().getResource("/Imagenes/flecha.jpg")));
 		lblAtras.setBorderPainted(false);
 		lblAtras.addMouseListener(new MouseAdapter() {
 			@Override
@@ -221,7 +221,7 @@ public class AnadirBibliotecario extends JFrame {
 		password.setBounds(206, 180, 114, 14);
 		contentPane.add(password);
 		
-		JButton button = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		JButton button = new JButton(new ImageIcon(this.getClass().getResource("/Imagenes/ayuda.jpg")));
 		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

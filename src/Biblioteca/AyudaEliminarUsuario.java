@@ -63,7 +63,7 @@ public class AyudaEliminarUsuario extends JFrame {
 		txtEliminarUsuario.setBounds(43, 68, 349, 160);
 		AyudaEliminarUsuario.add(txtEliminarUsuario);
 		
-		JButton label_1 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		JButton label_1 = new JButton(new ImageIcon(this.getClass().getResource("/Imagenes/flecha.jpg")));
 		label_1.setBorderPainted(false);
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override

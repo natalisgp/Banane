@@ -69,7 +69,7 @@ public class AyudaAnadirUsuario extends JFrame {
 		scrollPane.setViewportView(txtpnDesdeLaPantalla);
 		txtpnDesdeLaPantalla.setText("\tDesde la pantalla A\u00F1adir Usuario, puede registrarse en nuestra aplicaci\u00F3n. Para ello, rellene los diferentes campos, el \"DNI\" (Documento Nacional de Identidad) de la persona que se va a registrar, se pedir\u00E1 siempre que quiera acceder a la aplicaci\u00F3n. El \"Nombre\" y los dos \"Apellidos\" del nuevo usuario. El \"Username\" tiene que coincidir con el \"DNI\". Dentro de la casilla \"Permisos\", aparece \"1\" por defecto ya que va a ser un usuario el que va a registrarse. Dentro de la casilla \"Password\" introduzca una contrase\u00F1a, \u00E9sta se va a pedir cada vez que quiera acceder a nuestra aplicaci\u00F3n, por lo que es recomendable poner una que sepa que la va a recordar.\r\n\r\n\tSi no le hemos ayudado, estaremos encantados de poder atenderle y solucionar cualquiera problema o consulta que pudiera surgir.  Nuestro n\u00FAmero de atenci\u00F3n al cliente es el 987 50 49 22 en horario comercial o bien enviando un correo electr\u00F3nico a nernat@rovina.net desde el cual contestaremos con la mayor brevedad posible.");
 		
-		JButton label_2 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		JButton label_2 = new JButton(new ImageIcon(this.getClass().getResource("/Imagenes/flecha.jpg")));
 		label_2.setBorderPainted(false);
 		label_2.addMouseListener(new MouseAdapter() {
 			@Override

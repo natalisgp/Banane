@@ -57,7 +57,7 @@ public class ModificarBibliotecario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton label_2 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		JButton label_2 = new JButton(new ImageIcon(getClass().getResource("/Imagenes/flecha.jpg")));
 		label_2.setBorderPainted(false);
 		label_2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -127,13 +127,13 @@ public class ModificarBibliotecario extends JFrame {
 		textField_1.setBounds(196, 110, 114, 20);
 		contentPane.add(textField_1);
 		
-		JLabel lblModificarUsuario = new JLabel("Modificar usuario");
+		JLabel lblModificarUsuario = new JLabel("Modificar bibliotecario");
 		lblModificarUsuario.setForeground(Color.BLACK);
 		lblModificarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblModificarUsuario.setBounds(143, 23, 149, 14);
+		lblModificarUsuario.setBounds(143, 23, 183, 14);
 		contentPane.add(lblModificarUsuario);
 		
-		JButton button = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		JButton button = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
 		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

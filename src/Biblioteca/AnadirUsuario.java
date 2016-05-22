@@ -175,7 +175,7 @@ public class AnadirUsuario extends JFrame {
 		lblUsername.setBounds(74, 122, 69, 14);
 		contentPane.add(lblUsername);
 		
-		JButton lblAtras = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		JButton lblAtras = new JButton(new ImageIcon(this.getClass().getResource("/Imagenes/flecha.jpg")));
 		lblAtras.setBorderPainted(false);
 		lblAtras.addMouseListener(new MouseAdapter() {
 			@Override
@@ -222,7 +222,7 @@ public class AnadirUsuario extends JFrame {
 		password.setBounds(206, 180, 114, 14);
 		contentPane.add(password);
 		
-		JButton button = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		JButton button = new JButton(new ImageIcon(this.getClass().getResource("/Imagenes/ayuda.jpg")));
 		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

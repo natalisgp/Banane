@@ -57,7 +57,7 @@ public class ModificarUsuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton label_2 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		JButton label_2 = new JButton(new ImageIcon(getClass().getResource("/Imagenes/flecha.jpg")));
 		label_2.setBorderPainted(false);
 		label_2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -137,7 +137,7 @@ public class ModificarUsuario extends JFrame {
 		lblModificarUsuario.setBounds(143, 23, 149, 14);
 		contentPane.add(lblModificarUsuario);
 		
-		JButton button = new JButton(new ImageIcon("C:\\Users\\Natalia\\Desktop\\ayuda.jpg"));
+		JButton button = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
 		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

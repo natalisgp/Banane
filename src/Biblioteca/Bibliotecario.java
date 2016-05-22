@@ -58,7 +58,7 @@ public class Bibliotecario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton label_1 = new JButton(new ImageIcon("C:\\Users\\Natalia\\Desktop\\flecha.jpg"));
+		JButton label_1 = new JButton(new ImageIcon(getClass().getResource("/Imagenes/flecha.jpg")));
 		label_1.setBorderPainted(false);
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -229,7 +229,7 @@ public class Bibliotecario extends JFrame {
 		btnModificarCatlogo.setBounds(20, 143, 186, 14);
 		contentPane.add(btnModificarCatlogo);
 		
-		JButton btnAyuda = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		JButton btnAyuda = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
 		btnAyuda.setBorderPainted(false);
 		btnAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

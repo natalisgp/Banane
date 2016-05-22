@@ -210,7 +210,7 @@ public class CrearUsuario extends JFrame {
 		contentPane.add(lblUsername);
 		
 		
-		JButton lblAtras = new JButton(new ImageIcon("C:\\Users\\Natalia\\Desktop\\flecha.jpg"));
+		JButton lblAtras = new JButton(new ImageIcon(getClass().getResource("/Imagenes/flecha.jpg")));
 		lblAtras.setBorderPainted(false);
 		lblAtras.addMouseListener(new MouseAdapter() {
 			@Override
@@ -225,7 +225,7 @@ public class CrearUsuario extends JFrame {
 		lblAtras.setBounds(371, 230, 36, 14);
 		contentPane.add(lblAtras);
 		
-		JButton button = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		JButton button = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
 		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 		

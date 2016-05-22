@@ -56,7 +56,7 @@ public class EliminarBibliotecario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton label_2 = new JButton(new ImageIcon("C:\\Users\\Natalia\\Desktop\\flecha.jpg"));
+		JButton label_2 = new JButton(new ImageIcon(getClass().getResource("/Imagenes/flecha.jpg")));
 		label_2.setBorderPainted(false);
 		label_2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -76,7 +76,7 @@ public class EliminarBibliotecario extends JFrame {
 		JLabel lblEliminarUsuario = new JLabel("Eliminar bibliotecario");
 		lblEliminarUsuario.setForeground(Color.BLACK);
 		lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblEliminarUsuario.setBounds(139, 11, 131, 20);
+		lblEliminarUsuario.setBounds(139, 11, 161, 20);
 		contentPane.add(lblEliminarUsuario);
 		
 		JLabel label = new JLabel("DNI");
@@ -85,7 +85,7 @@ public class EliminarBibliotecario extends JFrame {
 		label.setBounds(95, 88, 46, 14);
 		contentPane.add(label);
 		
-		JButton button = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		JButton button = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
 		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

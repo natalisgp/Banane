@@ -55,7 +55,7 @@ public class Usuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton label_1 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		JButton label_1 = new JButton(new ImageIcon(getClass().getResource("/Imagenes/flecha.jpg")));
 		label_1.setBorderPainted(false);
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -132,7 +132,7 @@ public class Usuario extends JFrame {
 		btnBuscarCatlogo.setBounds(111, 45, 183, 23);
 		contentPane.add(btnBuscarCatlogo);
 		
-		JButton ayuda = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		JButton ayuda = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
 		ayuda.setBorderPainted(false);
 		ayuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

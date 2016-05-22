@@ -67,7 +67,7 @@ public class Modificarme1 extends JFrame {
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
 			
-			JButton label_2 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+			JButton label_2 = new JButton(new ImageIcon(getClass().getResource("/Imagenes/flecha.jpg")));
 			label_2.setBorderPainted(false);
 			label_2.addMouseListener(new MouseAdapter() {
 				@Override

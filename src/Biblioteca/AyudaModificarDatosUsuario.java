@@ -66,7 +66,7 @@ public class AyudaModificarDatosUsuario extends JFrame {
 		txtAyudaModifUsu.setBounds(38, 69, 360, 160);
 		Ayuda.add(txtAyudaModifUsu);
 		
-		JButton label_1 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		JButton label_1 = new JButton(new ImageIcon(this.getClass().getResource("/Imagenes/flecha.jpg")));
 		label_1.setBorderPainted(false);
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override

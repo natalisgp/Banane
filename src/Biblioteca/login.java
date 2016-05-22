@@ -66,7 +66,7 @@ public class login extends JFrame {
 		contentPane.setLayout(null);
 		
 		//JButton btnCrearUsuario = new JButton("Crear usuario");
-		JButton btnCrearUsuario = new JButton(new ImageIcon("C:\\Users\\Natalia\\Desktop\\nuevo.jpg"));
+		JButton btnCrearUsuario = new JButton(new ImageIcon(getClass().getResource("/Imagenes/nuevo.jpg")));
 		btnCrearUsuario.setBorderPainted(true);
 		btnCrearUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,7 +80,7 @@ public class login extends JFrame {
 			}
 		});
 		
-		JButton ayuda = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		JButton ayuda = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
 		ayuda.setBorderPainted(false);
 		ayuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -56,7 +56,7 @@ public class EliminarUsuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton label_2 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		JButton label_2 = new JButton(new ImageIcon(getClass().getResource("/Imagenes/flecha.jpg")));
 		label_2.setBorderPainted(false);
 		label_2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -85,7 +85,7 @@ public class EliminarUsuario extends JFrame {
 		label.setBounds(95, 88, 46, 14);
 		contentPane.add(label);
 		
-		JButton button = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		JButton button = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
 		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

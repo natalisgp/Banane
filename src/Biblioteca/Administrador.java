@@ -58,7 +58,7 @@ public class Administrador extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		JButton label_1 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		JButton label_1 = new JButton(new ImageIcon(this.getClass().getResource("/Imagenes/flecha.jpg")));
 		label_1.setBorderPainted(false);
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -183,7 +183,7 @@ public class Administrador extends JFrame {
 		btnCargarBackupUsuario.setBounds(20, 164, 186, 14);
 		contentPane.add(btnCargarBackupUsuario);
 		
-		JButton btnAyuda = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		JButton btnAyuda = new JButton(new ImageIcon (this.getClass().getResource("/Imagenes/ayuda.jpg")));
 		btnAyuda.setBorderPainted(false);
 		btnAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
