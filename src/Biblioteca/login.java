@@ -28,7 +28,7 @@ import javax.swing.SwingConstants;
 
 
 public class login extends JFrame {
-
+	//
 	private JPanel contentPane;
 	private JTextField DNI;
 	private JTextField Contraseña;
