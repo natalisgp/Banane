@@ -5,9 +5,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -19,6 +21,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import java.awt.event.MouseAdapter;
@@ -33,25 +36,16 @@ public class CrearUsuario extends JFrame {
 	private JTextField dni;
 	private JTextField apellidos;
 	private JTextField username;
-	private JTextField password;
-	private JRadioButton men,woman;
+	private JPasswordField password;
+	private JTextField email;
 	JComboBox comboBox = new JComboBox();
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
 	 */
 	
-public JRadioButton getMenOrWoman(String s){
-		
-		if(s.equals("woman")){
-			return woman;
-		}else if(s.equals("men")){
-			return men;
-		}else{
-			return null;
-		}
-		
-	}
+
 	
 	
 	
@@ -81,21 +75,21 @@ public JRadioButton getMenOrWoman(String s){
 		contentPane.setLayout(null);
 		
 		JLabel lblEliminarUsuario = new JLabel("Crear usuario");
-		lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblEliminarUsuario.setForeground(Color.BLACK);
-		lblEliminarUsuario.setBounds(10, 11, 95, 20);
+		lblEliminarUsuario.setBounds(138, 8, 141, 20);
 		contentPane.add(lblEliminarUsuario);
 		
 		JLabel label = new JLabel("DNI");
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
 	
-		label.setForeground(Color.BLACK);
-		label.setBounds(74, 42, 46, 14);
+		label.setForeground(Color.WHITE);
+		label.setBounds(76, 39, 46, 14);
 		contentPane.add(label);
 		
 		nombre = new JTextField();
 		nombre.setColumns(10);
-		nombre.setBounds(206, 69, 114, 20);
+		nombre.setBounds(206, 64, 114, 14);
 		contentPane.add(nombre);
 	
 		
@@ -108,10 +102,13 @@ public JRadioButton getMenOrWoman(String s){
 				String napellidos = apellidos.getText();
 				String nusername = username.getText();
 				String npermisos = (String)comboBox.getSelectedItem();
-				String npassword = password.getText();
+				char[] nopassword = password.getPassword();
+				String npassword =String.valueOf(nopassword);
+				System.out.println(npassword);
+				String nemail = email.getText();
 				boolean valid = checkDNI(dni.getText());
 				
-				if(ndni.length()>0 && nnombre.length()>0 && napellidos.length()>0 && nusername.length()>0 && npassword.length()>0){ 
+				if(ndni.length()>0 && nnombre.length()>0 && napellidos.length()>0 && nusername.length()>0 && npassword.length()>0 && nemail.length()>0){ 
 					
 					if(ndni.equals(nusername)){
 						
@@ -122,7 +119,7 @@ public JRadioButton getMenOrWoman(String s){
 								try{
 							
 					    
-									funciones.crearNuevoUsuario(ndni, nnombre, napellidos, nusername, npermisos, npassword);							
+									funciones.crearNuevoUsuario(ndni, nnombre, napellidos, nusername, npermisos, npassword,nemail);							
 									//new Usuario().setVisible(true);
 									//	ModificarUsuario1.this.dispose();
 									System.out.println("Estoy modificando los datos del usuario");
@@ -191,29 +188,30 @@ public JRadioButton getMenOrWoman(String s){
 			            return false;
 			}
 		});
-		btnEliminar.setBounds(144, 228, 89, 23);
+		btnEliminar.setBounds(152, 222, 69, 22);
 		contentPane.add(btnEliminar);
 		
 		JLabel lblNombre = new JLabel("NOMBRE");
-		lblNombre.setForeground(Color.BLACK);
+		lblNombre.setForeground(Color.WHITE);
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNombre.setBounds(74, 72, 69, 14);
+		lblNombre.setBounds(74, 64, 69, 14);
 		contentPane.add(lblNombre);
 		
 		JLabel lblApellidos = new JLabel("APELLIDOS");
-		lblApellidos.setForeground(Color.BLACK);
+		lblApellidos.setForeground(Color.WHITE);
 		lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblApellidos.setBounds(74, 104, 69, 14);
+		lblApellidos.setBounds(76, 89, 69, 14);
 		contentPane.add(lblApellidos);
 		
 		JLabel lblUsername = new JLabel("USERNAME");
-		lblUsername.setForeground(Color.BLACK);
+		lblUsername.setForeground(Color.WHITE);
 		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblUsername.setBounds(74, 137, 69, 14);
+		lblUsername.setBounds(76, 114, 69, 14);
 		contentPane.add(lblUsername);
 		
-		JLabel lblAtras = new JLabel("ATRAS");
-		lblAtras.setBackground(Color.BLACK);
+		
+		JButton lblAtras = new JButton(new ImageIcon("C:\\Users\\Natalia\\Desktop\\flecha.jpg"));
+		lblAtras.setBorderPainted(false);
 		lblAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -224,26 +222,11 @@ public JRadioButton getMenOrWoman(String s){
 		});
 		lblAtras.setForeground(Color.BLACK);
 		lblAtras.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblAtras.setBounds(365, 232, 69, 14);
+		lblAtras.setBounds(371, 230, 36, 14);
 		contentPane.add(lblAtras);
 		
-		JLabel lblPermisos = new JLabel("PERMISOS");
-		lblPermisos.setForeground(new Color(192, 192, 192));
-		lblPermisos.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPermisos.setBounds(74, 174, 69, 14);
-		contentPane.add(lblPermisos);
-		
-		dni = new JTextField();
-		dni.setColumns(10);
-		dni.setBounds(206, 39, 114, 20);
-		contentPane.add(dni);
-		
-		apellidos = new JTextField();
-		apellidos.setColumns(10);
-		apellidos.setBounds(206, 101, 114, 20);
-		contentPane.add(apellidos);
-		
-		JButton button = new JButton("Ayuda");
+		JButton button = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 		
 			public void actionPerformed(ActionEvent e) {
@@ -251,19 +234,42 @@ public JRadioButton getMenOrWoman(String s){
 				CrearUsuario.this.dispose(); //hago "invisible la clase login"
 			}
 		});
+		button.setBounds(383, 8, 24, 22);
+		contentPane.add(button);
+		
+		JLabel lblPermisos = new JLabel("PERMISOS");
+		lblPermisos.setForeground(Color.WHITE);
+		lblPermisos.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPermisos.setBounds(74, 142, 69, 14);
+		contentPane.add(lblPermisos);
+		
+		JLabel label_2 = new JLabel("EMAIL");
+		label_2.setForeground(Color.WHITE);
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_2.setBounds(74, 198, 69, 12);
+		contentPane.add(label_2);
+		
+		dni = new JTextField();
+		dni.setColumns(10);
+		dni.setBounds(206, 39, 114, 14);
+		contentPane.add(dni);
+		
+		apellidos = new JTextField();
+		apellidos.setColumns(10);
+		apellidos.setBounds(206, 89, 114, 14);
+		contentPane.add(apellidos);
+		paintComponents(getGraphics());
 		
 
 		
 		comboBox.addItem("2");
         comboBox.addItem("3");
-		comboBox.setBounds(206, 171, 114, 20);
+		comboBox.setBounds(206, 139, 114, 20);
 		contentPane.add(comboBox);
-		button.setBounds(339, 201, 85, 23);
-		contentPane.add(button);
 		
 		username = new JTextField();
 		username.setColumns(10);
-		username.setBounds(206, 134, 114, 20);
+		username.setBounds(206, 114, 114, 14);
 		contentPane.add(username);
 		
 	/*	permisos = new JTextField();
@@ -272,25 +278,32 @@ public JRadioButton getMenOrWoman(String s){
 		contentPane.add(permisos);*/
 	
 		
-		password = new JTextField();
+		password = new JPasswordField();
 		password.setColumns(10);
-		password.setBounds(206, 202, 114, 20);
+		password.setBounds(206, 170, 114, 14);
 		contentPane.add(password);
+		
+		email = new JTextField();
+		email.setColumns(10);
+		email.setBounds(206, 197, 114, 14);
+		contentPane.add(email);
 		
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPassword.setForeground(Color.BLACK);
-		lblPassword.setBounds(74, 205, 69, 14);
-		contentPane.add(lblPassword);
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setBounds(74, 173, 69, 14);
+		contentPane.add(lblPassword);	
+		
+		//Icono
+	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
+	    //Fondo
+	    ((JPanel)getContentPane()).setOpaque(false);
+	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
+	    JLabel fondo= new JLabel(); 
+	    fondo.setIcon(uno); 
+	    getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER); 
+	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 		
 		
-		
-		
-		JLabel label_1 = new JLabel("");
-		label_1.setForeground(Color.BLACK);
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_1.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\fondo.jpg"));
-		label_1.setBounds(-29, -49, 568, 365);
-		contentPane.add(label_1);
 	}
 }

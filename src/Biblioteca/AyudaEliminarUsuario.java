@@ -6,12 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 
 import java.awt.Font;
 import java.awt.Color;
 
 import javax.swing.JTextPane;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -51,7 +53,7 @@ public class AyudaEliminarUsuario extends JFrame {
 		AyudaEliminarUsuario.setLayout(null);
 		
 		JLabel labelAyuda = new JLabel("AYUDA");
-		labelAyuda.setForeground(Color.LIGHT_GRAY);
+		labelAyuda.setForeground(Color.BLACK);
 		labelAyuda.setFont(new Font("Tahoma", Font.BOLD, 15));
 		labelAyuda.setBounds(185, 32, 65, 14);
 		AyudaEliminarUsuario.add(labelAyuda);
@@ -61,7 +63,8 @@ public class AyudaEliminarUsuario extends JFrame {
 		txtEliminarUsuario.setBounds(43, 68, 349, 160);
 		AyudaEliminarUsuario.add(txtEliminarUsuario);
 		
-		JLabel label_1 = new JLabel("ATRAS");
+		JButton label_1 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		label_1.setBorderPainted(false);
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -72,16 +75,21 @@ public class AyudaEliminarUsuario extends JFrame {
 				
 			}
 		});
-		label_1.setForeground(Color.LIGHT_GRAY);
+		label_1.setForeground(Color.BLACK);
 		label_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		label_1.setBackground(Color.WHITE);
-		label_1.setBounds(365, 247, 69, 14);
+		label_1.setBounds(357, 239, 35, 14);
 		AyudaEliminarUsuario.add(label_1);
 		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\diam.jpg"));
-		label.setBounds(-53, 0, 568, 365);
-		AyudaEliminarUsuario.add(label);
+		//Icono
+	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
+	    //Fondo
+	    ((JPanel)getContentPane()).setOpaque(false);
+	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
+	    JLabel fondo= new JLabel(); 
+	    fondo.setIcon(uno); 
+	    getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER); 
+	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 
 }

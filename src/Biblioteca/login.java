@@ -5,11 +5,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -31,7 +33,7 @@ public class login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField DNI;
-	private JTextField Contraseña;
+	private JTextField Contrasena;
 
 	/**
 	 * Launch the application.
@@ -63,7 +65,9 @@ public class login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnCrearUsuario = new JButton("Crear usuario");
+		//JButton btnCrearUsuario = new JButton("Crear usuario");
+		JButton btnCrearUsuario = new JButton(new ImageIcon("C:\\Users\\Natalia\\Desktop\\nuevo.jpg"));
+		btnCrearUsuario.setBorderPainted(true);
 		btnCrearUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -76,7 +80,8 @@ public class login extends JFrame {
 			}
 		});
 		
-		JButton ayuda = new JButton("Ayuda");
+		JButton ayuda = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		ayuda.setBorderPainted(false);
 		ayuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -88,16 +93,16 @@ public class login extends JFrame {
 				
 			}
 		});
-		ayuda.setBounds(345, 234, 89, 23);
+		ayuda.setBounds(387, 24, 25, 23);
 		contentPane.add(ayuda);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\fondo.jpg"));
+		//label.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\fondo.jpg"));
 		label.setBounds(85, -136, 327, 365);
 		contentPane.add(label);
 		btnCrearUsuario.setBackground(Color.WHITE);
 		btnCrearUsuario.setForeground(Color.BLUE);
-		btnCrearUsuario.setBounds(147, 234, 131, 23);
+		btnCrearUsuario.setBounds(167, 234, 89, 23);
 		contentPane.add(btnCrearUsuario);
 		
 		DNI = new JTextField();
@@ -105,18 +110,20 @@ public class login extends JFrame {
 		contentPane.add(DNI);
 		DNI.setColumns(10);
 		
-		Contraseña = new JTextField();
-		Contraseña.setBounds(217, 147, 114, 20);
-		contentPane.add(Contraseña);
-		Contraseña.setColumns(10);
+		Contrasena = new JPasswordField();
+		//Contrasena = new JTextField();
+		Contrasena.setBounds(217, 147, 114, 20);
+		contentPane.add(Contrasena);
+		Contrasena.setColumns(10);
 		
 		JButton BotonEntrar = new JButton("Entrar");
 		BotonEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String ndni = DNI.getText();
-				String pass = Contraseña.getText();
+				char[] pass =((JPasswordField) Contrasena).getPassword();
+				//String pass = Contrasena.getText();
 				
-				if(ndni.length()>0 && pass.length()>0){
+				if(ndni.length()>0 && pass.length>0){
 					
 					//llamo a la funcion obtener usuario
 					try {
@@ -124,12 +131,12 @@ public class login extends JFrame {
 						String[] usuario =funciones.getUsuario(ndni);
 						String[] bibliotecario =funciones.getBibliotecario(ndni);
 						
-						System.out.println(admin[4]);
-						System.out.println(usuario[4]);
-						System.out.println(bibliotecario[4]);
+						System.out.println(admin[2]);
+						System.out.println(usuario[2]);
+						System.out.println(bibliotecario[2]);
 						
 						//si el dni es el del administrador
-						if(pass.equals(admin[4])){
+						if(ndni.equals(admin[2])){
 							
 
 							//ADMINISTRADOR
@@ -143,7 +150,7 @@ public class login extends JFrame {
 							}
 							//USUARIO	
 						}
-						if(pass.equals(usuario[4])){ //El permiso 2 para el administrador
+						if(ndni.equals(usuario[2])){ //El permiso 2 para el administrador
 								  	
 								new Usuario().setVisible(true);
 								login.this.dispose();
@@ -152,7 +159,7 @@ public class login extends JFrame {
 						}			
 								
 							//BIBLIOTECARIO	
-						if(pass.equals(bibliotecario[4])){ //El permiso 2 para el administrador
+						if(ndni.equals(bibliotecario[2])){ //El permiso 2 para el administrador
 								
 								new Bibliotecario().setVisible(true);
 								login.this.dispose(); //hago "invisible la clase login"
@@ -180,21 +187,26 @@ public class login extends JFrame {
 		contentPane.add(BotonEntrar);
 		
 		JLabel lblDni = new JLabel("DNI");
-		lblDni.setForeground(Color.LIGHT_GRAY);
+		lblDni.setForeground(Color.WHITE);
 		lblDni.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblDni.setBounds(131, 108, 46, 14);
 		contentPane.add(lblDni);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setForeground(Color.LIGHT_GRAY);
+		lblContrasea.setForeground(Color.WHITE);
 		lblContrasea.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblContrasea.setBounds(110, 150, 97, 14);
 		contentPane.add(lblContrasea);
 		
-		JLabel ImagenLogin = new JLabel("");
-		ImagenLogin.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\fondo.jpg"));
-		ImagenLogin.setBounds(-15, -78, 568, 365);
-		contentPane.add(ImagenLogin);
+		//Icono
+	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
+	    //Fondo
+	    ((JPanel)getContentPane()).setOpaque(false);
+	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
+	    JLabel fondo= new JLabel(); 
+	    fondo.setIcon(uno); 
+	    getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER); 
+	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 }
 

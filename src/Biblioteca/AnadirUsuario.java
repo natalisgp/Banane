@@ -5,11 +5,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import com.aeat.valida.Validador;
 
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -34,8 +36,9 @@ public class AnadirUsuario extends JFrame {
 	private JTextField dni;
 	private JTextField apellidos;
 	private JTextField username;
-	private JTextField password;
+	private JPasswordField password;
 	private JTextField permisos;
+	private JTextField email;
    
 	/**
 	 * Launch the application.
@@ -65,20 +68,20 @@ public class AnadirUsuario extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblEliminarUsuario = new JLabel("A\u00F1adir usuario");
-		lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEliminarUsuario.setForeground(Color.LIGHT_GRAY);
-		lblEliminarUsuario.setBounds(10, 11, 95, 20);
+		lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblEliminarUsuario.setForeground(Color.BLACK);
+		lblEliminarUsuario.setBounds(130, 11, 133, 20);
 		contentPane.add(lblEliminarUsuario);
 		
 		JLabel label = new JLabel("DNI");
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label.setForeground(Color.LIGHT_GRAY);
+		label.setForeground(Color.WHITE);
 		label.setBounds(74, 42, 46, 14);
 		contentPane.add(label);
 		
 		nombre = new JTextField();
 		nombre.setColumns(10);
-		nombre.setBounds(206, 69, 114, 20);
+		nombre.setBounds(206, 69, 114, 14);
 		contentPane.add(nombre);
 	
 		
@@ -91,10 +94,13 @@ public class AnadirUsuario extends JFrame {
 				String napellidos = apellidos.getText();
 				String nusername = username.getText();
 				String npermisos =permisos.getText();
-				String npassword = password.getText();
+				char[] nopassword = password.getPassword();
+				String npassword =String.valueOf(nopassword);
+				
+				String nemail = email.getText();
 				boolean valid = checkDNI(dni.getText());
 				
-				if(ndni.length()>0 && nnombre.length()>0 && napellidos.length()>0 && nusername.length()>0 && npassword.length()>0){ 
+				if(ndni.length()>0 && nnombre.length()>0 && napellidos.length()>0 && nusername.length()>0 && npassword.length()>0 && nemail.length()>0){ 
 					
 					if(ndni.equals(nusername)){
 						
@@ -103,7 +109,7 @@ public class AnadirUsuario extends JFrame {
 							try{
 							
 					
-								funciones.crearNuevoUsuario(ndni, nnombre, napellidos, nusername, npermisos, npassword);							
+								funciones.anadirNuevoUsuario(ndni, nnombre, napellidos, nusername, npermisos, npassword,nemail);							
 								//new Usuario().setVisible(true);
 								//	ModificarUsuario1.this.dispose();
 								System.out.println("Estoy modificando los datos del usuario");
@@ -151,26 +157,26 @@ public class AnadirUsuario extends JFrame {
 		
 		JLabel lblNombre = new JLabel("NOMBRE");
 		
-		lblNombre.setForeground(Color.LIGHT_GRAY);
+		lblNombre.setForeground(Color.WHITE);
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNombre.setBounds(74, 72, 69, 14);
 		contentPane.add(lblNombre);
 		
 		JLabel lblApellidos = new JLabel("APELLIDOS");
-		lblApellidos.setForeground(Color.LIGHT_GRAY);
+		lblApellidos.setForeground(Color.WHITE);
 		lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		//lblApellidos.setPrompt("Escriba aquí",20);
-		lblApellidos.setBounds(74, 104, 69, 14);
+		lblApellidos.setBounds(74, 97, 69, 14);
 		contentPane.add(lblApellidos);
 		
 		JLabel lblUsername = new JLabel("USERNAME");
-		lblUsername.setForeground(Color.LIGHT_GRAY);
+		lblUsername.setForeground(Color.WHITE);
 		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblUsername.setBounds(74, 137, 69, 14);
+		lblUsername.setBounds(74, 122, 69, 14);
 		contentPane.add(lblUsername);
 		
-		JLabel lblAtras = new JLabel("ATRAS");
-		lblAtras.setBackground(Color.WHITE);
+		JButton lblAtras = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		lblAtras.setBorderPainted(false);
 		lblAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -179,30 +185,30 @@ public class AnadirUsuario extends JFrame {
 				AnadirUsuario.this.dispose(); //hago "invisible la clase login"
 			}
 		});
-		lblAtras.setForeground(Color.LIGHT_GRAY);
+		lblAtras.setForeground(Color.WHITE);
 		lblAtras.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblAtras.setBounds(359, 232, 69, 14);
+		lblAtras.setBounds(359, 232, 35, 14);
 		contentPane.add(lblAtras);
 		
 		JLabel lblPermisos = new JLabel("PERMISOS");
-		lblPermisos.setForeground(new Color(192, 192, 192));
+		lblPermisos.setForeground(Color.WHITE);
 		lblPermisos.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPermisos.setBounds(74, 174, 69, 14);
+		lblPermisos.setBounds(74, 147, 69, 14);
 		contentPane.add(lblPermisos);
 		
 		dni = new JTextField();
 		dni.setColumns(10);
-		dni.setBounds(206, 39, 114, 20);
+		dni.setBounds(206, 39, 114, 14);
 		contentPane.add(dni);
 		
 		apellidos = new JTextField();
 		apellidos.setColumns(10);
-		apellidos.setBounds(206, 101, 114, 20);
+		apellidos.setBounds(206, 92, 114, 14);
 		contentPane.add(apellidos);
 		
 		username = new JTextField();
 		username.setColumns(10);
-		username.setBounds(206, 134, 114, 20);
+		username.setBounds(206, 122, 114, 14);
 		contentPane.add(username);
 		
 	/*	permisos = new JTextField();
@@ -211,12 +217,13 @@ public class AnadirUsuario extends JFrame {
 		contentPane.add(permisos);*/
 	
 		
-		password = new JTextField();
+		password = new JPasswordField();
 		password.setColumns(10);
-		password.setBounds(206, 202, 114, 20);
+		password.setBounds(206, 180, 114, 14);
 		contentPane.add(password);
 		
-		JButton button = new JButton("Ayuda");
+		JButton button = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -224,28 +231,42 @@ public class AnadirUsuario extends JFrame {
 				AnadirUsuario.this.dispose(); //hago "invisible la clase login"
 			}
 		});
-		button.setBounds(349, 201, 75, 23);
+		button.setBounds(370, 11, 24, 23);
 		contentPane.add(button);
 		
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPassword.setForeground(Color.LIGHT_GRAY);
-		lblPassword.setBounds(74, 205, 69, 14);
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setBounds(74, 180, 69, 14);
 		contentPane.add(lblPassword);
+		
+		JLabel label_2 = new JLabel("EMAIL");
+		label_2.setForeground(Color.WHITE);
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_2.setBounds(76, 205, 69, 14);
+		contentPane.add(label_2);
 		
 		permisos = new JTextField();
 		permisos.setEditable(false);
 		permisos.setBackground(SystemColor.control);
-		permisos.setText("1");
-		permisos.setBounds(206, 171, 114, 20);
+		permisos.setText("2");
+		permisos.setBounds(206, 147, 114, 20);
 		contentPane.add(permisos);
 		permisos.setColumns(10);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setForeground(Color.LIGHT_GRAY);
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_1.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\diam.jpg"));
-		label_1.setBounds(-29, -49, 568, 365);
-		contentPane.add(label_1);
+		email = new JTextField();
+		email.setColumns(10);
+		email.setBounds(206, 203, 114, 14);
+		contentPane.add(email);
+		
+		//Icono
+	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
+	    //Fondo
+	    ((JPanel)getContentPane()).setOpaque(false);
+	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
+	    JLabel fondo= new JLabel(); 
+	    fondo.setIcon(uno); 
+	    getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER); 
+	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 }

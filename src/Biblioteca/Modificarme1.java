@@ -5,8 +5,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -31,7 +33,9 @@ public class Modificarme1 extends JFrame {
 	private JTextField surname;
 	private JTextField username;
 	private JTextField permisos;
-	private JTextField password;
+	private JTextField email;
+	
+	private JPasswordField password;
 	/**
 	 * Launch the application.
 	 */
@@ -63,7 +67,8 @@ public class Modificarme1 extends JFrame {
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
 			
-			JLabel label_2 = new JLabel("ATRAS");
+			JButton label_2 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+			label_2.setBorderPainted(false);
 			label_2.addMouseListener(new MouseAdapter() {
 				@Override
 			
@@ -72,34 +77,34 @@ public class Modificarme1 extends JFrame {
 					Modificarme1.this.dispose(); //hago "invisible la clase login"
 				}
 			});
-			label_2.setForeground(Color.LIGHT_GRAY);
+			label_2.setForeground(Color.BLACK);
 			label_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 			label_2.setBackground(Color.WHITE);
-			label_2.setBounds(355, 237, 69, 14);
+			label_2.setBounds(383, 233, 28, 14);
 			contentPane.add(label_2);
 			
 			dnis = new JTextField();
 			dnis.setEditable(false);
 			dnis.setColumns(10);
-			dnis.setBounds(206, 39, 114, 20);
+			dnis.setBounds(206, 39, 114, 14);
 			contentPane.add(dnis);
 			dnis.setText(Modificarme.ndni);
 			
 			JLabel lblEliminarUsuario = new JLabel("Modificar mis datos");
-			lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblEliminarUsuario.setForeground(Color.LIGHT_GRAY);
-			lblEliminarUsuario.setBounds(10, 11, 154, 20);
+			lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
+			lblEliminarUsuario.setForeground(Color.BLACK);
+			lblEliminarUsuario.setBounds(126, 8, 154, 20);
 			contentPane.add(lblEliminarUsuario);
 			
 			JLabel label = new JLabel("DNI");
 			label.setFont(new Font("Tahoma", Font.BOLD, 11));
-			label.setForeground(Color.LIGHT_GRAY);
+			label.setForeground(Color.WHITE);
 			label.setBounds(74, 42, 46, 14);
 			contentPane.add(label);
 			
 			name = new JTextField();
 			name.setColumns(10);
-			name.setBounds(206, 69, 114, 20);
+			name.setBounds(206, 69, 114, 14);
 			contentPane.add(name);
 			name.setText(datos[0]);
 			
@@ -112,9 +117,11 @@ public class Modificarme1 extends JFrame {
 					String napellidos = surname.getText();
 					String nusername = username.getText();
 					String npermisos = permisos.getText();
-					String npassword = password.getText();
+					String nemail = email.getText();
+					char[] nopassword = password.getPassword();
+					String npassword =String.valueOf(nopassword);
 					
-					if(nnombre.length()>0 && napellidos.length()>0 && nusername.length()>0 && npermisos.length()>0 && npassword.length()>0){ 
+					if(nnombre.length()>0 && napellidos.length()>0 && nusername.length()>0 && npermisos.length()>0 && npassword.length()>0 && nemail.length()>0){ 
 						
 						
 						if(ndni.equals(nusername)){
@@ -122,7 +129,7 @@ public class Modificarme1 extends JFrame {
 						
 						try{
 							
-							funciones.modificarUsuarios(ndni,nnombre, napellidos, nusername, npermisos, npassword);
+							funciones.modificarUsuarios(ndni,nnombre, napellidos, nusername, npermisos, npassword,nemail);
 							
 							//new Usuario().setVisible(true);
 							Modificarme1.this.dispose();
@@ -149,64 +156,82 @@ public class Modificarme1 extends JFrame {
 			contentPane.add(btnEliminar);
 			
 			JLabel lblNombre = new JLabel("NOMBRE");
-			lblNombre.setForeground(Color.LIGHT_GRAY);
+			lblNombre.setForeground(Color.WHITE);
 			lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblNombre.setBounds(74, 72, 69, 14);
+			lblNombre.setBounds(74, 69, 69, 14);
 			contentPane.add(lblNombre);
+			
+			JLabel label1 = new JLabel("EMAIL");
+			label1.setForeground(Color.WHITE);
+			label1.setFont(new Font("Tahoma", Font.BOLD, 11));
+			label1.setBounds(76, 205, 69, 14);
+			contentPane.add(label1);
 			
 			
 			JLabel lblApellidos = new JLabel("APELLIDOS");
-			lblApellidos.setForeground(Color.LIGHT_GRAY);
+			lblApellidos.setForeground(Color.WHITE);
 			lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblApellidos.setBounds(74, 104, 69, 14);
+			lblApellidos.setBounds(74, 94, 69, 14);
 			contentPane.add(lblApellidos);
 			
 			JLabel lblUsername = new JLabel("USERNAME");
 			lblUsername.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblUsername.setForeground(Color.LIGHT_GRAY);
-			lblUsername.setBounds(74, 137, 69, 14);
+			lblUsername.setForeground(Color.WHITE);
+			lblUsername.setBounds(74, 119, 69, 14);
 			contentPane.add(lblUsername);
 			
 			JLabel lblPermisos = new JLabel("PERMISOS");
-			lblPermisos.setForeground(Color.LIGHT_GRAY);
+			lblPermisos.setForeground(Color.WHITE);
 			lblPermisos.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblPermisos.setBounds(74, 174, 69, 14);
+			lblPermisos.setBounds(74, 144, 69, 14);
 			contentPane.add(lblPermisos);
+			
+			
 			
 			surname = new JTextField();
 			surname.setColumns(10);
-			surname.setBounds(206, 101, 114, 20);
+			surname.setBounds(206, 94, 114, 14);
 			contentPane.add(surname);
 			surname.setText(datos[1]);
 			
 			username = new JTextField();
 			username.setColumns(10);
-			username.setBounds(206, 134, 114, 20);
+			username.setBounds(206, 119, 114, 14);
 			contentPane.add(username);
 			username.setText(datos[2]);
 			
 			permisos = new JTextField();
 			permisos.setColumns(10);
-			permisos.setBounds(206, 171, 114, 20);
+			permisos.setBounds(206, 144, 114, 14);
 			contentPane.add(permisos);
 			permisos.setText(datos[3]);
 			
-			password = new JTextField();
+			email = new JTextField();
+			email.setColumns(10);
+			email.setBounds(206, 205, 114, 14);
+			contentPane.add(email);
+			
+			password = new JPasswordField();
 			password.setColumns(10);
-			password.setBounds(206, 202, 114, 20);
+			password.setBounds(206, 174, 114, 14);
 			contentPane.add(password);
 			password.setText(datos[4]);
 			
 			JLabel lblPassword = new JLabel("PASSWORD");
 			lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblPassword.setForeground(Color.LIGHT_GRAY);
-			lblPassword.setBounds(74, 205, 69, 14);
+			lblPassword.setForeground(Color.WHITE);
+			lblPassword.setBounds(74, 174, 69, 14);
 			contentPane.add(lblPassword);
 			
-			JLabel label_1 = new JLabel("");
-			label_1.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\diam.jpg"));
-			label_1.setBounds(-50, -89, 568, 365);
-			contentPane.add(label_1);
+			//Icono
+		    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
+		    //Fondo
+		    ((JPanel)getContentPane()).setOpaque(false);
+		    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
+		    JLabel fondo= new JLabel(); 
+		    fondo.setIcon(uno); 
+		    getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER); 
+		    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 		}catch (Exception e){
 			
 		}

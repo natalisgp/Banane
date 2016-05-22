@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -54,7 +55,8 @@ public class Usuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel label_1 = new JLabel("ATRAS");
+		JButton label_1 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		label_1.setBorderPainted(false);
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -63,20 +65,20 @@ public class Usuario extends JFrame {
 				Usuario.this.dispose(); //hago "invisible la clase login"
 			}
 		});
-		label_1.setForeground(Color.LIGHT_GRAY);
+		label_1.setForeground(Color.BLACK);
 		label_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		label_1.setBackground(Color.WHITE);
-		label_1.setBounds(375, 247, 69, 14);
+		label_1.setBounds(384, 238, 35, 14);
 		contentPane.add(label_1);
 		
 		JButton btnBuscarCatlogo_1 = new JButton("Buscar cat\u00E1logo");
-		btnBuscarCatlogo_1.setBounds(111, 170, 183, 23);
+		btnBuscarCatlogo_1.setBounds(111, 148, 183, 23);
 		contentPane.add(btnBuscarCatlogo_1);
 		
 		JLabel lblUsuario = new JLabel("USUARIO");
-		lblUsuario.setForeground(Color.LIGHT_GRAY);
+		lblUsuario.setForeground(Color.BLACK);
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblUsuario.setBounds(10, 11, 55, 14);
+		lblUsuario.setBounds(172, 11, 55, 14);
 		contentPane.add(lblUsuario);
 		
 		JButton button = new JButton("Consultar datos personales");
@@ -84,7 +86,7 @@ public class Usuario extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		button.setBounds(111, 136, 183, 23);
+		button.setBounds(111, 114, 183, 23);
 		contentPane.add(button);
 		
 		JButton btnModificarDatosPersonales = new JButton("Modificar datos personales");
@@ -93,21 +95,27 @@ public class Usuario extends JFrame {
 				
 				new Modificarme().setVisible(true); //Voy a crear usuario
 				Usuario.this.dispose(); //hago "invisible la clase login"
+								
+			}
+		});
+		btnModificarDatosPersonales.setBounds(111, 80, 183, 23);
+		contentPane.add(btnModificarDatosPersonales);
+		
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				
-				
+				new login().setVisible(true); //Voy a crear usuario
+				Usuario.this.dispose(); //hago "invisible la clase login"
 				
 				
 			}
 		});
-		btnModificarDatosPersonales.setBounds(111, 92, 183, 23);
-		contentPane.add(btnModificarDatosPersonales);
-		
-		JButton btnLogout = new JButton("Logout");
-		btnLogout.setBounds(111, 238, 183, 23);
+		btnLogout.setBounds(111, 216, 183, 23);
 		contentPane.add(btnLogout);
 		
 		JButton btnBuscarProducto = new JButton("Buscar producto");
-		btnBuscarProducto.setBounds(111, 204, 183, 23);
+		btnBuscarProducto.setBounds(111, 182, 183, 23);
 		contentPane.add(btnBuscarProducto);
 		
 		JButton btnBuscarCatlogo = new JButton("Ver cat\u00E1logos");
@@ -121,10 +129,11 @@ public class Usuario extends JFrame {
 				
 			}
 		});
-		btnBuscarCatlogo.setBounds(111, 58, 183, 23);
+		btnBuscarCatlogo.setBounds(111, 45, 183, 23);
 		contentPane.add(btnBuscarCatlogo);
 		
-		JButton ayuda = new JButton("Ayuda");
+		JButton ayuda = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		ayuda.setBorderPainted(false);
 		ayuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -135,13 +144,18 @@ public class Usuario extends JFrame {
 				
 			}
 		});
-		ayuda.setBounds(349, 212, 85, 23);
+		ayuda.setBounds(393, 22, 26, 23);
 		contentPane.add(ayuda);
 		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\diam.jpg"));
-		label.setBounds(-92, -48, 568, 365);
-		contentPane.add(label);
+		//Icono
+	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
+	    //Fondo
+	    ((JPanel)getContentPane()).setOpaque(false);
+	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
+	    JLabel fondo= new JLabel(); 
+	    fondo.setIcon(uno); 
+	    getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER); 
+	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 }
 

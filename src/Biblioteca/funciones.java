@@ -89,6 +89,7 @@ public class funciones {
 		String username =null;
 		String permisos = null;
 		String password = null;
+		String email = null;
 		
 		
 		while (rs.next()){
@@ -97,9 +98,10 @@ public class funciones {
 			username = rs.getString("username");
 			permisos= rs.getInt("permisos")+"";
 			password= rs.getString("password");
+			email=rs.getString("email");
 		}
 		gname=nombre;
-		String[] result ={nombre, apellidos, username,permisos,password};
+		String[] result ={nombre, apellidos, username,permisos,password,email};
 		return result;
 	}
 	
@@ -125,6 +127,7 @@ public class funciones {
 				username = rs.getString("username");
 				permisos= rs.getInt("permisos")+"";
 				password= rs.getString("password");
+				
 			}
 			gname=nombre;
 			String[] result ={nombre, apellidos, username,permisos,password};
@@ -213,42 +216,61 @@ public class funciones {
 	}
 	
 	
-	public static void añadirNuevoUsuario(String dni, String nombre, String apellidos, String username, String permisos , String password) throws SQLException {
-		String query="INSERT INTO USUARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+password+"')";
+	public static void anadirNuevoUsuario(String dni, String nombre, String apellidos, String username, String permisos , String password, String email) throws SQLException {
+		String query="INSERT INTO USUARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD,EMAIL) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+password+"','"+email+"')";
 		ejecutar(query, db);
 		
 	}
 	
-	public static void crearNuevoUsuario(String dni, String nombre, String apellidos, String username,String permisos, String password) throws SQLException {
-		String query="INSERT INTO USUARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+password+"')";
+	public static void crearNuevoUsuario(String dni, String nombre, String apellidos, String username,String permisos, String npassword, String email) throws SQLException {
+		String query="INSERT INTO USUARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD,EMAIL) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+npassword+"','"+email+"')";
 		ejecutar(query, db);
 		
 	}
 	
 	//BIBLIOTECARIO
-	public static void crearNuevoBibliotecario(String dni, String nombre, String apellidos, String username,String permisos, String password) throws SQLException {
-		String query="INSERT INTO BIBLIOTECARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+password+"')";
+	public static void crearNuevoBibliotecario(String dni, String nombre, String apellidos, String username,String permisos, String npassword) throws SQLException {
+		String query="INSERT INTO BIBLIOTECARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+npassword+"')";
 		ejecutar(query, db);
 		
 		
 	}
 	
+	//BIBLIOTECARIO
+		public static void anadirNuevoBibliotecario(String dni, String nombre, String apellidos, String username,String permisos, String npassword) throws SQLException {
+			String query="INSERT INTO BIBLIOTECARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+npassword+"')";
+			ejecutar(query, db);
+			
+			
+		}
+	
 
-	public static void modificarUsuarios(String dni,String nombre, String apellidos, String username, String permisos , String password) throws SQLException {
+	public static void modificarUsuarios(String dni,String nombre, String apellidos, String username, String permisos , String password, String email) throws SQLException {
 
-		
-			String query="UPDATE USUARIO SET NOMBRE = '"+nombre+"', APELLIDOS= '"+apellidos+"', USERNAME= '"+username+"', PERMISOS= "+permisos+" , PASSWORD= '"+password+"' WHERE DNI= '"+dni+"'";
+			String query="UPDATE USUARIO SET NOMBRE = '"+nombre+"', APELLIDOS= '"+apellidos+"', USERNAME= '"+username+"', PERMISOS= "+permisos+" , PASSWORD= '"+password+"', EMAIL= '"+email+"' WHERE DNI= '"+dni+"'";
 			ejecutar(query, db);
 		
 	}
+	
+	public static void modificarBibliotecario(String dni,String nombre, String apellidos, String username, String permisos , String password) throws SQLException {
+
+		String query="UPDATE BIBLIOTECARIO SET NOMBRE = '"+nombre+"', APELLIDOS= '"+apellidos+"', USERNAME= '"+username+"', PERMISOS= "+permisos+" , PASSWORD= '"+password+"' WHERE DNI= '"+dni+"'";
+		ejecutar(query, db);
+	
+}
 
 	public static void removeUser(String dni) throws SQLException {
 		String query="DELETE FROM USUARIO WHERE DNI = '"+dni+"'";
 		ejecutar(query, db);
 	}
+	
+	public static void removeBibliotecario(String dni) throws SQLException {
+		String query="DELETE FROM BIBLIOTECARIO WHERE DNI = '"+dni+"'";
+		ejecutar(query, db);
+	}
 
 	//Funcion que me hace el backup catalogo
-	public static void hacerBackupCatalogo(File archivo) throws IOException, SQLException {
+	public static void hacerBackupBibliotecario(File archivo) throws IOException, SQLException {
 		
 		//Creo el bufer de escritura
 		 FileWriter fw = new FileWriter(archivo.getAbsoluteFile());
@@ -270,7 +292,7 @@ public class funciones {
 	
 	static ArrayList<String> getUsuarios() throws SQLException{
 	    
-	      String query="SELECT * FROM ADMINISTRADOR";
+	      String query="SELECT * FROM USUARIO";
 	    ResultSet rs = ejecutar(query, db);
 	    
 	    ArrayList<String> resultado = new ArrayList<String>();
@@ -289,6 +311,26 @@ public class funciones {
 	    return resultado;
 	  }
 	
+	static ArrayList<String> getBibliotecario() throws SQLException{
+	    
+	      String query="SELECT * FROM BIBLIOTECARIO";
+	    ResultSet rs = ejecutar(query, db);
+	    
+	    ArrayList<String> resultado = new ArrayList<String>();
+	    while (rs.next()){
+	      
+	      java.sql.ResultSetMetaData rsmd = rs.getMetaData();
+	      int numberOfColumns = rsmd.getColumnCount();
+	      String data = null;
+	      
+	      for(int columnIndex = 1; columnIndex <= numberOfColumns; columnIndex ++){
+	        data = data+"-"+rs.getObject(columnIndex);
+	      }
+	      resultado.add(data.substring(2, data.length()));
+	      
+	    }
+	    return resultado;
+	  }
 	
 	
 	public static void hacerBackupUsuarios(File archivo2) throws IOException, SQLException {
@@ -311,7 +353,7 @@ public class funciones {
 	}
 	
 
-	public static void cargarBackupCatalogo(File archivo) throws IOException, SQLException {
+	public static void cargarBackupBibliotecario(File archivo) throws IOException, SQLException {
 		
 		ArrayList<String> datos = new ArrayList<String>();
 		
@@ -324,14 +366,14 @@ public class funciones {
         	datos.add(linea);
         }
         
-        String query="TRUNCATE TABLE CATALOGODEPRODUCTOS";
+        String query="TRUNCATE TABLE BIBLIOTECARIO";
 		ejecutar(query, db);
         
 		for(int i=0; i<datos.size(); i++){
 			String algo = datos.get(i);
 			String[] tb = algo.split("-");
 			
-			String query1="INSERT INTO CATALOGODEPRODUCTOS (CATALOGOID, CANTIDAD) VALUES ('"+tb[1]+"', '"+tb[2]+"')";
+			String query1="INSERT INTO BIBLIOTECARIO (NOMBRE,APELLIDOS,USERNAME,DNI,PERMISOS,PASSWORD) VALUES ('"+tb[1]+"', '"+tb[2]+"','"+tb[3]+"', '"+tb[4]+"','"+tb[5]+"', '"+tb[6]+"')";
 			ejecutar(query1, db);
 		}
         
@@ -354,25 +396,19 @@ public class funciones {
         	datos.add(linea);
         }
         
-        String query="TRUNCATE TABLE ADMINISTRADOR";
+        String query="TRUNCATE TABLE USUARIO";
 		ejecutar(query, db);
         
 		for(int i=0; i<datos.size(); i++){
 			String algo = datos.get(i);
 			String[] tb = algo.split("-");
 			
-			String query1="INSERT INTO ADMINISTRADOR (NOMBRE,APELLIDOS,USERNAME,DNI,PERMISOS,PASSWORD) VALUES ('"+tb[1]+"', '"+tb[2]+"','"+tb[3]+"', '"+tb[4]+"','"+tb[5]+"', '"+tb[6]+"')";
+			String query1="INSERT INTO USUARIO (NOMBRE,APELLIDOS,USERNAME,DNI,PERMISOS,PASSWORD,EMAIL) VALUES ('"+tb[1]+"', '"+tb[2]+"','"+tb[3]+"', '"+tb[4]+"','"+tb[5]+"', '"+tb[6]+"','"+tb[7]+"')";
 			ejecutar(query1, db);
 		}
         
         
 		
 	}
-
-	
-	
-	
-
-
   
 }

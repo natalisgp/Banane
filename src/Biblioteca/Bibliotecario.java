@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -51,13 +52,14 @@ public class Bibliotecario extends JFrame {
 	public Bibliotecario() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 554, 399);
+		setBounds(100, 100, 512, 292);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel label_1 = new JLabel("ATRAS");
+		JButton label_1 = new JButton(new ImageIcon("C:\\Users\\Natalia\\Desktop\\flecha.jpg"));
+		label_1.setBorderPainted(false);
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -69,16 +71,16 @@ public class Bibliotecario extends JFrame {
 				
 			}
 		});
-		label_1.setForeground(Color.LIGHT_GRAY);
+		label_1.setForeground(Color.BLACK);
 		label_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		label_1.setBackground(Color.WHITE);
-		label_1.setBounds(397, 321, 69, 14);
+		label_1.setBounds(453, 225, 34, 14);
 		contentPane.add(label_1);
 		
 		JLabel lblBibliotecario = new JLabel("BIBLIOTECARIO");
-		lblBibliotecario.setForeground(Color.LIGHT_GRAY);
+		lblBibliotecario.setForeground(Color.BLACK);
 		lblBibliotecario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblBibliotecario.setBounds(10, 11, 102, 14);
+		lblBibliotecario.setBounds(168, 11, 102, 14);
 		contentPane.add(lblBibliotecario);
 		
 		JButton btnModificarDatosUsuario = new JButton("Modificar datos usuario");
@@ -93,7 +95,7 @@ public class Bibliotecario extends JFrame {
 				
 			}
 		});
-		btnModificarDatosUsuario.setBounds(61, 36, 183, 23);
+		btnModificarDatosUsuario.setBounds(20, 36, 183, 14);
 		contentPane.add(btnModificarDatosUsuario);
 		
 		JButton btnEliminarUsuario = new JButton("Eliminar usuario");
@@ -107,7 +109,7 @@ public class Bibliotecario extends JFrame {
 				
 			}
 		});
-		btnEliminarUsuario.setBounds(61, 74, 183, 23);
+		btnEliminarUsuario.setBounds(20, 61, 183, 14);
 		contentPane.add(btnEliminarUsuario);
 		
 		JButton btnAadirProducto = new JButton("A\u00F1adir producto a cat\u00E1logo");
@@ -115,7 +117,7 @@ public class Bibliotecario extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnAadirProducto.setBounds(280, 36, 186, 23);
+		btnAadirProducto.setBounds(239, 36, 186, 14);
 		contentPane.add(btnAadirProducto);
 		
 		JButton btnCargarBackupCatlogo = new JButton("Cargar copia seguridad cat\u00E1logo");
@@ -126,18 +128,18 @@ public class Bibliotecario extends JFrame {
 				File archivo = chooser.getSelectedFile();
 				
 				try {
-					funciones.cargarBackupCatalogo(archivo);
+					funciones.cargarBackupBibliotecario(archivo);
 				} catch (IOException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		btnCargarBackupCatlogo.setBounds(61, 261, 197, 23);
+		btnCargarBackupCatlogo.setBounds(20, 168, 183, 14);
 		contentPane.add(btnCargarBackupCatlogo);
 		
 		JButton btnEliminarProducto = new JButton("Eliminar producto de cat\u00E1logo");
-		btnEliminarProducto.setBounds(280, 74, 186, 23);
+		btnEliminarProducto.setBounds(239, 61, 186, 14);
 		contentPane.add(btnEliminarProducto);
 		
 		JButton btnAltaUsuario = new JButton("Buscar usuario");
@@ -150,7 +152,7 @@ public class Bibliotecario extends JFrame {
 			
 			}
 		});
-		btnAltaUsuario.setBounds(61, 118, 186, 23);
+		btnAltaUsuario.setBounds(20, 86, 186, 14);
 		contentPane.add(btnAltaUsuario);
 		
 		JButton btnBajaUsuario = new JButton("Añadir usuario");
@@ -164,11 +166,11 @@ public class Bibliotecario extends JFrame {
 				
 			}
 		});
-		btnBajaUsuario.setBounds(61, 164, 183, 23);
+		btnBajaUsuario.setBounds(20, 111, 183, 14);
 		contentPane.add(btnBajaUsuario);
 		
 		JButton btnAadirProductoAl = new JButton("A\u00F1adir cat\u00E1logo");
-		btnAadirProductoAl.setBounds(280, 118, 186, 23);
+		btnAadirProductoAl.setBounds(239, 86, 186, 14);
 		contentPane.add(btnAadirProductoAl);
 		
 		JButton btnEliminarProductoDel = new JButton("Eliminar cat\u00E1logo");
@@ -196,9 +198,9 @@ public class Bibliotecario extends JFrame {
 				
 			}
 		});
-		btnBackupUsuarios.setBounds(280, 261, 186, 23);
+		btnBackupUsuarios.setBounds(239, 168, 186, 14);
 		contentPane.add(btnBackupUsuarios);
-		btnEliminarProductoDel.setBounds(280, 164, 186, 23);
+		btnEliminarProductoDel.setBounds(239, 111, 186, 14);
 		contentPane.add(btnEliminarProductoDel);
 		
 		JButton btnCargarBackupUsuario = new JButton("Cargar copia seguridad usuario");
@@ -220,14 +222,15 @@ public class Bibliotecario extends JFrame {
 				
 			}
 		});
-		btnCargarBackupUsuario.setBounds(58, 312, 186, 23);
+		btnCargarBackupUsuario.setBounds(20, 197, 186, 14);
 		contentPane.add(btnCargarBackupUsuario);
 		
 		JButton btnModificarCatlogo = new JButton("Modificar cat\u00E1logo");
-		btnModificarCatlogo.setBounds(61, 211, 186, 23);
+		btnModificarCatlogo.setBounds(20, 143, 186, 14);
 		contentPane.add(btnModificarCatlogo);
 		
-		JButton btnAyuda = new JButton("Ayuda");
+		JButton btnAyuda = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		btnAyuda.setBorderPainted(false);
 		btnAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -245,22 +248,27 @@ public class Bibliotecario extends JFrame {
 				File archivo = choose.getSelectedFile();
 				
 				try {
-					funciones.hacerBackupCatalogo(archivo);
+					funciones.hacerBackupBibliotecario(archivo);
 				} catch (IOException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		btnBackupCatlogo.setBounds(280, 211, 186, 23);
+		btnBackupCatlogo.setBounds(239, 143, 186, 14);
 		contentPane.add(btnBackupCatlogo);
-		btnAyuda.setBounds(463, 317, 75, 23);
+		btnAyuda.setBounds(460, 36, 27, 23);
 		contentPane.add(btnAyuda);
 		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\diam.jpg"));
-		label.setBounds(-25, -45, 591, 426);
-		contentPane.add(label);
+		//Icono
+	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
+	    //Fondo
+	    ((JPanel)getContentPane()).setOpaque(false);
+	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
+	    JLabel fondo= new JLabel(); 
+	    fondo.setIcon(uno); 
+	    getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER); 
+	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 
 }

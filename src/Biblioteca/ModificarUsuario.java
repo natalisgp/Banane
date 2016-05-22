@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -28,6 +29,7 @@ public class ModificarUsuario extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField_1;
 	static String ndni;
+
 	/**
 	 * Launch the application.
 	 */
@@ -55,7 +57,8 @@ public class ModificarUsuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel label_2 = new JLabel("ATRAS");
+		JButton label_2 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		label_2.setBorderPainted(false);
 		label_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -65,15 +68,15 @@ public class ModificarUsuario extends JFrame {
 				
 			}
 		});
-		label_2.setForeground(Color.LIGHT_GRAY);
+		label_2.setForeground(Color.BLACK);
 		label_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		label_2.setBackground(Color.WHITE);
-		label_2.setBounds(344, 237, 69, 14);
+		label_2.setBounds(381, 201, 29, 14);
 		contentPane.add(label_2);
 		
 		JLabel label = new JLabel("DNI");
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label.setForeground(Color.LIGHT_GRAY);
+		label.setForeground(Color.WHITE);
 		label.setBounds(101, 113, 46, 14);
 		contentPane.add(label);
 		
@@ -83,10 +86,12 @@ public class ModificarUsuario extends JFrame {
 				
 				 ndni = textField_1.getText();
 				
+				 
+				
 				if(ndni.length()>0){ // y exista dicho dni
 					
 					try{
-						String[] usuario = funciones.getAdministrador(ndni);
+						String[] usuario = funciones.getUsuario(ndni);
 						
 						if(ndni.equals(usuario[2])){
 							
@@ -124,13 +129,16 @@ public class ModificarUsuario extends JFrame {
 		textField_1.setBounds(196, 110, 114, 20);
 		contentPane.add(textField_1);
 		
+		
+		
 		JLabel lblModificarUsuario = new JLabel("Modificar usuario");
-		lblModificarUsuario.setForeground(Color.LIGHT_GRAY);
-		lblModificarUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblModificarUsuario.setBounds(10, 11, 110, 14);
+		lblModificarUsuario.setForeground(Color.BLACK);
+		lblModificarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblModificarUsuario.setBounds(143, 23, 149, 14);
 		contentPane.add(lblModificarUsuario);
 		
-		JButton button = new JButton("Ayuda");
+		JButton button = new JButton(new ImageIcon("C:\\Users\\Natalia\\Desktop\\ayuda.jpg"));
+		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -139,13 +147,17 @@ public class ModificarUsuario extends JFrame {
 				
 			}
 		});
-		button.setBounds(335, 203, 89, 23);
+		button.setBounds(381, 23, 29, 23);
 		contentPane.add(button);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_1.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\diam.jpg"));
-		label_1.setBounds(-87, -84, 568, 365);
-		contentPane.add(label_1);
+		//Icono
+	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
+	    //Fondo
+	    ((JPanel)getContentPane()).setOpaque(false);
+	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
+	    JLabel fondo= new JLabel(); 
+	    fondo.setIcon(uno); 
+	    getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER); 
+	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 }

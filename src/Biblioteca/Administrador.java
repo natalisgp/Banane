@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -26,7 +27,6 @@ import java.sql.SQLException;
 
 public class Administrador extends JFrame {
 
-/////////hola gola giilhjvtfc
 	private JPanel contentPane;
 
 	/**
@@ -51,13 +51,15 @@ public class Administrador extends JFrame {
 	public Administrador() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 554, 399);
+		setBounds(100, 100, 491, 265);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel label_1 = new JLabel("ATRAS");
+		
+		JButton label_1 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		label_1.setBorderPainted(false);
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -69,16 +71,16 @@ public class Administrador extends JFrame {
 				
 			}
 		});
-		label_1.setForeground(Color.LIGHT_GRAY);
+		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		label_1.setBackground(Color.WHITE);
-		label_1.setBounds(397, 321, 69, 14);
+		label_1.setBounds(417, 200, 34, 14);
 		contentPane.add(label_1);
 		
 		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
-		lblAdministrador.setForeground(Color.LIGHT_GRAY);
+		lblAdministrador.setForeground(Color.BLACK);
 		lblAdministrador.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAdministrador.setBounds(10, 11, 102, 14);
+		lblAdministrador.setBounds(167, 11, 102, 14);
 		contentPane.add(lblAdministrador);
 		
 		JButton btnModificarDatosUsuario = new JButton("Modificar datos usuario");
@@ -93,7 +95,7 @@ public class Administrador extends JFrame {
 				
 			}
 		});
-		btnModificarDatosUsuario.setBounds(61, 36, 183, 23);
+		btnModificarDatosUsuario.setBounds(20, 89, 183, 14);
 		contentPane.add(btnModificarDatosUsuario);
 		
 		JButton btnEliminarUsuario = new JButton("Eliminar usuario");
@@ -107,38 +109,8 @@ public class Administrador extends JFrame {
 				
 			}
 		});
-		btnEliminarUsuario.setBounds(61, 74, 183, 23);
+		btnEliminarUsuario.setBounds(20, 114, 183, 14);
 		contentPane.add(btnEliminarUsuario);
-		
-		JButton btnAadirProducto = new JButton("A\u00F1adir producto a cat\u00E1logo");
-		btnAadirProducto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnAadirProducto.setBounds(280, 36, 186, 23);
-		contentPane.add(btnAadirProducto);
-		
-		JButton btnCargarBackupCatlogo = new JButton("Cargar copia seguridad cat\u00E1logo");
-		btnCargarBackupCatlogo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser chooser = new JFileChooser("Cargar Backup");
-				chooser.showOpenDialog(null);
-				File archivo = chooser.getSelectedFile();
-				
-				try {
-					funciones.cargarBackupCatalogo(archivo);
-				} catch (IOException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		btnCargarBackupCatlogo.setBounds(61, 261, 197, 23);
-		contentPane.add(btnCargarBackupCatlogo);
-		
-		JButton btnEliminarProducto = new JButton("Eliminar producto de cat\u00E1logo");
-		btnEliminarProducto.setBounds(280, 74, 186, 23);
-		contentPane.add(btnEliminarProducto);
 		
 		JButton btnAltaUsuario = new JButton("Buscar usuario");
 		btnAltaUsuario.addActionListener(new ActionListener() {
@@ -150,7 +122,7 @@ public class Administrador extends JFrame {
 			
 			}
 		});
-		btnAltaUsuario.setBounds(61, 118, 186, 23);
+		btnAltaUsuario.setBounds(20, 61, 183, 14);
 		contentPane.add(btnAltaUsuario);
 		
 		JButton btnBajaUsuario = new JButton("Añadir usuario");
@@ -164,18 +136,8 @@ public class Administrador extends JFrame {
 				
 			}
 		});
-		btnBajaUsuario.setBounds(61, 164, 183, 23);
+		btnBajaUsuario.setBounds(20, 36, 183, 14);
 		contentPane.add(btnBajaUsuario);
-		
-		JButton btnAadirProductoAl = new JButton("A\u00F1adir cat\u00E1logo");
-		btnAadirProductoAl.setBounds(280, 118, 186, 23);
-		contentPane.add(btnAadirProductoAl);
-		
-		JButton btnEliminarProductoDel = new JButton("Eliminar cat\u00E1logo");
-		btnEliminarProductoDel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		
 		JButton btnBackupUsuarios = new JButton("Copia seguridad usuarios");
 		btnBackupUsuarios.addActionListener(new ActionListener() {
@@ -196,10 +158,8 @@ public class Administrador extends JFrame {
 				
 			}
 		});
-		btnBackupUsuarios.setBounds(280, 261, 186, 23);
+		btnBackupUsuarios.setBounds(20, 189, 186, 14);
 		contentPane.add(btnBackupUsuarios);
-		btnEliminarProductoDel.setBounds(280, 164, 186, 23);
-		contentPane.add(btnEliminarProductoDel);
 		
 		JButton btnCargarBackupUsuario = new JButton("Cargar copia seguridad usuario");
 		btnCargarBackupUsuario.addActionListener(new ActionListener() {
@@ -220,14 +180,11 @@ public class Administrador extends JFrame {
 				
 			}
 		});
-		btnCargarBackupUsuario.setBounds(58, 312, 186, 23);
+		btnCargarBackupUsuario.setBounds(20, 164, 186, 14);
 		contentPane.add(btnCargarBackupUsuario);
 		
-		JButton btnModificarCatlogo = new JButton("Modificar cat\u00E1logo");
-		btnModificarCatlogo.setBounds(61, 211, 186, 23);
-		contentPane.add(btnModificarCatlogo);
-		
-		JButton btnAyuda = new JButton("Ayuda");
+		JButton btnAyuda = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		btnAyuda.setBorderPainted(false);
 		btnAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -235,33 +192,91 @@ public class Administrador extends JFrame {
 				Administrador.this.dispose(); //hago "invisible la clase login"
 			}
 		});
-		
-		JButton btnBackupCatlogo = new JButton("Copia seguridad cat\u00E1logo");
-		btnBackupCatlogo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Dialogo para escoger donde guardar y con que nombre y extension
-				JFileChooser choose = new JFileChooser("Guardar Backup");
-				choose.showSaveDialog(null);
-				File archivo = choose.getSelectedFile();
-				
-				try {
-					funciones.hacerBackupCatalogo(archivo);
-				} catch (IOException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		btnBackupCatlogo.setBounds(280, 211, 186, 23);
-		contentPane.add(btnBackupCatlogo);
-		btnAyuda.setBounds(463, 317, 75, 23);
+		btnAyuda.setBounds(424, 11, 27, 23);
 		contentPane.add(btnAyuda);
 		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\diam.jpg"));
-		label.setBounds(-25, -45, 591, 426);
-		contentPane.add(label);
+		//Icono
+	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
+	    //Fondo
+	    ((JPanel)getContentPane()).setOpaque(false);
+	    
+	    JButton button = new JButton("Añadir bibliotecario");
+	    button.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent arg0) {
+	    		
+	    		new AnadirBibliotecario().setVisible(true);
+				Administrador.this.dispose();
+				System.out.println("Voy a añadir un nuevo bibliotecario");
+	    	}
+	    });
+	    button.setBounds(229, 36, 183, 14);
+	    contentPane.add(button);
+	    
+	    JButton button_1 = new JButton("Buscar bibliotecario");
+	    button_1.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		
+	    		new ModificarBibliotecario().setVisible(true);
+				Administrador.this.dispose();
+				System.out.println("Voy a modificar un bibliotecario");
+	    	}
+	    });
+	    button_1.setBounds(229, 61, 183, 14);
+	    contentPane.add(button_1);
+	    
+	    JButton button_2 = new JButton("Modificar datos bibliotecario");
+	    button_2.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		
+	    		new ModificarBibliotecario().setVisible(true);
+				Administrador.this.dispose();
+				System.out.println("Voy a modificar un usuario");
+	    		
+	    	}
+	    });
+	    button_2.setBounds(229, 89, 183, 14);
+	    contentPane.add(button_2);
+	    
+	    JButton button_3 = new JButton("Eliminar bibliotecario");
+	    button_3.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		
+	    		new EliminarBibliotecario().setVisible(true);
+				Administrador.this.dispose();
+				System.out.println("Voy a eliminar a un Bibliotecario");
+	    	}
+	    });
+	    button_3.setBounds(229, 114, 183, 14);
+	    contentPane.add(button_3);
+	    
+	    JButton button_4 = new JButton("Cargar copia bibliotecario");
+	    button_4.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    	}
+	    });
+	    button_4.setBounds(229, 164, 186, 14);
+	    contentPane.add(button_4);
+	    
+	    JButton button_5 = new JButton("Copia seguridad bibliotecario");
+	    button_5.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    	}
+	    });
+	    button_5.setBounds(229, 189, 186, 14);
+	    contentPane.add(button_5);
+	    
+	    JButton button_6 = new JButton("Enviar email usuario");
+	    button_6.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    	}
+	    });
+	    button_6.setBounds(20, 139, 183, 14);
+	    contentPane.add(button_6);
+	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
+	    JLabel fondo= new JLabel(); 
+	    fondo.setIcon(uno); 
+	    getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER); 
+	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
-
 }
 

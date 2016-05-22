@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -55,7 +56,8 @@ public class Modificarme extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel label_2 = new JLabel("ATRAS");
+		JButton label_2 = new JButton(new ImageIcon("/Imagenes/flecha.jpg"));
+		label_2.setBorderPainted(false);
 		label_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -64,15 +66,15 @@ public class Modificarme extends JFrame {
 				Modificarme.this.dispose(); //hago "invisible la clase login"
 			}
 		});
-		label_2.setForeground(Color.LIGHT_GRAY);
+		label_2.setForeground(Color.BLACK);
 		label_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		label_2.setBackground(Color.WHITE);
-		label_2.setBounds(355, 226, 69, 14);
+		label_2.setBackground(Color.BLACK);
+		label_2.setBounds(377, 198, 27, 14);
 		contentPane.add(label_2);
 		
 		JLabel label = new JLabel("DNI");
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label.setForeground(Color.LIGHT_GRAY);
+		label.setForeground(Color.WHITE);
 		label.setBounds(101, 113, 46, 14);
 		contentPane.add(label);
 		
@@ -125,12 +127,13 @@ public class Modificarme extends JFrame {
 		contentPane.add(textField_1);
 		
 		JLabel lblModificarUsuario = new JLabel("Modificar mis datos");
-		lblModificarUsuario.setForeground(Color.LIGHT_GRAY);
-		lblModificarUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblModificarUsuario.setBounds(10, 11, 137, 14);
+		lblModificarUsuario.setForeground(Color.BLACK);
+		lblModificarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblModificarUsuario.setBounds(126, 20, 154, 14);
 		contentPane.add(lblModificarUsuario);
 		
-		JButton button = new JButton("Ayuda");
+		JButton button = new JButton(new ImageIcon("/Imagenes/ayuda.jpg"));
+		button.setBorderPainted(false);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -138,12 +141,17 @@ public class Modificarme extends JFrame {
 				Modificarme.this.dispose(); //hago "invisible la clase login"
 			}
 		});
-		button.setBounds(349, 198, 75, 23);
+		button.setBounds(377, 11, 27, 23);
 		contentPane.add(button);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\diam.jpg"));
-		label_1.setBounds(-19, -88, 568, 365);
-		contentPane.add(label_1);
+		//Icono
+	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
+	    //Fondo
+	    ((JPanel)getContentPane()).setOpaque(false);
+	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
+	    JLabel fondo= new JLabel(); 
+	    fondo.setIcon(uno); 
+	    getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER); 
+	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 }
