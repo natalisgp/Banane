@@ -76,7 +76,7 @@ public class AyudaModificarUsuario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				new ModificarUsuario().setVisible(true);
+				new ModificarAlumno().setVisible(true);
 				AyudaModificarUsuario.this.dispose(); //hago "invisible la clase login"
 			}
 		});

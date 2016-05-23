@@ -1,5 +1,6 @@
 package Biblioteca;
 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -24,11 +25,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class Modificarme extends JFrame {
+public class EnviarEmail extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField_1;
 	static String ndni;
+
 	/**
 	 * Launch the application.
 	 */
@@ -36,7 +38,7 @@ public class Modificarme extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Modificarme frame = new Modificarme();
+					EnviarEmail frame = new EnviarEmail();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +50,7 @@ public class Modificarme extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Modificarme() {
+	public EnviarEmail() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -62,14 +64,15 @@ public class Modificarme extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				new Alumno().setVisible(true);
-				Modificarme.this.dispose(); //hago "invisible la clase login"
+				new Administrador().setVisible(true);
+				EnviarEmail.this.dispose(); //hago "invisible la clase login"
+				
 			}
 		});
 		label_2.setForeground(Color.BLACK);
 		label_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		label_2.setBackground(Color.BLACK);
-		label_2.setBounds(377, 198, 27, 14);
+		label_2.setBackground(Color.WHITE);
+		label_2.setBounds(381, 201, 29, 14);
 		contentPane.add(label_2);
 		
 		JLabel label = new JLabel("DNI");
@@ -78,23 +81,24 @@ public class Modificarme extends JFrame {
 		label.setBounds(101, 113, 46, 14);
 		contentPane.add(label);
 		
-		JButton btnEliminar = new JButton("Modificar");
+		JButton btnEliminar = new JButton("Redactar");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				 ndni = textField_1.getText();
-			
+				
+				 
 				
 				if(ndni.length()>0){ // y exista dicho dni
 					
 					try{
-						String[] usuario = funciones.getAdministrador(ndni);
+						String[] usuario = funciones.getUsuario(ndni);
 						
 						if(ndni.equals(usuario[2])){
 							
-							new Modificarme1().setVisible(true);
-							Modificarme.this.dispose();
-							System.out.println("Voy a modificar los datos de un usuario");
+							new EnviarEmail1().setVisible(true);
+							EnviarEmail.this.dispose();
+							System.out.println("Voy a enviar un correo al usuario");
 							
 							
 						}else {
@@ -126,10 +130,12 @@ public class Modificarme extends JFrame {
 		textField_1.setBounds(196, 110, 114, 20);
 		contentPane.add(textField_1);
 		
-		JLabel lblModificarUsuario = new JLabel("Modificar mis datos");
+		
+		
+		JLabel lblModificarUsuario = new JLabel("Enviar correo");
 		lblModificarUsuario.setForeground(Color.BLACK);
 		lblModificarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblModificarUsuario.setBounds(126, 20, 154, 14);
+		lblModificarUsuario.setBounds(143, 23, 149, 14);
 		contentPane.add(lblModificarUsuario);
 		
 		JButton button = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
@@ -137,11 +143,12 @@ public class Modificarme extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new AyudaModificarDatosUsuario().setVisible(true);
-				Modificarme.this.dispose(); //hago "invisible la clase login"
+				new AyudaModificarUsuario().setVisible(true);
+				EnviarEmail.this.dispose(); //hago "invisible la clase login"
+				
 			}
 		});
-		button.setBounds(377, 11, 27, 23);
+		button.setBounds(381, 23, 29, 23);
 		contentPane.add(button);
 		
 		//Icono
@@ -155,3 +162,4 @@ public class Modificarme extends JFrame {
 	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 }
+

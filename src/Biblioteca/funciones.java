@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -42,6 +43,32 @@ public class funciones {
 	  
 		return connection;
 	}
+	/*
+	public static String searchAdminEmail() throws SQLException, NoSuchAlgorithmException{
+		
+		start.getConection();
+		
+		start.executeQuery( "SELECT USUARIO FROM CURRENTADMIN ");
+		
+		start.getResult().next();
+		
+		String user = start.getResult().getString(1);
+		
+		start.executeQuery("SELECT EMAIL FROM USER WHERE USUARIO = '"+user+"'");
+		
+		start.getResult().next();
+		
+		//Descodificamos el email para mostrarlo
+		String email = decode(start.getResult().getString(1));
+		
+		logger.info("email de administrador proporcionado");
+		return email;
+		
+		
+		
+	}*/
+	
+	
 	
 	static ResultSet ejecutar(String query, Connection db) throws SQLException{
 		
@@ -76,6 +103,8 @@ public class funciones {
 		String[] result ={nombre, apellidos, username,permisos,password};
 		return result;
 	}
+	
+	
 
 	//getUsuarios
 	
@@ -131,6 +160,62 @@ public class funciones {
 			}
 			gname=nombre;
 			String[] result ={nombre, apellidos, username,permisos,password};
+			return result;
+		}
+		
+		
+    static String[] getProfe(String dni) throws SQLException{
+			
+			gdni=dni;
+		  	String query="SELECT * FROM PROFESOR WHERE DNI = '"+dni+"'";
+			ResultSet rs = ejecutar(query, db);
+			String nombre = null;
+			String apellidos = null;
+			String username =null;
+			String permisos = null;
+			String password = null;
+			String email = null;
+			
+			
+			while (rs.next()){
+				nombre = rs.getString("nombre");
+				apellidos = rs.getString("apellidos");
+				username = rs.getString("username");
+				permisos= rs.getInt("permisos")+"";
+				password= rs.getString("password");
+				email=rs.getString("email");
+				
+			}
+			gname=nombre;
+			String[] result ={nombre, apellidos, username,permisos,password,email};
+			return result;
+		}
+
+		
+		static String[] getAlumno(String dni) throws SQLException{
+			
+			gdni=dni;
+		  	String query="SELECT * FROM ALUMNO WHERE DNI = '"+dni+"'";
+			ResultSet rs = ejecutar(query, db);
+			String nombre = null;
+			String apellidos = null;
+			String username =null;
+			String permisos = null;
+			String password = null;
+			String email = null;
+			
+			
+			while (rs.next()){
+				nombre = rs.getString("nombre");
+				apellidos = rs.getString("apellidos");
+				username = rs.getString("username");
+				permisos= rs.getInt("permisos")+"";
+				password= rs.getString("password");
+				email=rs.getString("email");
+				
+			}
+			gname=nombre;
+			String[] result ={nombre, apellidos, username,permisos,password,email};
 			return result;
 		}
 
@@ -215,9 +300,18 @@ public class funciones {
 		
 	}
 	
+	//Profesor
 	
-	public static void anadirNuevoUsuario(String dni, String nombre, String apellidos, String username, String permisos , String password, String email) throws SQLException {
-		String query="INSERT INTO USUARIO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD,EMAIL) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+password+"','"+email+"')";
+	//BIBLIOTECARIO
+	public static void anadirNuevoProfesor(String dni, String nombre, String apellidos, String username,String permisos, String npassword,String email) throws SQLException {
+		String query="INSERT INTO PROFESOR (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD,EMAIL) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+npassword+"', '"+email+"')";
+		ejecutar(query, db);
+				
+				
+	}
+	
+	public static void anadirNuevoAlumno(String dni, String nombre, String apellidos, String username, String permisos , String password, String email) throws SQLException {
+		String query="INSERT INTO ALUMNO (DNI, NOMBRE, APELLIDOS, USERNAME,PERMISOS,PASSWORD,EMAIL) VALUES ('"+dni+"', '"+nombre+"', '"+apellidos+"', '"+username+"', "+permisos+" , '"+password+"', '"+email+"')";
 		ejecutar(query, db);
 		
 	}
@@ -243,6 +337,21 @@ public class funciones {
 			
 			
 		}
+		
+		public static void modificarAlumno(String dni,String nombre, String apellidos, String username, String permisos , String password, String email) throws SQLException {
+
+			String query="UPDATE ALUMNO SET NOMBRE = '"+nombre+"', APELLIDOS= '"+apellidos+"', USERNAME= '"+username+"', PERMISOS= "+permisos+" , PASSWORD= '"+password+"', EMAIL= '"+email+"' WHERE DNI= '"+dni+"'";
+			ejecutar(query, db);
+		
+	}	
+		
+		
+	public static void modificarProfe(String dni,String nombre, String apellidos, String username, String permisos , String password, String email) throws SQLException {
+
+			String query="UPDATE PROFESOR SET NOMBRE = '"+nombre+"', APELLIDOS= '"+apellidos+"', USERNAME= '"+username+"', PERMISOS= "+permisos+" , PASSWORD= '"+password+"', EMAIL= '"+email+"' WHERE DNI= '"+dni+"'";
+			ejecutar(query, db);
+		
+	}	
 	
 
 	public static void modificarUsuarios(String dni,String nombre, String apellidos, String username, String permisos , String password, String email) throws SQLException {
@@ -266,6 +375,16 @@ public class funciones {
 	
 	public static void removeBibliotecario(String dni) throws SQLException {
 		String query="DELETE FROM BIBLIOTECARIO WHERE DNI = '"+dni+"'";
+		ejecutar(query, db);
+	}
+	
+	public static void removeProfe(String dni) throws SQLException {
+		String query="DELETE FROM PROFESOR WHERE DNI = '"+dni+"'";
+		ejecutar(query, db);
+	}
+	
+	public static void removeAlumno(String dni) throws SQLException {
+		String query="DELETE FROM ALUMNO WHERE DNI = '"+dni+"'";
 		ejecutar(query, db);
 	}
 
@@ -310,6 +429,9 @@ public class funciones {
 	    }
 	    return resultado;
 	  }
+	
+	
+	
 	
 	static ArrayList<String> getBibliotecario() throws SQLException{
 	    
@@ -410,5 +532,17 @@ public class funciones {
         
 		
 	}
+
+
+
+	
+
+
+
+	
+
+
+
+	
   
 }

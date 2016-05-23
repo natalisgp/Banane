@@ -29,7 +29,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class AnadirUsuario extends JFrame {
+public class DarDeAltaP extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nombre;
@@ -47,7 +47,7 @@ public class AnadirUsuario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AnadirUsuario frame = new AnadirUsuario();
+					DarDeAltaP frame = new DarDeAltaP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,7 +59,7 @@ public class AnadirUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AnadirUsuario() {
+	public DarDeAltaP() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -67,7 +67,7 @@ public class AnadirUsuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblEliminarUsuario = new JLabel("A\u00F1adir usuario");
+		JLabel lblEliminarUsuario = new JLabel("Dar de alta profesor");
 		lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblEliminarUsuario.setForeground(Color.BLACK);
 		lblEliminarUsuario.setBounds(130, 11, 133, 20);
@@ -109,7 +109,7 @@ public class AnadirUsuario extends JFrame {
 							try{
 							
 					
-								funciones.anadirNuevoUsuario(ndni, nnombre, napellidos, nusername, npermisos, npassword,nemail);							
+								funciones.anadirNuevoProfesor(ndni, nnombre, napellidos, nusername, npermisos, npassword,nemail);							
 								//new Usuario().setVisible(true);
 								//	ModificarUsuario1.this.dispose();
 								System.out.println("Estoy modificando los datos del usuario");
@@ -124,7 +124,7 @@ public class AnadirUsuario extends JFrame {
 							}
 							//new Usuario().setVisible(true);
 							//CrearUsuario.this.dispose();
-							System.out.println("Estoy creando un nuevo usuario");
+							System.out.println("Estoy creando un nuevo Profesor");
 							
 						}else{
 							JOptionPane.showMessageDialog( null,"DNI no válido" , "DNI falso" ,JOptionPane.ERROR_MESSAGE );
@@ -181,8 +181,8 @@ public class AnadirUsuario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				new Administrador().setVisible(true);
-				AnadirUsuario.this.dispose(); //hago "invisible la clase login"
+				new Bibliotecario().setVisible(true);
+				DarDeAltaP.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		lblAtras.setForeground(Color.WHITE);
@@ -228,7 +228,7 @@ public class AnadirUsuario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				new AyudaAnadirUsuario().setVisible(true); //Voy a crear usuario
-				AnadirUsuario.this.dispose(); //hago "invisible la clase login"
+				DarDeAltaP.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		button.setBounds(370, 11, 24, 23);
@@ -249,7 +249,7 @@ public class AnadirUsuario extends JFrame {
 		permisos = new JTextField();
 		permisos.setEditable(false);
 		permisos.setBackground(SystemColor.control);
-		permisos.setText("2");
+		permisos.setText("3");
 		permisos.setBounds(206, 147, 114, 20);
 		contentPane.add(permisos);
 		permisos.setColumns(10);

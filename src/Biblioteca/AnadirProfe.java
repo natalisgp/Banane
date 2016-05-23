@@ -29,7 +29,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class AnadirBibliotecario extends JFrame {
+public class AnadirProfe extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nombre;
@@ -38,7 +38,7 @@ public class AnadirBibliotecario extends JFrame {
 	private JTextField username;
 	private JPasswordField password;
 	private JTextField permisos;
-	
+	private JTextField email;
    
 	/**
 	 * Launch the application.
@@ -47,7 +47,7 @@ public class AnadirBibliotecario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AnadirBibliotecario frame = new AnadirBibliotecario();
+					AnadirProfe frame = new AnadirProfe();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,7 +59,7 @@ public class AnadirBibliotecario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AnadirBibliotecario() {
+	public AnadirProfe() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -67,10 +67,10 @@ public class AnadirBibliotecario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblEliminarUsuario = new JLabel("A\u00F1adir bibliotecario");
+		JLabel lblEliminarUsuario = new JLabel("A\u00F1adir profesor");
 		lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblEliminarUsuario.setForeground(Color.BLACK);
-		lblEliminarUsuario.setBounds(130, 11, 158, 20);
+		lblEliminarUsuario.setBounds(130, 11, 133, 20);
 		contentPane.add(lblEliminarUsuario);
 		
 		JLabel label = new JLabel("DNI");
@@ -96,10 +96,12 @@ public class AnadirBibliotecario extends JFrame {
 				String npermisos =permisos.getText();
 				char[] nopassword = password.getPassword();
 				String npassword =String.valueOf(nopassword);
+				String nemail = email.getText();
+				
 				
 				boolean valid = checkDNI(dni.getText());
 				
-				if(ndni.length()>0 && nnombre.length()>0 && napellidos.length()>0 && nusername.length()>0 && npassword.length()>0){ 
+				if(ndni.length()>0 && nnombre.length()>0 && napellidos.length()>0 && nusername.length()>0 && npassword.length()>0 && nemail.length()>0){ 
 					
 					if(ndni.equals(nusername)){
 						
@@ -108,12 +110,12 @@ public class AnadirBibliotecario extends JFrame {
 							try{
 							
 					
-								funciones.anadirNuevoBibliotecario(ndni, nnombre, napellidos, nusername, npermisos, npassword);							
+								funciones.anadirNuevoProfesor(ndni, nnombre, napellidos, nusername, npermisos, npassword,nemail);							
 								//new Usuario().setVisible(true);
 								//	ModificarUsuario1.this.dispose();
-								System.out.println("Estoy modificando los datos del usuario");
+								System.out.println("Estoy modificando los datos del profesor");
 							
-								JOptionPane.showMessageDialog(null, "Se ha creado un nuevo usuario");
+								JOptionPane.showMessageDialog(null, "Se ha creado un nuevo profesor");
 							
 							
 							
@@ -123,7 +125,7 @@ public class AnadirBibliotecario extends JFrame {
 							}
 							//new Usuario().setVisible(true);
 							//CrearUsuario.this.dispose();
-							System.out.println("Estoy creando un nuevo usuario");
+							System.out.println("Estoy creando un nuevo profesor");
 							
 						}else{
 							JOptionPane.showMessageDialog( null,"DNI no válido" , "DNI falso" ,JOptionPane.ERROR_MESSAGE );
@@ -180,8 +182,8 @@ public class AnadirBibliotecario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				new Administrador().setVisible(true);
-				AnadirBibliotecario.this.dispose(); //hago "invisible la clase login"
+				new AnadirElegir().setVisible(true);
+				AnadirProfe.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		lblAtras.setForeground(Color.WHITE);
@@ -210,11 +212,6 @@ public class AnadirBibliotecario extends JFrame {
 		username.setBounds(206, 122, 114, 14);
 		contentPane.add(username);
 		
-	/*	permisos = new JTextField();
-		permisos.setColumns(10);
-		permisos.setBounds(206, 202, 114, 20);
-		contentPane.add(permisos);*/
-	
 		
 		password = new JPasswordField();
 		password.setColumns(10);
@@ -227,7 +224,7 @@ public class AnadirBibliotecario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				new AyudaAnadirUsuario().setVisible(true); //Voy a crear usuario
-				AnadirBibliotecario.this.dispose(); //hago "invisible la clase login"
+				AnadirProfe.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		button.setBounds(370, 11, 24, 23);
@@ -239,17 +236,25 @@ public class AnadirBibliotecario extends JFrame {
 		lblPassword.setBounds(74, 180, 69, 14);
 		contentPane.add(lblPassword);
 		
-
+		JLabel label_2 = new JLabel("EMAIL");
+		label_2.setForeground(Color.WHITE);
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_2.setBounds(76, 205, 69, 14);
+		contentPane.add(label_2);
 		
 		permisos = new JTextField();
 		permisos.setEditable(false);
 		permisos.setBackground(SystemColor.control);
-		permisos.setText("2");
+		permisos.setText("3");
 		permisos.setBounds(206, 147, 114, 20);
 		contentPane.add(permisos);
 		permisos.setColumns(10);
 		
-	
+		email = new JTextField();
+		email.setColumns(10);
+		email.setBounds(206, 203, 114, 14);
+		contentPane.add(email);
+		
 		//Icono
 	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
 	    //Fondo

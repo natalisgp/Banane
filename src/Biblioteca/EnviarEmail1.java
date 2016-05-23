@@ -22,9 +22,10 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextArea;
 
 
-public class ModificarUsuario1 extends JFrame {
+public class EnviarEmail1 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField name;
@@ -34,6 +35,12 @@ public class ModificarUsuario1 extends JFrame {
 	private JTextField permisos;
 	private JPasswordField password;
 	private JTextField email;
+	private JTextField textField;
+	private boolean flag;
+	
+	
+
+	private JTextField textField_1;
 	/**
 	 * Launch the application.
 	 */
@@ -41,7 +48,7 @@ public class ModificarUsuario1 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ModificarUsuario1 frame = new ModificarUsuario1();
+					EnviarEmail1 frame = new EnviarEmail1();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,11 +60,13 @@ public class ModificarUsuario1 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ModificarUsuario1() {
+	public EnviarEmail1() {
 		
 		try{
-			String[] datos = funciones.getAdministrador(ModificarUsuario.ndni);
+			//cogo el dni que me ha pasado la ventana anterior
+			String[] datos = funciones.getUsuario(EnviarEmail.ndni);
 
+			//panel
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 450, 300);
 			contentPane = new JPanel();
@@ -65,14 +74,16 @@ public class ModificarUsuario1 extends JFrame {
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
 			
+			
+			//ATRAS
 			JButton label_2 = new JButton(new ImageIcon(getClass().getResource("/Imagenes/flecha.jpg")));
 			label_2.setBorderPainted(false);
 			label_2.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					
-					new ModificarUsuario().setVisible(true);
-					ModificarUsuario1.this.dispose(); //hago "invisible la clase login"
+					new EnviarEmail().setVisible(true);
+					EnviarEmail1.this.dispose(); //hago "invisible la clase login"
 				}
 			});
 			label_2.setForeground(Color.BLACK);
@@ -81,28 +92,78 @@ public class ModificarUsuario1 extends JFrame {
 			label_2.setBounds(381, 233, 30, 14);
 			contentPane.add(label_2);
 			
-			JLabel lblEliminarUsuario = new JLabel("Modificar datos usuario");
+			
+			//ETIQUETA
+			JLabel lblEliminarUsuario = new JLabel("Enviar email al usuario");
 			lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
 			lblEliminarUsuario.setForeground(Color.BLACK);
 			lblEliminarUsuario.setBounds(114, 11, 183, 20);
 			contentPane.add(lblEliminarUsuario);
 			
-			JLabel label = new JLabel("DNI");
-			label.setFont(new Font("Tahoma", Font.BOLD, 11));
-			label.setForeground(Color.WHITE);
-			label.setBounds(74, 42, 46, 14);
-			contentPane.add(label);
-			
-			name = new JTextField();
-			name.setColumns(10);
-			name.setBounds(206, 64, 114, 14);
-			contentPane.add(name);
-			name.setText(datos[0]);
-			
-			JButton btnEliminar = new JButton("Modificar datos");
+			flag=true;
+			//funcion enviar
+			JButton btnEliminar = new JButton("Enviar Email");
 			btnEliminar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+				public void actionPerformed(ActionEvent evento) {
 					
+					Email e;		
+					
+					if(flag){
+						//email con archivo adjunto
+						//logger.info("nuevo email sin archivo adjunto");
+						e = new Email(sender,password,filePath,fileName,receiver_Field.getText(),subject_Field.getText(),text_Area.getText());
+					}else{
+						//email sin archivo
+						logger.info("nuevo email con archivo adjunto");
+						e = new Email(sender,password,receiver_Field.getText(),subject_Field.getText(),text_Area.getText());
+					}
+					
+
+					
+				if (e.sendMail()){
+		            JOptionPane.showMessageDialog(null,"El email se ha enviado correctamente");
+		            dispose();
+		        }else{
+		            JOptionPane.showMessageDialog(null,"El email no se ha enviado correctamente");
+		        }		
+						
+					
+				}
+			});
+			this.cancel.addActionListener( new ActionListener(){
+			
+				public void actionPerformed(ActionEvent evento ) {
+					logger.info("email cancelado");
+					System.exit(0);
+				}
+			});
+			this.attach.addActionListener( new ActionListener(){
+				
+				public void actionPerformed(ActionEvent evento ) {
+				
+					logger.info("adjuntando archivo");	
+					JFileChooser chooser = new JFileChooser();
+					chooser.setApproveButtonText("Adjuntar Archivo");
+					chooser.showOpenDialog(null);
+					File file = chooser.getSelectedFile();
+					filePath = file.getPath();
+					
+					fileName  = file.getName();		
+				
+					attached_Field.setText(fileName);
+					
+					flag = true;
+					
+				}
+			});	
+			}
+		
+					
+					
+					
+					
+					
+					/*
 					String ndni = dnis.getText();
 					String nnombre = name.getText();
 					String napellidos = surname.getText();
@@ -122,8 +183,8 @@ public class ModificarUsuario1 extends JFrame {
 							funciones.modificarUsuarios(ndni,nnombre, napellidos, nusername, npermisos, npassword,nemail);
 							
 							//new Usuario().setVisible(true);
-							ModificarUsuario1.this.dispose();
-							System.out.println("Estoy modificando los datos del usuario");
+							EnviarEmail1.this.dispose();
+							System.out.println("Estoy cogiendo el correo de usuario");
 							
 							
 							
@@ -142,90 +203,65 @@ public class ModificarUsuario1 extends JFrame {
 					}
 					
 				}
-			});
-			btnEliminar.setBounds(134, 233, 133, 23);
+			});*/
+			btnEliminar.setBounds(124, 224, 133, 23);
 			contentPane.add(btnEliminar);
 			
-			JLabel lblNombre = new JLabel("NOMBRE");
-			lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblNombre.setForeground(Color.WHITE);
-			lblNombre.setBounds(74, 67, 69, 14);
-			contentPane.add(lblNombre);
+			JLabel label = new JLabel("ASUNTO");
+			label.setForeground(Color.WHITE);
+			label.setFont(new Font("Tahoma", Font.BOLD, 11));
+			label.setBounds(81, 88, 69, 14);
+			contentPane.add(label);
 			
 			
-			JLabel lblApellidos = new JLabel("APELLIDOS");
-			lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblApellidos.setForeground(Color.WHITE);
-			lblApellidos.setBounds(74, 92, 69, 14);
-			contentPane.add(lblApellidos);
 			
-			JLabel lblUsername = new JLabel("USERNAME");
-			lblUsername.setForeground(Color.WHITE);
-			lblUsername.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblUsername.setBounds(74, 117, 69, 14);
-			contentPane.add(lblUsername);
+			JLabel label2 = new JLabel("DESTINATARIO");
+			label2.setForeground(Color.WHITE);
+			label2.setFont(new Font("Tahoma", Font.BOLD, 11));
+			label2.setBounds(81, 63, 84, 14);
+			contentPane.add(label2);
 			
-			JLabel lblPermisos = new JLabel("PERMISOS");
-			lblPermisos.setForeground(Color.WHITE);
-			lblPermisos.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblPermisos.setBounds(74, 142, 69, 14);
-			contentPane.add(lblPermisos);
-			
-			JLabel label1 = new JLabel("EMAIL");
-			label1.setForeground(Color.WHITE);
-			label1.setFont(new Font("Tahoma", Font.BOLD, 11));
-			label1.setBounds(74, 190, 69, 14);
-			contentPane.add(label1);
-			
-			dnis = new JTextField();
-			dnis.setEditable(false);
-			dnis.setColumns(10);
-			dnis.setBounds(206, 39, 114, 14);
-			contentPane.add(dnis);
-			dnis.setText(ModificarUsuario.ndni);
-			
-			surname = new JTextField();
-		
-			surname.setColumns(10);
-			surname.setBounds(206, 90, 114, 14);
-			contentPane.add(surname);
-			surname.setText(datos[1]);
-			
-			username = new JTextField();
-			username.setColumns(10);
-			username.setBounds(206, 115, 114, 14);
-			contentPane.add(username);
-			username.setText(datos[2]);
-			
-			permisos = new JTextField();
-			permisos.setEditable(false);
-			permisos.setColumns(10);
-			permisos.setBounds(206, 140, 114, 14);
-			permisos.setText("2");
-			contentPane.add(permisos);
+			JLabel label_1 = new JLabel("ADJUNTAR");
+			label_1.setForeground(Color.WHITE);
+			label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+			label_1.setBounds(81, 189, 69, 14);
+			contentPane.add(label_1);
 			
 			
-			password = new JPasswordField();
-			password.setColumns(10);
-			password.setBounds(206, 165, 114, 14);
-			contentPane.add(password);
-			password.setText(datos[4]);
 			
 			email = new JTextField();
 			email.setColumns(10);
-			email.setBounds(206, 190, 114, 14);
+			email.setBounds(187, 63, 182, 14);
 			contentPane.add(email);
+			email.setText(datos[5]);
+			System.out.println(email);
 			
-			JLabel lblPassword = new JLabel("PASSWORD");
-			lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblPassword.setForeground(Color.WHITE);
-			lblPassword.setBounds(74, 165, 69, 14);
-			contentPane.add(lblPassword);
+			
 			
 			//Icono
 		    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
 		    //Fondo
 		    ((JPanel)getContentPane()).setOpaque(false);
+		    
+		
+		    
+		    textField = new JTextField(20);
+		    textField.setBounds(141, 88, 228, 14);
+		    contentPane.add(textField);
+		    
+		    JTextArea textArea = new JTextArea();
+		    textArea.setBounds(81, 123, 288, 55);
+		    contentPane.add(textArea);
+		    
+		    textField_1 = new JTextField();
+		    textField_1.setText((String) null);
+		    textField_1.setColumns(10);
+		    textField_1.setBounds(149, 186, 220, 14);
+		    contentPane.add(textField_1);
+		    
+		    
+		    
+		    
 		    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
 		    JLabel fondo= new JLabel(); 
 		    fondo.setIcon(uno); 
@@ -236,3 +272,4 @@ public class ModificarUsuario1 extends JFrame {
 		}
 	}
 }
+

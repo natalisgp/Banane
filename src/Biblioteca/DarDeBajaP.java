@@ -1,5 +1,7 @@
 package Biblioteca;
 
+
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -24,7 +26,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class EliminarUsuario extends JFrame {
+public class DarDeBajaP extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -36,7 +38,7 @@ public class EliminarUsuario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EliminarUsuario frame = new EliminarUsuario();
+					DarDeBajaP frame = new DarDeBajaP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +50,7 @@ public class EliminarUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EliminarUsuario() {
+	public DarDeBajaP() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -62,8 +64,8 @@ public class EliminarUsuario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				new Administrador().setVisible(true);
-				EliminarUsuario.this.dispose(); //hago "invisible la clase login"
+				new Bibliotecario().setVisible(true);
+				DarDeBajaP.this.dispose(); //hago "invisible la clase login"
 				
 			}
 		});
@@ -73,7 +75,7 @@ public class EliminarUsuario extends JFrame {
 		label_2.setBounds(377, 212, 26, 14);
 		contentPane.add(label_2);
 		
-		JLabel lblEliminarUsuario = new JLabel("Eliminar usuario");
+		JLabel lblEliminarUsuario = new JLabel("Dar de baja profesor");
 		lblEliminarUsuario.setForeground(Color.BLACK);
 		lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblEliminarUsuario.setBounds(139, 11, 131, 20);
@@ -91,7 +93,7 @@ public class EliminarUsuario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				new AyudaEliminarUsuario().setVisible(true); //Voy a crear usuario
-				EliminarUsuario.this.dispose(); //hago "invisible la clase login"
+				DarDeBajaP.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		button.setBounds(377, 22, 26, 23);
@@ -111,16 +113,16 @@ public class EliminarUsuario extends JFrame {
 				if(ndni.length()>0){ // y exista dicho dni
 					
 					try{
-						String[] comprobar = funciones.getUsuario(ndni);
+						String[] comprobar = funciones.getProfe(ndni);
 						
 						if(ndni.equals(comprobar[2])){
 							
 							//new ().setVisible(true);
-							EliminarUsuario.this.dispose();
-							System.out.println("Voy a eliminar al usuario");
-							funciones.removeUser(ndni);
+							DarDeBajaP.this.dispose();
+							System.out.println("Voy a eliminar al profe");
+							funciones.removeProfe(ndni);
 							
-							JOptionPane.showMessageDialog(null, "Se ha eliminado el usuario.");
+							JOptionPane.showMessageDialog(null, "Se ha eliminado el profe.");
 							
 							
 						}else {
@@ -158,4 +160,3 @@ public class EliminarUsuario extends JFrame {
 	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 }
-

@@ -21,7 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class Usuario extends JFrame {
+public class Alumno extends JFrame {
 
 	
 
@@ -34,7 +34,7 @@ public class Usuario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Usuario frame = new Usuario();
+					Alumno frame = new Alumno();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +46,7 @@ public class Usuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Usuario() {
+	public Alumno() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -62,7 +62,7 @@ public class Usuario extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				new login().setVisible(true);
-				Usuario.this.dispose(); //hago "invisible la clase login"
+				Alumno.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		label_1.setForeground(Color.BLACK);
@@ -71,11 +71,7 @@ public class Usuario extends JFrame {
 		label_1.setBounds(384, 238, 35, 14);
 		contentPane.add(label_1);
 		
-		JButton btnBuscarCatlogo_1 = new JButton("Buscar cat\u00E1logo");
-		btnBuscarCatlogo_1.setBounds(111, 148, 183, 23);
-		contentPane.add(btnBuscarCatlogo_1);
-		
-		JLabel lblUsuario = new JLabel("USUARIO");
+		JLabel lblUsuario = new JLabel("ALUMNO");
 		lblUsuario.setForeground(Color.BLACK);
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblUsuario.setBounds(172, 11, 55, 14);
@@ -84,6 +80,9 @@ public class Usuario extends JFrame {
 		JButton button = new JButton("Consultar datos personales");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				new BiblioAccedeFichaAlumno().setVisible(true); //Voy a crear usuario
+				Alumno.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		button.setBounds(111, 114, 183, 23);
@@ -93,8 +92,8 @@ public class Usuario extends JFrame {
 		btnModificarDatosPersonales.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new Modificarme().setVisible(true); //Voy a crear usuario
-				Usuario.this.dispose(); //hago "invisible la clase login"
+				new ModificarAlumno().setVisible(true); //Voy a crear usuario
+				Alumno.this.dispose(); //hago "invisible la clase login"
 								
 			}
 		});
@@ -106,31 +105,13 @@ public class Usuario extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				new login().setVisible(true); //Voy a crear usuario
-				Usuario.this.dispose(); //hago "invisible la clase login"
+				Alumno.this.dispose(); //hago "invisible la clase login"
 				
 				
 			}
 		});
-		btnLogout.setBounds(111, 216, 183, 23);
+		btnLogout.setBounds(111, 148, 183, 23);
 		contentPane.add(btnLogout);
-		
-		JButton btnBuscarProducto = new JButton("Buscar producto");
-		btnBuscarProducto.setBounds(111, 182, 183, 23);
-		contentPane.add(btnBuscarProducto);
-		
-		JButton btnBuscarCatlogo = new JButton("Ver cat\u00E1logos");
-		btnBuscarCatlogo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-			//	new VerCatálogos().setVisible(true); //Voy a crear usuario
-				Usuario.this.dispose(); //hago "invisible la clase login"
-				
-				
-			}
-		});
-		btnBuscarCatlogo.setBounds(111, 45, 183, 23);
-		contentPane.add(btnBuscarCatlogo);
 		
 		JButton ayuda = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
 		ayuda.setBorderPainted(false);
@@ -138,7 +119,7 @@ public class Usuario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				new AyudaUsuario().setVisible(true); //Voy a crear usuario
-				Usuario.this.dispose(); //hago "invisible la clase login"
+				Alumno.this.dispose(); //hago "invisible la clase login"
 				
 				
 				

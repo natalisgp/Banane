@@ -128,11 +128,14 @@ public class login extends JFrame {
 					//llamo a la funcion obtener usuario
 					try {
 						String[] admin = funciones.getAdministrador(ndni);
-						String[] usuario =funciones.getUsuario(ndni);
+						String[] alumno =funciones.getAlumno(ndni);
+						String[] profesor =funciones.getProfe(ndni);
+						//String[] usuario =funciones.getUsuario(ndni);
 						String[] bibliotecario =funciones.getBibliotecario(ndni);
 						
 						System.out.println(admin[2]);
-						System.out.println(usuario[2]);
+						System.out.println(alumno[2]);
+						System.out.println(profesor[2]);
 						System.out.println(bibliotecario[2]);
 						
 						//si el dni es el del administrador
@@ -148,17 +151,26 @@ public class login extends JFrame {
 								//new nombredelaclase.setVisible(true);
 								System.out.println("Hola soy el administrador");
 							}
-							//USUARIO	
+							
 						}
-						if(ndni.equals(usuario[2])){ //El permiso 2 para el administrador
+						//Alumno	
+						if(ndni.equals(alumno[2])){ //El permiso 2 para el administrador
 								  	
-								new Usuario().setVisible(true);
+								new Alumno().setVisible(true);
 								login.this.dispose();
-								System.out.println("Hola soy el usuario");
+								System.out.println("Hola soy el alumno");
 						
-						}			
+						}	
+						//Profesor
+						if(ndni.equals(profesor[2])){ //El permiso 2 para el administrador
+						  	
+							new Profesor().setVisible(true);
+							login.this.dispose();
+							System.out.println("Hola soy el profesor");
+					
+					    }	
 								
-							//BIBLIOTECARIO	
+						//BIBLIOTECARIO	
 						if(ndni.equals(bibliotecario[2])){ //El permiso 2 para el administrador
 								
 								new Bibliotecario().setVisible(true);

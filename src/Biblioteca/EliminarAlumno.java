@@ -15,20 +15,19 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class ModificarUsuario extends JFrame {
+public class EliminarAlumno extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_1;
-	static String ndni;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -37,7 +36,7 @@ public class ModificarUsuario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ModificarUsuario frame = new ModificarUsuario();
+					EliminarAlumno frame = new EliminarAlumno();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +48,7 @@ public class ModificarUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ModificarUsuario() {
+	public EliminarAlumno() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -63,41 +62,65 @@ public class ModificarUsuario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				new Administrador().setVisible(true);
-				ModificarUsuario.this.dispose(); //hago "invisible la clase login"
+				new Eliminar().setVisible(true);
+				EliminarAlumno.this.dispose(); //hago "invisible la clase login"
 				
 			}
 		});
 		label_2.setForeground(Color.BLACK);
 		label_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		label_2.setBackground(Color.WHITE);
-		label_2.setBounds(381, 201, 29, 14);
+		label_2.setBounds(377, 212, 26, 14);
 		contentPane.add(label_2);
 		
+		JLabel lblEliminarUsuario = new JLabel("Eliminar alumno");
+		lblEliminarUsuario.setForeground(Color.BLACK);
+		lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblEliminarUsuario.setBounds(139, 11, 161, 20);
+		contentPane.add(lblEliminarUsuario);
+		
 		JLabel label = new JLabel("DNI");
-		label.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label.setFont(new Font("Tahoma", Font.BOLD, 13));
 		label.setForeground(Color.WHITE);
-		label.setBounds(101, 113, 46, 14);
+		label.setBounds(95, 88, 46, 14);
 		contentPane.add(label);
 		
-		JButton btnEliminar = new JButton("Modificar");
+		JButton button = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
+		button.setBorderPainted(false);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				new AyudaEliminarUsuario().setVisible(true); //Voy a crear usuario
+				EliminarAlumno.this.dispose(); //hago "invisible la clase login"
+			}
+		});
+		button.setBounds(377, 22, 26, 23);
+		contentPane.add(button);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(193, 85, 114, 20);
+		contentPane.add(textField);
+		
+		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				 ndni = textField_1.getText();
-				
-				 
+				String ndni = textField.getText();
 				
 				if(ndni.length()>0){ // y exista dicho dni
 					
 					try{
-						String[] usuario = funciones.getUsuario(ndni);
+						String[] comprobar = funciones.getAlumno(ndni);
 						
-						if(ndni.equals(usuario[2])){
+						if(ndni.equals(comprobar[2])){
 							
-							new ModificarUsuario1().setVisible(true);
-							ModificarUsuario.this.dispose();
-							System.out.println("Voy a modificar los datos de un usuario");
+							//new ().setVisible(true);
+							EliminarAlumno.this.dispose();
+							System.out.println("Voy a eliminar al alumno");
+							funciones.removeAlumno(ndni);
+							
+							JOptionPane.showMessageDialog(null, "Se ha eliminado el alumno.");
 							
 							
 						}else {
@@ -121,34 +144,8 @@ public class ModificarUsuario extends JFrame {
 				
 			}
 		});
-		btnEliminar.setBounds(164, 179, 89, 23);
+		btnEliminar.setBounds(170, 170, 89, 23);
 		contentPane.add(btnEliminar);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(196, 110, 114, 20);
-		contentPane.add(textField_1);
-		
-		
-		
-		JLabel lblModificarUsuario = new JLabel("Modificar usuario");
-		lblModificarUsuario.setForeground(Color.BLACK);
-		lblModificarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblModificarUsuario.setBounds(143, 23, 149, 14);
-		contentPane.add(lblModificarUsuario);
-		
-		JButton button = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
-		button.setBorderPainted(false);
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				new AyudaModificarUsuario().setVisible(true);
-				ModificarUsuario.this.dispose(); //hago "invisible la clase login"
-				
-			}
-		});
-		button.setBounds(381, 23, 29, 23);
-		contentPane.add(button);
 		
 		//Icono
 	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());

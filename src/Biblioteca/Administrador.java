@@ -87,7 +87,7 @@ public class Administrador extends JFrame {
 		btnModificarDatosUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				new ModificarUsuario().setVisible(true);
+				new Modificar().setVisible(true);
 				Administrador.this.dispose();
 				System.out.println("Voy a modificar un usuario");
 				
@@ -102,7 +102,7 @@ public class Administrador extends JFrame {
 		btnEliminarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new EliminarUsuario().setVisible(true);
+				new Eliminar().setVisible(true);
 				Administrador.this.dispose();
 				System.out.println("Voy a eliminar a un usuario");
 				
@@ -116,7 +116,7 @@ public class Administrador extends JFrame {
 		btnAltaUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new BuscarUsuario().setVisible(true);
+				new Buscar().setVisible(true);
 				Administrador.this.dispose();
 				System.out.println("Voy a buscar un usuario");
 			
@@ -129,7 +129,7 @@ public class Administrador extends JFrame {
 		btnBajaUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new AnadirUsuario().setVisible(true);
+				new AnadirElegir().setVisible(true);
 				Administrador.this.dispose();
 				System.out.println("Voy a añadir un nuevo usuario");
 				
@@ -268,6 +268,11 @@ public class Administrador extends JFrame {
 	    JButton button_6 = new JButton("Enviar email usuario");
 	    button_6.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
+	    		
+	    		new EnviarEmail().setVisible(true);
+				Administrador.this.dispose();
+				System.out.println("Voy a enviar un email");
+	    		
 	    	}
 	    });
 	    button_6.setBounds(20, 139, 183, 14);

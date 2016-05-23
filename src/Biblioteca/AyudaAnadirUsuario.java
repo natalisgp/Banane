@@ -76,7 +76,7 @@ public class AyudaAnadirUsuario extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				
-				new AnadirUsuario().setVisible(true);
+				new AnadirAlumno().setVisible(true);
 				AyudaAnadirUsuario.this.dispose(); //hago "invisible la clase login"
 			}
 		});
