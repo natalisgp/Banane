@@ -1,5 +1,4 @@
 package Biblioteca;
-
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -18,7 +17,7 @@ import org.apache.log4j.Logger;
 
 
 public class Email {
-	static Logger logger = Logger.getLogger(Email.class.getName());
+	//static Logger logger = Logger.getLogger(Email.class.getName());
     
     String usuarioCorreo;
     String password;
@@ -31,7 +30,7 @@ public class Email {
     String mensaje;
     
     public Email(String usuarioCorreo, String password, String rutaArchivo, String nombreArchivo, String destinatario, String asunto,String mensaje) {
-        logger.info("nueva Email");
+        //logger.info("nueva Email");
     	this.usuarioCorreo = usuarioCorreo;
         this.password = password;
         this.rutaArchivo = rutaArchivo;
@@ -87,11 +86,11 @@ public class Email {
             t.connect(usuarioCorreo, password);
             t.sendMessage(message, message.getAllRecipients());
             t.close();
-            logger.info("email enviado");
+            //logger.info("email enviado");
             return true;
         }
         catch (Exception e){
-        	logger.warn("exception en el envio del email");
+        	//logger.warn("exception en el envio del email");
             e.printStackTrace();
             return false;
         }        

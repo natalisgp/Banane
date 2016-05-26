@@ -90,6 +90,7 @@ public class funciones {
 		String username =null;
 		String permisos = null;
 		String password = null;
+		String email = null;
 		
 		
 		while (rs.next()){
@@ -98,9 +99,10 @@ public class funciones {
 			username = rs.getString("username");
 			permisos= rs.getInt("permisos")+"";
 			password= rs.getString("password");
+			email=rs.getString("email");
 		}
 		gname=nombre;
-		String[] result ={nombre, apellidos, username,permisos,password};
+		String[] result ={nombre, apellidos, username,permisos,password,email};
 		return result;
 	}
 	

@@ -1,5 +1,4 @@
 package Biblioteca;
-
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,31 +24,31 @@ import org.apache.log4j.Logger;
 
 
 public class EmailWindow extends JDialog{
-	static Logger logger = Logger.getLogger(EmailWindow.class.getName());
+	//static Logger logger = Logger.getLogger(EmailWindow.class.getName());
 
 	private static final long serialVersionUID = 1L;
 
 	String sender,password;
+	String destinatario;
 	
 	private JTextArea text_Area;
 	private JButton send,cancel,attach;
-	private JLabel receiver_Label,subject_Label,attached_File,receiver_Field;
+	private JLabel receiver_Label,subject_Label,attached_File;
 	private JTextField subject_Field,attached_Field;
-	private Boolean flag,timetable;
-	private String receiver;
+	private Boolean flag;
 	
 	
 	private String filePath,fileName;
+	private JTextField textField;
 	
 	
-	public EmailWindow(String user,String password,String receiver,Boolean timetable){
+	public EmailWindow(String user,String password){
 		
-		logger.info("nueva EmailWindoww");
+		//logger.info("nueva EmailWindoww");
 		this.sender = user;
 		this.password = password;
-		this.receiver = receiver;
+		
 		flag = false;
-		this.timetable = timetable;
 		
 		setTitle( "Mandar Email" );
 		setLocation( 250 , 200 );
@@ -58,13 +57,10 @@ public class EmailWindow extends JDialog{
 		setDefaultCloseOperation( JDialog.HIDE_ON_CLOSE);
 		
 	
-		this.setLayout(null);
+		getContentPane().setLayout(null);
 
 		receiver_Label = new JLabel("DESTINATARIO");
 		receiver_Label.setBounds(50, 50, 100 ,20);
-		
-		receiver_Field = new JLabel(this.receiver);
-		receiver_Field.setBounds(160, 50, 290 ,20);
 	
 		subject_Label = new JLabel("ASUNTO");
 		subject_Label.setBounds(50, 90, 100 ,30);
@@ -89,29 +85,25 @@ public class EmailWindow extends JDialog{
 		attach = new JButton("Adjuntar"); 
 		attach.setBounds(350,500,90,20);
 		
-		this.add( receiver_Label );
-		this.add( receiver_Field);
+		getContentPane().add( receiver_Label );
 	
-		this.add( subject_Label );
-		this.add( subject_Field);
-		this.add(text_Area);	
-		this.add(attached_File);
-		this.add(attached_Field);
-		this.add( send );
-		this.add( cancel);
-		this.add(attach);
+		getContentPane().add( subject_Label );
+		getContentPane().add( subject_Field);
+		getContentPane().add(text_Area);	
+		getContentPane().add(attached_File);
+		getContentPane().add(attached_Field);
+		getContentPane().add( send );
+		getContentPane().add( cancel);
+		getContentPane().add(attach);
+		
+		textField = new JTextField(20);
+		textField.setBounds(160, 50, 290, 20);
+		getContentPane().add(textField);
 		
 		actions();
 		ayuda();
 		
-		if(this.timetable){
-			
-			this.filePath = "table.png";
-			this.fileName = "table.png";
-			subject_Field.setText("Timetable");
-			attached_Field.setText("table.png");
-			flag = true;
-		} 
+		
 		
 		
 	}
@@ -150,12 +142,12 @@ public class EmailWindow extends JDialog{
 				
 				if(flag){
 					//email con archivo adjunto
-					logger.info("nuevo email sin archivo adjunto");
-					e = new Email(sender,password,filePath,fileName,receiver_Field.getText(),subject_Field.getText(),text_Area.getText());
+					
+					e = new Email(sender,password,filePath,fileName,textField.getText(),subject_Field.getText(),text_Area.getText());
 				}else{
 					//email sin archivo
-					logger.info("nuevo email con archivo adjunto");
-					e = new Email(sender,password,receiver_Field.getText(),subject_Field.getText(),text_Area.getText());
+					
+					e = new Email(sender,password,textField.getText(),subject_Field.getText(),text_Area.getText());
 				}
 				
 
@@ -173,7 +165,7 @@ public class EmailWindow extends JDialog{
 		this.cancel.addActionListener( new ActionListener(){
 		
 			public void actionPerformed(ActionEvent evento ) {
-				logger.info("email cancelado");
+				
 				System.exit(0);
 			}
 		});
@@ -181,7 +173,7 @@ public class EmailWindow extends JDialog{
 			
 			public void actionPerformed(ActionEvent evento ) {
 			
-				logger.info("adjuntando archivo");	
+				
 				JFileChooser chooser = new JFileChooser();
 				chooser.setApproveButtonText("Adjuntar Archivo");
 				chooser.showOpenDialog(null);

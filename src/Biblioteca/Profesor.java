@@ -73,7 +73,7 @@ public class Profesor extends JFrame {
 		
 		JLabel lblUsuario = new JLabel("PROFESOR");
 		lblUsuario.setForeground(Color.BLACK);
-		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUsuario.setBounds(157, 11, 98, 14);
 		contentPane.add(lblUsuario);
 		
@@ -81,7 +81,7 @@ public class Profesor extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				new BiblioAccedeFichaProfe().setVisible(true); //Voy a crear usuario
+				new ProfesorDatos().setVisible(true); //Voy a crear usuario
 				Profesor.this.dispose(); //hago "invisible la clase login"
 				
 			}
@@ -93,7 +93,7 @@ public class Profesor extends JFrame {
 		btnModificarDatosPersonales.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new ModificarProfe().setVisible(true); //Voy a crear usuario
+				new ProfesorModificar().setVisible(true); //Voy a crear usuario
 				Profesor.this.dispose(); //hago "invisible la clase login"
 								
 			}

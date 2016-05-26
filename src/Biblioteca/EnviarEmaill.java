@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-public class Eliminar extends JFrame {
+public class EnviarEmaill extends JFrame {
 
 	private JPanel contentPane;
 
@@ -36,7 +36,7 @@ public class Eliminar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Eliminar frame = new Eliminar();
+					EnviarEmaill frame = new EnviarEmaill();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class Eliminar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Eliminar() {
+	public EnviarEmaill() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 491, 265);
@@ -67,7 +67,7 @@ public class Eliminar extends JFrame {
 			
 					
 					new Administrador().setVisible(true);
-					Eliminar.this.dispose(); //hago "invisible la clase login"
+					EnviarEmaill.this.dispose(); //hago "invisible la clase login"
 				
 			}
 		});
@@ -77,19 +77,19 @@ public class Eliminar extends JFrame {
 		label_1.setBounds(417, 200, 34, 14);
 		contentPane.add(label_1);
 		
-		JLabel lblAdministrador = new JLabel("Elegir usuario a eliminar");
+		JLabel lblAdministrador = new JLabel("Elegir usuario para enviar un correo");
 		lblAdministrador.setForeground(Color.BLACK);
-		lblAdministrador.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAdministrador.setBounds(167, 11, 102, 14);
+		lblAdministrador.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblAdministrador.setBounds(78, 20, 288, 14);
 		contentPane.add(lblAdministrador);
 		
 		JButton btnModificarDatosUsuario = new JButton("PROFESOR");
 		btnModificarDatosUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				new EliminarProfe().setVisible(true);
-				Eliminar.this.dispose();
-				System.out.println("Voy a eliminar a un profesor");
+				new EmailProfesor().setVisible(true);
+				EnviarEmaill.this.dispose();
+				System.out.println("Voy a enviar un correo a un profesor");
 				
 				
 				
@@ -102,9 +102,9 @@ public class Eliminar extends JFrame {
 		btnEliminarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new EliminarAlumno().setVisible(true);
-				Eliminar.this.dispose();
-				System.out.println("Voy a eliminar a un alumno");
+				new EmailAlumno().setVisible(true);
+				EnviarEmaill.this.dispose();
+				System.out.println("Voy a enviar un correo a un alumno");
 				
 				
 			}
@@ -118,7 +118,7 @@ public class Eliminar extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				new AyudaAdministrador().setVisible(true); //Voy a crear usuario
-				Eliminar.this.dispose(); //hago "invisible la clase login"
+				EnviarEmaill.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		btnAyuda.setBounds(424, 11, 27, 23);
@@ -135,6 +135,7 @@ public class Eliminar extends JFrame {
 	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 }
+
 
 
 

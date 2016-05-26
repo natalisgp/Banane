@@ -31,6 +31,7 @@ import javax.swing.SwingConstants;
 
 public class login extends JFrame {
 
+	public static String ndni;
 	private JPanel contentPane;
 	private JTextField DNI;
 	private JTextField Contrasena;
@@ -119,7 +120,7 @@ public class login extends JFrame {
 		JButton BotonEntrar = new JButton("Entrar");
 		BotonEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String ndni = DNI.getText();
+			ndni = DNI.getText();
 				char[] pass =((JPasswordField) Contrasena).getPassword();
 				//String pass = Contrasena.getText();
 				

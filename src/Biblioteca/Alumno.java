@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+////
 
 public class Alumno extends JFrame {
 
@@ -73,15 +73,15 @@ public class Alumno extends JFrame {
 		
 		JLabel lblUsuario = new JLabel("ALUMNO");
 		lblUsuario.setForeground(Color.BLACK);
-		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblUsuario.setBounds(172, 11, 55, 14);
+		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblUsuario.setBounds(164, 31, 116, 14);
 		contentPane.add(lblUsuario);
 		
 		JButton button = new JButton("Consultar datos personales");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				new BiblioAccedeFichaAlumno().setVisible(true); //Voy a crear usuario
+				new AlumnoDatos().setVisible(true); //Voy a crear usuario
 				Alumno.this.dispose(); //hago "invisible la clase login"
 			}
 		});
@@ -92,7 +92,7 @@ public class Alumno extends JFrame {
 		btnModificarDatosPersonales.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new ModificarAlumno().setVisible(true); //Voy a crear usuario
+				new AlumnoModificar().setVisible(true); //Voy a crear usuario
 				Alumno.this.dispose(); //hago "invisible la clase login"
 								
 			}
