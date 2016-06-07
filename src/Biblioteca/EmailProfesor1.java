@@ -25,22 +25,19 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTextArea;
 
 
-public class EmailProfesor1 extends JFrame {
+public class  EmailProfesor1 extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField name;
-	private JTextField dnis;
-	private JTextField surname;
-	private JTextField username;
-	private JTextField permisos;
-	private JPasswordField password;
+	
 	private JTextField email;
-	private JTextField textField;
-	private boolean flag;
-	
-	
+	private JTextArea text_Area;
+	private JLabel receiver_Label,subject_Label;
+	private JTextField subject_Field;
+	String asunto;
+	String texto ;
+	String gmail ;
+	JButton send;
 
-	private JTextField textField_1;
 	/**
 	 * Launch the application.
 	 */
@@ -89,133 +86,64 @@ public class EmailProfesor1 extends JFrame {
 			label_2.setForeground(Color.BLACK);
 			label_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 			label_2.setBackground(Color.WHITE);
-			label_2.setBounds(381, 233, 30, 14);
+			label_2.setBounds(378, 212, 30, 14);
 			contentPane.add(label_2);
 			
 			
-			//ETIQUETA
-			JLabel lblEliminarUsuario = new JLabel("Enviar email al profesor");
-			lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
-			lblEliminarUsuario.setForeground(Color.BLACK);
-			lblEliminarUsuario.setBounds(114, 11, 183, 20);
-			contentPane.add(lblEliminarUsuario);
-			
-			flag=true;
-			/*
-			//funcion enviar
-			JButton btnEliminar = new JButton("Enviar Email");
-			btnEliminar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent evento) {
-					
-					Email e;		
-					
-					if(flag){
-						//email con archivo adjunto
-						//logger.info("nuevo email sin archivo adjunto");
-						e = new Email(sender,password,filePath,fileName,receiver_Field.getText(),subject_Field.getText(),text_Area.getText());
-					}else{
-						//email sin archivo
-						logger.info("nuevo email con archivo adjunto");
-						e = new Email(sender,password,receiver_Field.getText(),subject_Field.getText(),text_Area.getText());
-					}
-					
+			getContentPane().setLayout(null);
 
-					
-				if (e.sendMail()){
-		            JOptionPane.showMessageDialog(null,"El email se ha enviado correctamente");
-		            dispose();
-		        }else{
-		            JOptionPane.showMessageDialog(null,"El email no se ha enviado correctamente");
-		        }		
-						
-					
-				}
-			});
-			this.cancel.addActionListener( new ActionListener(){
-			
-				public void actionPerformed(ActionEvent evento ) {
-					logger.info("email cancelado");
-					System.exit(0);
-				}
-			});
-			this.attach.addActionListener( new ActionListener(){
-				
-				public void actionPerformed(ActionEvent evento ) {
-				
-					logger.info("adjuntando archivo");	
-					JFileChooser chooser = new JFileChooser();
-					chooser.setApproveButtonText("Adjuntar Archivo");
-					chooser.showOpenDialog(null);
-					File file = chooser.getSelectedFile();
-					filePath = file.getPath();
-					
-					fileName  = file.getName();		
-				
-					attached_Field.setText(fileName);
-					
-					flag = true;
-					
-				}
-			});	
+			receiver_Label = new JLabel("DESTINATARIO");
+			receiver_Label.setBounds(37, 27, 100 ,20);
 		
-			btnEliminar.setBounds(124, 224, 133, 23);
-			contentPane.add(btnEliminar);
-			*/
+			subject_Label = new JLabel("ASUNTO");
+			subject_Label.setBounds(37, 58, 100 ,30);
 			
-			JLabel label = new JLabel("ASUNTO");
-			label.setForeground(Color.WHITE);
-			label.setFont(new Font("Tahoma", Font.BOLD, 11));
-			label.setBounds(81, 88, 69, 14);
-			contentPane.add(label);
+			subject_Field = new JTextField(20);
+			subject_Field.setBounds(103, 63, 266 ,20);
 			
+			text_Area = new JTextArea();
+			text_Area.setBounds(47, 99, 322, 92);
 			
+			send = new JButton("Enviar");
+			send.setBounds(157, 212, 89, 23);
+			contentPane.add(send);
+		
 			
-			JLabel label2 = new JLabel("DESTINATARIO");
-			label2.setForeground(Color.WHITE);
-			label2.setFont(new Font("Tahoma", Font.BOLD, 11));
-			label2.setBounds(81, 63, 84, 14);
-			contentPane.add(label2);
+		
 			
-			JLabel label_1 = new JLabel("ADJUNTAR");
-			label_1.setForeground(Color.WHITE);
-			label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-			label_1.setBounds(81, 189, 69, 14);
-			contentPane.add(label_1);
-			
+			getContentPane().add( receiver_Label );
+		
+			getContentPane().add( subject_Label );
+			getContentPane().add( subject_Field);
+			getContentPane().add(text_Area);
 			
 			
 			email = new JTextField();
 			email.setColumns(10);
-			email.setBounds(187, 63, 182, 14);
+			email.setBounds(127, 28, 242, 17);
 			contentPane.add(email);
 			email.setText(datos[5]);
-			System.out.println(email);
 			
+			
+			send.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evento) {
+					
+					asunto = subject_Field.getText();
+					texto = text_Area.getText();
+					gmail = email.getText();
+		
+						
+					funciones m = new funciones();
+					m.SendMail(texto,gmail,asunto);
+							
+				}
+			});
 			
 			
 			//Icono
 		    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
 		    //Fondo
 		    ((JPanel)getContentPane()).setOpaque(false);
-		    
-		
-		    
-		    textField = new JTextField(20);
-		    textField.setBounds(141, 88, 228, 14);
-		    contentPane.add(textField);
-		    
-		    JTextArea textArea = new JTextArea();
-		    textArea.setBounds(81, 123, 288, 55);
-		    contentPane.add(textArea);
-		    
-		    textField_1 = new JTextField();
-		    textField_1.setText((String) null);
-		    textField_1.setColumns(10);
-		    textField_1.setBounds(149, 186, 220, 14);
-		    contentPane.add(textField_1);
-		    
-		    
-		    
 		    
 		    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
 		    JLabel fondo= new JLabel(); 
@@ -227,3 +155,4 @@ public class EmailProfesor1 extends JFrame {
 		}
 	}
 }
+

@@ -64,7 +64,7 @@ public class EmailProfesor extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				new EnviarEmaill().setVisible(true);
+				new EmailProfesor1().setVisible(true);
 				EmailProfesor.this.dispose(); //hago "invisible la clase login"
 				
 			}

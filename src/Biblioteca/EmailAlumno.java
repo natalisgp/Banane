@@ -96,7 +96,7 @@ public class EmailAlumno extends JFrame {
 						
 						if(ndni.equals(usuario[2])){
 							
-							new EnviarEmail1().setVisible(true);
+							new EmailAlumno1().setVisible(true);
 							EmailAlumno.this.dispose();
 							System.out.println("Voy a enviar un correo al alumno");
 							

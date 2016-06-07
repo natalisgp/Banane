@@ -269,7 +269,7 @@ public class Administrador extends JFrame {
 	    button_6.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		
-	    		new EmailA().setVisible(true);
+	    		new EnviarEmaill().setVisible(true);
 				Administrador.this.dispose();
 				System.out.println("Voy a enviar un email");
 	    		
