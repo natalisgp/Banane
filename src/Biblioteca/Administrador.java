@@ -277,6 +277,19 @@ public class Administrador extends JFrame {
 	    });
 	    button_6.setBounds(20, 139, 183, 14);
 	    contentPane.add(button_6);
+	    
+	    JButton button_7 = new JButton("Material");
+	    button_7.setBounds(229, 139, 183, 14);
+	    button_7.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		
+	    		new Materiales().setVisible(true);
+				Administrador.this.dispose();
+				System.out.println("Voy a ver el materia");
+	    		
+	    	}
+	    });
+	    contentPane.add(button_7);
 	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
 	    JLabel fondo= new JLabel(); 
 	    fondo.setIcon(uno); 

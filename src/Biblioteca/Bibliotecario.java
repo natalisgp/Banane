@@ -229,6 +229,19 @@ Bibliotecario.this.dispose(); //hago "invisible la clase login"
        button_1.setBounds(249, 163, 183, 14);
        contentPane.add(button_1);
        
+       JButton button_2 = new JButton("Materiales");
+       button_2.addActionListener(new ActionListener() {
+       	public void actionPerformed(ActionEvent arg0) {
+       		
+       		new Materiales().setVisible(true);
+            Bibliotecario.this.dispose();
+            System.out.println("Voy a acceder a los materiales");
+       		
+       	}
+       });
+       button_2.setBounds(20, 216, 183, 14);
+       contentPane.add(button_2);
+       
       
       
       

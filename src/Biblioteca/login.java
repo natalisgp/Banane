@@ -66,21 +66,6 @@ public class login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		//JButton btnCrearUsuario = new JButton("Crear usuario");
-		JButton btnCrearUsuario = new JButton(new ImageIcon(getClass().getResource("/Imagenes/nuevo.jpg")));
-		btnCrearUsuario.setBorderPainted(true);
-		btnCrearUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				new CrearUsuario().setVisible(true); //Voy a crear usuario
-				login.this.dispose(); //hago "invisible la clase login"
-				
-	            
-				
-				
-			}
-		});
-		
 		JButton ayuda = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
 		ayuda.setBorderPainted(false);
 		ayuda.addActionListener(new ActionListener() {
@@ -101,10 +86,6 @@ public class login extends JFrame {
 		//label.setIcon(new ImageIcon("C:\\Users\\Natalia\\Desktop\\fondo.jpg"));
 		label.setBounds(85, -136, 327, 365);
 		contentPane.add(label);
-		btnCrearUsuario.setBackground(Color.WHITE);
-		btnCrearUsuario.setForeground(Color.BLUE);
-		btnCrearUsuario.setBounds(167, 234, 89, 23);
-		contentPane.add(btnCrearUsuario);
 		
 		DNI = new JTextField();
 		DNI.setBounds(217, 106, 114, 20);
@@ -134,10 +115,6 @@ public class login extends JFrame {
 						//String[] usuario =funciones.getUsuario(ndni);
 						String[] bibliotecario =funciones.getBibliotecario(ndni);
 						
-						System.out.println(admin[2]);
-						System.out.println(alumno[2]);
-						System.out.println(profesor[2]);
-						System.out.println(bibliotecario[2]);
 						
 						//si el dni es el del administrador
 						if(ndni.equals(admin[2])){
