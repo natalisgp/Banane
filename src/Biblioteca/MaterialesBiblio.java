@@ -16,7 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class Materiales extends JFrame {
+public class MaterialesBiblio extends JFrame {
 
 	private JPanel contentPane;
 
@@ -27,7 +27,7 @@ public class Materiales extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Materiales frame = new Materiales();
+					 MaterialesBiblio frame = new  MaterialesBiblio();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class Materiales extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Materiales() {
+	public  MaterialesBiblio() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 491, 265);
@@ -56,8 +56,8 @@ public class Materiales extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 					
-					new Administrador().setVisible(true);
-					Materiales.this.dispose(); //hago "invisible la clase login"
+					new Bibliotecario().setVisible(true);
+					 MaterialesBiblio.this.dispose(); //hago "invisible la clase login"
 				
 			}
 		});
@@ -78,7 +78,7 @@ public class Materiales extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				new InsertarSala().setVisible(true);
-				Materiales.this.dispose();
+				 MaterialesBiblio.this.dispose();
 				System.out.println("Voy a insertar una nueva sala");
 				
 				
@@ -94,7 +94,7 @@ public class Materiales extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				new AyudaAdministrador().setVisible(true); //Voy a crear usuario
-				Materiales.this.dispose(); //hago "invisible la clase login"
+				 MaterialesBiblio.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		btnAyuda.setBounds(424, 11, 27, 23);
@@ -109,7 +109,7 @@ public class Materiales extends JFrame {
 	    button.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {
 	    		new EliminarSala().setVisible(true);
-				Materiales.this.dispose();
+	    		 MaterialesBiblio.this.dispose();
 				System.out.println("Voy eliminar una sala");
 				
 				
@@ -123,7 +123,7 @@ public class Materiales extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				new InsertarLibro().setVisible(true);
-				Materiales.this.dispose();
+				 MaterialesBiblio.this.dispose();
 				System.out.println("Voy insertar un nuevo libro");
 				
 				
@@ -138,7 +138,7 @@ public class Materiales extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				new InsertarTablet().setVisible(true);
-				Materiales.this.dispose();
+				 MaterialesBiblio.this.dispose();
 				System.out.println("Voy a insertar una nueva tablet");
 				
 				
@@ -152,7 +152,7 @@ public class Materiales extends JFrame {
 	    button_4.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {
 	    		new EliminarLibro().setVisible(true);
-				Materiales.this.dispose();
+	    		 MaterialesBiblio.this.dispose();
 				System.out.println("Voy eliminar un libro");
 				
 				
@@ -165,7 +165,7 @@ public class Materiales extends JFrame {
 	    button_6.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {
 	    		new EliminarTablet().setVisible(true);
-				Materiales.this.dispose();
+	    		 MaterialesBiblio.this.dispose();
 				System.out.println("Voy eliminar una tablet");
 				
 				
@@ -175,33 +175,29 @@ public class Materiales extends JFrame {
 	    contentPane.add(button_6);
 	    
 	    JButton button_3 = new JButton("Consultar Sala");
-	    button_3.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		new DisponiLibro().setVisible(true);
-				Materiales.this.dispose();
-	    	}
-	    });
-	    button_3.setBounds(26, 169, 126, 23); 
+	    button_3.setBounds(26, 166, 126, 23);
 	    contentPane.add(button_3);
 	    
 	    JButton button_5 = new JButton("Consultar Libro");
 	    button_5.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		new DisponiLibro().setVisible(true);
-				Materiales.this.dispose();
+	    		MaterialesBiblio.this.dispose();
+	    		
 	    	}
 	    });
-	    button_5.setBounds(168, 169, 126, 23);
+	    button_5.setBounds(168, 166, 126, 23);
 	    contentPane.add(button_5);
 	    
-	    JButton button_7 = new JButton("Consulta Tablet");
+	    JButton button_7 = new JButton("Consultar Tablet");
 	    button_7.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		new DisponiTablet().setVisible(true);
-				Materiales.this.dispose();
+	    		MaterialesBiblio.this.dispose();
+	    		
 	    	}
 	    });
-	    button_7.setBounds(304, 169, 126, 23);
+	    button_7.setBounds(304, 166, 126, 23);
 	    contentPane.add(button_7);
 	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
 	    JLabel fondo= new JLabel(); 
@@ -210,6 +206,7 @@ public class Materiales extends JFrame {
 	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 }
+
 
 
 

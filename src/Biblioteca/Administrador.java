@@ -74,13 +74,13 @@ public class Administrador extends JFrame {
 		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		label_1.setBackground(Color.WHITE);
-		label_1.setBounds(417, 200, 34, 14);
+		label_1.setBounds(424, 211, 34, 14);
 		contentPane.add(label_1);
 		
 		JLabel lblAdministrador = new JLabel("ADMINISTRADOR");
 		lblAdministrador.setForeground(Color.BLACK);
 		lblAdministrador.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAdministrador.setBounds(167, 11, 102, 14);
+		lblAdministrador.setBounds(164, 11, 102, 14);
 		contentPane.add(lblAdministrador);
 		
 		JButton btnModificarDatosUsuario = new JButton("Modificar datos usuario");
@@ -139,28 +139,6 @@ public class Administrador extends JFrame {
 		btnBajaUsuario.setBounds(20, 36, 183, 14);
 		contentPane.add(btnBajaUsuario);
 		
-		JButton btnBackupUsuarios = new JButton("Copia seguridad usuarios");
-		btnBackupUsuarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				//Dialogo para escoger donde guardar y con que nombre y extension
-				JFileChooser choose = new JFileChooser("Guardar Backup");
-				choose.showSaveDialog(null);
-				File archivo2 = choose.getSelectedFile();
-				
-				try {
-					funciones.hacerBackupUsuarios(archivo2);
-				} catch (IOException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				
-			}
-		});
-		btnBackupUsuarios.setBounds(20, 189, 186, 14);
-		contentPane.add(btnBackupUsuarios);
-		
 		JButton btnCargarBackupUsuario = new JButton("Cargar copia seguridad usuario");
 		btnCargarBackupUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -170,7 +148,7 @@ public class Administrador extends JFrame {
 				File archivo2 = chooser.getSelectedFile();
 				
 				try {
-					funciones.cargarBackupUsuario(archivo2);
+					funciones.cargarBackupAlumno(archivo2);
 				} catch (IOException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -180,7 +158,7 @@ public class Administrador extends JFrame {
 				
 			}
 		});
-		btnCargarBackupUsuario.setBounds(20, 164, 186, 14);
+		btnCargarBackupUsuario.setBounds(20, 175, 186, 14);
 		contentPane.add(btnCargarBackupUsuario);
 		
 		JButton btnAyuda = new JButton(new ImageIcon (this.getClass().getResource("/Imagenes/ayuda.jpg")));
@@ -254,16 +232,8 @@ public class Administrador extends JFrame {
 	    	public void actionPerformed(ActionEvent e) {
 	    	}
 	    });
-	    button_4.setBounds(229, 164, 186, 14);
+	    button_4.setBounds(20, 200, 186, 14);
 	    contentPane.add(button_4);
-	    
-	    JButton button_5 = new JButton("Copia seguridad bibliotecario");
-	    button_5.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    	}
-	    });
-	    button_5.setBounds(229, 189, 186, 14);
-	    contentPane.add(button_5);
 	    
 	    JButton button_6 = new JButton("Enviar email usuario");
 	    button_6.addActionListener(new ActionListener() {
@@ -278,8 +248,8 @@ public class Administrador extends JFrame {
 	    button_6.setBounds(20, 139, 183, 14);
 	    contentPane.add(button_6);
 	    
-	    JButton button_7 = new JButton("Material");
-	    button_7.setBounds(229, 139, 183, 14);
+	    JButton button_7 = new JButton("Ejemplares");
+	    button_7.setBounds(20, 150, 183, 14);
 	    button_7.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		
@@ -290,6 +260,30 @@ public class Administrador extends JFrame {
 	    	}
 	    });
 	    contentPane.add(button_7);
+	    
+	    JButton button_8 = new JButton("Copias de seguridad");
+	    button_8.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		
+	    		
+	    		new Copias().setVisible(true);
+				Administrador.this.dispose();
+	    	}
+	    });
+	    button_8.setBounds(229, 139, 186, 14);
+	    contentPane.add(button_8);
+	    
+	    JButton button_5 = new JButton("Cargar copias de seguridad");
+	    button_5.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		
+	    		
+	    		new Cargar().setVisible(true);
+				Administrador.this.dispose();
+	    	}
+	    });
+	    button_5.setBounds(229, 171, 186, 14);
+	    contentPane.add(button_5);
 	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
 	    JLabel fondo= new JLabel(); 
 	    fondo.setIcon(uno); 

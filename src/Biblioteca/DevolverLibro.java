@@ -1,5 +1,4 @@
-
-	package Biblioteca;
+package Biblioteca;
 
 	import java.awt.BorderLayout;
 	import java.awt.EventQueue;
@@ -27,17 +26,21 @@
 	import java.awt.event.MouseEvent;
 
 
-	public class AlquilerTablet extends JFrame {
+	public class DevolverLibro extends JFrame {
 
 		private JPanel contentPane;
 		private JTextField textField;
 		private JTextField textField_1;
 		public static String ndni;
 		 Calendar calendario = new GregorianCalendar();
-			int hora,minutos,segundos;
-			String reloj;
+		 int dia;
+		 String fecha;
+
+			String relojActual;
+			String minutosActual;
+		
 			String suma;
-		 String tablet ;
+		 String nsignatura ;
 		
 		
 		/**
@@ -47,7 +50,7 @@
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						AlquilerLibro frame = new AlquilerLibro();
+						DevolverLibro frame = new DevolverLibro();
 						frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -59,7 +62,7 @@
 		/**
 		 * Create the frame.
 		 */
-		public AlquilerTablet() {
+		public DevolverLibro() {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 450, 300);
 			contentPane = new JPanel();
@@ -74,7 +77,7 @@
 				public void mouseClicked(MouseEvent e) {
 					
 					new Bibliotecario().setVisible(true);
-					AlquilerTablet.this.dispose(); //hago "invisible la clase login"
+					DevolverLibro.this.dispose(); //hago "invisible la clase login"
 					
 				}
 			});
@@ -84,7 +87,7 @@
 			label_2.setBounds(377, 212, 26, 14);
 			contentPane.add(label_2);
 			
-			JLabel lblEliminarUsuario = new JLabel("Alquilar tablet");
+			JLabel lblEliminarUsuario = new JLabel("Devolver libro");
 			lblEliminarUsuario.setForeground(Color.BLACK);
 			lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
 			lblEliminarUsuario.setBounds(139, 11, 161, 20);
@@ -102,7 +105,7 @@
 				public void actionPerformed(ActionEvent e) {
 					
 					new AyudaEliminarUsuario().setVisible(true); //Voy a crear usuario
-					AlquilerTablet.this.dispose(); //hago "invisible la clase login"
+					DevolverLibro.this.dispose(); //hago "invisible la clase login"
 				}
 			});
 			button.setBounds(377, 22, 26, 23);
@@ -113,34 +116,34 @@
 			textField.setBounds(186, 120, 114, 20);
 			contentPane.add(textField);
 			
-			JButton btnEliminar = new JButton("Alquilar");
+			JButton btnEliminar = new JButton("Devolver");
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					tablet = textField_1.getText();
+					nsignatura = textField_1.getText();
 					
 					//consulta para cambiar el reservado del libro
 					String [] datosLibro = null;
 					try {
-						datosLibro= funciones.getTabletReser(tablet);
+						datosLibro= funciones.getSignaRese(nsignatura);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					
-					String reserva = datosLibro[1];
+					String reserva = datosLibro[4];
+					//System.out.println("reservado "+reserva );
 					String solucion = null ;
 					if(reserva.equals("NO")){
 						solucion="SI";
 						//JOptionPane.showMessageDialog(null, "EL LIBRO ESTA DISPONIBLE");
 				    }else if(reserva.equals("SI")){
-				    	reserva.equals("NO");
 				    	solucion="NO";
 				    	//JOptionPane.showMessageDialog(null, "EL LIBRO NO ESTA DISPONIBLE");
 				    }
 					
 					try {
-						funciones.cambiarTablet(solucion,tablet);
+						funciones.cambiarReserva(solucion,nsignatura);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -158,57 +161,93 @@
 							
 							//hora
 
-							hora =calendario.get(Calendar.HOUR_OF_DAY);
-							minutos = calendario.get(Calendar.MINUTE);
-							segundos = calendario.get(Calendar.SECOND);
+							dia = calendario.get(Calendar.DATE);
+							
 							
 						
-						    reloj = Integer.toString(hora)+":"+Integer.toString(minutos);
+						    //relojActual = Integer.toString(hora)+":"+Integer.toString(minutos);
 							
 							//Alumno	
 							if(ndni.equals(alumno[2])){ //El permiso 2 para el administrador  	
 								
-								if(alumno[6]==null){
+							    //leo la hora y si se ha pasado multa
+								String fecha = alumno[8];
+								
+								int inicio = fecha.indexOf("/");
+								int diaRe=Integer.parseInt(fecha.substring(0, inicio));
+								diaRe+=3;
+								//System.out.println("dia de reserva + 3"+diaRe);
+								
+								if(dia<diaRe){
+									
+									//Le pongo una multa porque ha entregado la tablet tarde
+									nsignatura="";
+									String ho= "";
+									String multa = "SI";
+									funciones.devolverTabletAl(nsignatura,ho,multa,alumno[2]);
+									
+									//le mando un correo porque le he puesto una multa
+									String emailA=alumno[5];
+									//System.out.println(emailA);
+									String asunto="MULTA";
+									String texto = "Se le ha multado por no entregar el ejemplar alquilado a tiempo. En un periodo de tres dias no podra realizar un alquiler";
+									funciones m = new funciones();
+									m.SendMail(texto,emailA,asunto);
+									
+									
+									
+								}else{
+									nsignatura="";
+									String ho= "";
+									String multa = "NO";
+									
+									funciones.devolverTabletAl(nsignatura,ho,multa,alumno[2]);
+								}
+									
+								//}
+								//String horaPasada = 
+								
 								
 									//pongo la reserva del alumno a si
-								
-									funciones.alquilaAlumnoLibro(tablet, reloj, alumno[2]);
-								}else{
-									solucion="NO";
-									try {
-										funciones.cambiarTablet(solucion,tablet);
-									} catch (SQLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-									
-									
-									JOptionPane.showMessageDialog(null, "Ya tiene alguna reserva y no se puede realizar otra");
-								}
-								//le paso la signatura del libro a reservas y la hora
-								
-								
+									//funciones.alquilaAlumnoLibro(tablet, reloj, alumno[2]);
 							}	
 							//Profesor
 							if(ndni.equals(profesor[2])){ //El permiso 2 para el administrador
 								
-								if(profesor[6]==null){
+								String fecha = profesor[8];
+								//System.out.println(fecha);
 								
-								 //funciones.horaReseProfe(fecha, ndni);
-									funciones.alquilaProfeLibro(tablet, reloj, ndni);
+								int inicio = fecha.indexOf("/");
+								int diaRe=Integer.parseInt(fecha.substring(0, inicio));
+								diaRe+=3;
+							
+								if(dia>diaRe){
+									
+									nsignatura="";
+									String ho= "";
+									String multa = "SI";
+									funciones.devolverTabletProfe(nsignatura,ho,multa,profesor[2]);
+									
+									//le mando un correo porque le he puesto una multa
+									String emailProfesor=profesor[5];
+									//System.out.println(emailProfesor);
+									String asunto="MULTA";
+									String texto = "Se le ha multado por no entregar el ejemplar alquilado a tiempo. En un periodo de tres dias no podra realizar un alquiler";
+									funciones m = new funciones();
+									m.SendMail(texto,emailProfesor,asunto);
+									
+									
 								}else{
-									solucion="NO";
-									try {
-										funciones.cambiarTablet(solucion,tablet);
-									} catch (SQLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
+									nsignatura="";
+									String ho= "";
+									String multa = "NO";
 									
+									funciones.devolverTabletProfe(nsignatura,ho,multa,profesor[2]);
 									
-									JOptionPane.showMessageDialog(null, "Ya tiene alguna reserva y no se puede realizar otra");
+									//le mando un correo porque le he puesto una multa
 								}
-						
+									
+								
 						    }	
 							
 				} catch (SQLException e1) {
@@ -236,7 +275,7 @@
 		    textField_1.setBounds(186, 70, 114, 20);
 		    contentPane.add(textField_1);
 		    
-		    JLabel label_1 = new JLabel("TABLET");
+		    JLabel label_1 = new JLabel("SIGNATURA");
 		    label_1.setForeground(Color.WHITE);
 		    label_1.setFont(new Font("Tahoma", Font.BOLD, 13));
 		    label_1.setBounds(62, 72, 80, 14);

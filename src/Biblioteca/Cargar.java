@@ -7,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -14,9 +16,12 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
 
 
-public class Materiales extends JFrame {
+public class Cargar extends JFrame {
 
 	private JPanel contentPane;
 
@@ -27,7 +32,7 @@ public class Materiales extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Materiales frame = new Materiales();
+					Cargar frame = new Cargar();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +44,7 @@ public class Materiales extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Materiales() {
+	public Cargar() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 491, 265);
@@ -57,7 +62,7 @@ public class Materiales extends JFrame {
 				
 					
 					new Administrador().setVisible(true);
-					Materiales.this.dispose(); //hago "invisible la clase login"
+					Cargar.this.dispose(); //hago "invisible la clase login"
 				
 			}
 		});
@@ -67,24 +72,31 @@ public class Materiales extends JFrame {
 		label_1.setBounds(417, 200, 34, 14);
 		contentPane.add(label_1);
 		
-		JLabel lblAdministrador = new JLabel("Elegir una opción");
+		JLabel lblAdministrador = new JLabel("Cargar copias de seguridad");
 		lblAdministrador.setForeground(Color.BLACK);
 		lblAdministrador.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblAdministrador.setBounds(142, 22, 288, 23);
 		contentPane.add(lblAdministrador);
 		
-		JButton btnModificarDatosUsuario = new JButton("Insertar Sala");
+		JButton btnModificarDatosUsuario = new JButton("Administrador");
 		btnModificarDatosUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				new InsertarSala().setVisible(true);
-				Materiales.this.dispose();
-				System.out.println("Voy a insertar una nueva sala");
-				
-				
-				
-			}
-		});
+				public void actionPerformed(ActionEvent e) {
+					
+					JFileChooser chooser = new JFileChooser("Cargar Backup");
+					chooser.showOpenDialog(null);
+					File archivo2 = chooser.getSelectedFile();
+					
+					try {
+						funciones.cargarBackupAdm(archivo2);
+					} catch (IOException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
+					
+				}
+			});
 		btnModificarDatosUsuario.setBounds(26, 70, 126, 23);
 		contentPane.add(btnModificarDatosUsuario);
 		
@@ -94,7 +106,7 @@ public class Materiales extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				new AyudaAdministrador().setVisible(true); //Voy a crear usuario
-				Materiales.this.dispose(); //hago "invisible la clase login"
+				Cargar.this.dispose(); //hago "invisible la clase login"
 			}
 		});
 		btnAyuda.setBounds(424, 11, 27, 23);
@@ -105,26 +117,42 @@ public class Materiales extends JFrame {
 	    //Fondo
 	    ((JPanel)getContentPane()).setOpaque(false);
 	    
-	    JButton button = new JButton("Eliminar Sala");
+	    JButton button = new JButton("Bibliotecario");
 	    button.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent arg0) {
-	    		new EliminarSala().setVisible(true);
-				Materiales.this.dispose();
-				System.out.println("Voy eliminar una sala");
+			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser chooser = new JFileChooser("Cargar Backup");
+				chooser.showOpenDialog(null);
+				File archivo2 = chooser.getSelectedFile();
+				
+				try {
+					funciones.cargarBackupBiblio(archivo2);
+				} catch (IOException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				
-	    	}
-	    });
+				
+			}
+		});
 	    button.setBounds(26, 120, 126, 23);
 	    contentPane.add(button);
 	    
-	    JButton button_1 = new JButton("Insertar Libro");
+	    JButton button_1 = new JButton("Alumno");
 	    button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				
-				new InsertarLibro().setVisible(true);
-				Materiales.this.dispose();
-				System.out.println("Voy insertar un nuevo libro");
+				JFileChooser chooser = new JFileChooser("Cargar Backup");
+				chooser.showOpenDialog(null);
+				File archivo2 = chooser.getSelectedFile();
+				
+				try {
+					funciones.cargarBackupAlumno(archivo2);
+				} catch (IOException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				
 				
@@ -133,13 +161,20 @@ public class Materiales extends JFrame {
 	    button_1.setBounds(168, 70, 126, 23);
 	    contentPane.add(button_1);
 	    
-	    JButton button_2 = new JButton("Insertar Tablet");
+	    JButton button_2 = new JButton("Profesor");
 	    button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				
-				new InsertarTablet().setVisible(true);
-				Materiales.this.dispose();
-				System.out.println("Voy a insertar una nueva tablet");
+				JFileChooser chooser = new JFileChooser("Cargar Backup");
+				chooser.showOpenDialog(null);
+				File archivo2 = chooser.getSelectedFile();
+				
+				try {
+					funciones.cargarBackupProfesor(archivo2);
+				} catch (IOException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				
 				
@@ -148,61 +183,71 @@ public class Materiales extends JFrame {
 	    button_2.setBounds(304, 70, 126, 23);
 	    contentPane.add(button_2);
 	    
-	    JButton button_4 = new JButton("Eliminar Libro");
+	    JButton button_4 = new JButton("Salas");
 	    button_4.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent arg0) {
-	    		new EliminarLibro().setVisible(true);
-				Materiales.this.dispose();
-				System.out.println("Voy eliminar un libro");
+			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser chooser = new JFileChooser("Cargar Backup");
+				chooser.showOpenDialog(null);
+				File archivo2 = chooser.getSelectedFile();
+				
+				try {
+					funciones.cargarBackupSalas(archivo2);
+				} catch (IOException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				
-	    	}
-	    });
+				
+			}
+		});
 	    button_4.setBounds(168, 120, 126, 23);
 	    contentPane.add(button_4);
 	    
-	    JButton button_6 = new JButton("Eliminar Tablet");
+	    JButton button_6 = new JButton("Tablet");
 	    button_6.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent arg0) {
-	    		new EliminarTablet().setVisible(true);
-				Materiales.this.dispose();
-				System.out.println("Voy eliminar una tablet");
+			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser chooser = new JFileChooser("Cargar Backup");
+				chooser.showOpenDialog(null);
+				File archivo2 = chooser.getSelectedFile();
+				
+				try {
+					funciones.cargarBackupTablet(archivo2);
+				} catch (IOException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				
-	    	}
-	    });
+				
+			}
+		});
 	    button_6.setBounds(304, 120, 126, 23);
 	    contentPane.add(button_6);
 	    
-	    JButton button_3 = new JButton("Consultar Sala");
-	    button_3.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		new DisponiLibro().setVisible(true);
-				Materiales.this.dispose();
-	    	}
-	    });
-	    button_3.setBounds(26, 169, 126, 23); 
-	    contentPane.add(button_3);
-	    
-	    JButton button_5 = new JButton("Consultar Libro");
+	    JButton button_5 = new JButton("Libros");
 	    button_5.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		new DisponiLibro().setVisible(true);
-				Materiales.this.dispose();
-	    	}
-	    });
+			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser chooser = new JFileChooser("Cargar Backup");
+				chooser.showOpenDialog(null);
+				File archivo2 = chooser.getSelectedFile();
+				
+				try {
+					funciones.cargarBackupLibros(archivo2);
+				} catch (IOException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				
+			}
+		});
 	    button_5.setBounds(168, 169, 126, 23);
 	    contentPane.add(button_5);
-	    
-	    JButton button_7 = new JButton("Consulta Tablet");
-	    button_7.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		new DisponiTablet().setVisible(true);
-				Materiales.this.dispose();
-	    	}
-	    });
-	    button_7.setBounds(304, 169, 126, 23);
-	    contentPane.add(button_7);
 	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
 	    JLabel fondo= new JLabel(); 
 	    fondo.setIcon(uno); 
@@ -210,6 +255,8 @@ public class Materiales extends JFrame {
 	    fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
 	}
 }
+
+
 
 
 

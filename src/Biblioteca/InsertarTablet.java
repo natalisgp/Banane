@@ -35,7 +35,6 @@ public class InsertarTablet extends JFrame {
 
 	private JTextField tablet;
 	private JTextField reserva;
-	private JTextField id;
    
 	/**
 	 * Launch the application.
@@ -73,12 +72,12 @@ public class InsertarTablet extends JFrame {
 		JLabel label = new JLabel("TABLET");
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label.setForeground(Color.WHITE);
-		label.setBounds(74, 59, 46, 14);
+		label.setBounds(75, 85, 46, 14);
 		contentPane.add(label);
 		
 		tablet = new JTextField();
 		tablet.setColumns(10);
-		tablet.setBounds(206, 59, 114, 14);
+		tablet.setBounds(206, 85, 114, 14);
 		contentPane.add(tablet);
 	
 		
@@ -88,20 +87,20 @@ public class InsertarTablet extends JFrame {
 				
 				String ntablet= tablet.getText();
 	
-				String nreserva = reserva.getText();
+				String nreserva = "NO";
 				
-				String nid = id.getText();
+			
 			
 
 				
-				if(ntablet.length()>0 &&  nreserva.length()>0&& nid.length()>0) { 
+				if(ntablet.length()>0 &&  nreserva.length()>0) { 
 					
 		
 						
 							try{
 							
 					
-								funciones.anadirTablet(ntablet, nreserva, nid);							
+								funciones.anadirTablet(ntablet, nreserva);							
 								//new Usuario().setVisible(true);
 								//	ModificarUsuario1.this.dispose();
 								
@@ -145,7 +144,7 @@ public class InsertarTablet extends JFrame {
 		lblApellidos.setForeground(Color.WHITE);
 		lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		//lblApellidos.setPrompt("Escriba aquí",20);
-		lblApellidos.setBounds(74, 97, 69, 14);
+		lblApellidos.setBounds(74, 125, 69, 14);
 		contentPane.add(lblApellidos);
 		
 	
@@ -171,7 +170,7 @@ public class InsertarTablet extends JFrame {
 		reserva.setColumns(10);
 		reserva.setEditable(false);
 		reserva.setText("NO");
-		reserva.setBounds(206, 97, 114, 14);
+		reserva.setBounds(206, 125, 114, 14);
 		contentPane.add(reserva);
 		
 		
@@ -188,21 +187,10 @@ public class InsertarTablet extends JFrame {
 		button.setBounds(370, 11, 24, 23);
 		contentPane.add(button);
 		
-		JLabel lblPassword = new JLabel("ID");
-		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPassword.setForeground(Color.WHITE);
-		lblPassword.setBounds(74, 134, 69, 14);
-		contentPane.add(lblPassword);
-		
 		//Icono
 	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
 	    //Fondo
 	    ((JPanel)getContentPane()).setOpaque(false);
-	    
-	    id = new JTextField();
-	    id.setColumns(10);
-	    id.setBounds(206, 134, 114, 14);
-	    contentPane.add(id);
 	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
 	    JLabel fondo= new JLabel(); 
 	    fondo.setIcon(uno); 

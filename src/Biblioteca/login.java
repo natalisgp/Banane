@@ -1,8 +1,6 @@
 package Biblioteca;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -12,21 +10,14 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
-
 import javax.swing.ImageIcon;
-
 import java.awt.Color;
 import java.sql.SQLException;
-import javax.swing.JTextPane;
-import javax.swing.JTextArea;
 import javax.swing.UIManager;
-import javax.swing.JToggleButton;
 import java.awt.Font;
-import javax.swing.SwingConstants;
+
 
 
 public class login extends JFrame {
@@ -35,6 +26,7 @@ public class login extends JFrame {
 	private JPanel contentPane;
 	private JTextField DNI;
 	private JTextField Contrasena;
+	char[] pass;
 
 	/**
 	 * Launch the application.
@@ -102,7 +94,7 @@ public class login extends JFrame {
 		BotonEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			ndni = DNI.getText();
-				char[] pass =((JPasswordField) Contrasena).getPassword();
+			pass =((JPasswordField) Contrasena).getPassword();
 				//String pass = Contrasena.getText();
 				
 				if(ndni.length()>0 && pass.length>0){
@@ -114,50 +106,60 @@ public class login extends JFrame {
 						String[] profesor =funciones.getProfe(ndni);
 						//String[] usuario =funciones.getUsuario(ndni);
 						String[] bibliotecario =funciones.getBibliotecario(ndni);
-						
+						String con = String.valueOf(pass);
 						
 						//si el dni es el del administrador
 						if(ndni.equals(admin[2])){
-							
-
-							//ADMINISTRADOR
-							if(admin[3].equals("1")){  //El permiso 1 para el usuario
+							if(con.equals(admin[4])){
 								
-								new Administrador().setVisible(true);
-								login.this.dispose(); //hago "invisible la clase login"
-								
-								//new nombredelaclase.setVisible(true);
-								System.out.println("Hola soy el administrador");
-							}
+								//ADMINISTRADOR
+								if(admin[3].equals("1")){  //El permiso 1 para el usuario
+									
+									new Administrador().setVisible(true);
+									login.this.dispose(); //hago "invisible la clase login"
+									
+									//new nombredelaclase.setVisible(true);
+									System.out.println("Hola soy el administrador");
+								}
+							}	
+							JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");
+						
 							
 						}
 						//Alumno	
 						if(ndni.equals(alumno[2])){ //El permiso 2 para el administrador
-								  	
+							if(con.equals(alumno[4])){	  	
 								new Alumno().setVisible(true);
 								login.this.dispose();
 								System.out.println("Hola soy el alumno");
-						
+							}else{	
+								JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");	
+							}	
 						}	
 						//Profesor
 						if(ndni.equals(profesor[2])){ //El permiso 2 para el administrador
-						  	
-							new Profesor().setVisible(true);
-							login.this.dispose();
-							System.out.println("Hola soy el profesor");
+							if(con.equals(profesor[4])){
+								new Profesor().setVisible(true);
+								login.this.dispose();
+								System.out.println("Hola soy el profesor");
+							}else{	
+								JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");	
+							}	
 					
 					    }	
 								
 						//BIBLIOTECARIO	
 						if(ndni.equals(bibliotecario[2])){ //El permiso 2 para el administrador
-								
+							
+						    if(con.equals(bibliotecario[4])){
 								new Bibliotecario().setVisible(true);
 								login.this.dispose(); //hago "invisible la clase login"
 								
 								//new nombredelaclase.setVisible(true);
 								System.out.println("Hola soy el bibliotecario");
-									
-								
+							}else{	
+								JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");	
+							}	
 							
 						}
 						

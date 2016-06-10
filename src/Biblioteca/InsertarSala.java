@@ -37,7 +37,6 @@ public class InsertarSala extends JFrame {
 	private JTextField reservas;
 	private JTextField numReserva;
 	private JTextField tiempo;
-	private JTextField id;
    
 	/**
 	 * Launch the application.
@@ -89,23 +88,27 @@ public class InsertarSala extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				String nnombre = nombre.getText();
+				//System.out.println(nnombre);
 				int nalumnos = Integer.parseInt(alumnos.getText());
+				//System.out.println(nalumnos);
 				String nreservas = reservas.getText();
+				//System.out.println(nreservas);
 				int nnumRese =  Integer.parseInt(numReserva.getText());
+				//System.out.println(nnumRese);
 				String ntiempo =tiempo.getText();
-				String nid = id.getText();
-				
+				//System.out.println(ntiempo);
+			
 			
 
 				
-				if(nnombre.length()>0 && nreservas.length()>0 && nid.length()>0) { 
+				if(nnombre.length()>0 && nreservas.length()>0) { 
 					
 		
 						
 							try{
 							
 					
-								funciones.anadirSala(nnombre, nalumnos, nreservas, nnumRese, ntiempo, nid);							
+								funciones.anadirSala(nnombre, nalumnos, nreservas, nnumRese, ntiempo);							
 								//new Usuario().setVisible(true);
 								//	ModificarUsuario1.this.dispose();
 								
@@ -215,12 +218,6 @@ public class InsertarSala extends JFrame {
 		button.setBounds(370, 11, 24, 23);
 		contentPane.add(button);
 		
-		JLabel lblPassword = new JLabel("ID");
-		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPassword.setForeground(Color.WHITE);
-		lblPassword.setBounds(74, 180, 69, 14);
-		contentPane.add(lblPassword);
-		
 		tiempo = new JTextField();
 		tiempo.setEditable(false);
 		tiempo.setBackground(SystemColor.control);
@@ -233,11 +230,6 @@ public class InsertarSala extends JFrame {
 	    setIconImage(new ImageIcon(getClass().getResource("/Imagenes/Banane.jpg")).getImage());
 	    //Fondo
 	    ((JPanel)getContentPane()).setOpaque(false);
-	    
-	    id = new JTextField();
-	    id.setColumns(10);
-	    id.setBounds(206, 177, 114, 14);
-	    contentPane.add(id);
 	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
 	    JLabel fondo= new JLabel(); 
 	    fondo.setIcon(uno); 

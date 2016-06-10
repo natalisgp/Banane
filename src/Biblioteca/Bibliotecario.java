@@ -81,7 +81,7 @@ public class Bibliotecario extends JFrame {
     JLabel lblBibliotecario = new JLabel("BIBLIOTECARIO");
     lblBibliotecario.setForeground(Color.BLACK);
     lblBibliotecario.setFont(new Font("Tahoma", Font.BOLD, 15));
-    lblBibliotecario.setBounds(146, 36, 151, 14);
+    lblBibliotecario.setBounds(167, 11, 151, 14);
     contentPane.add(lblBibliotecario);
     
     JButton btnModificarDatosUsuario = new JButton("Modificar datos alumno");
@@ -96,7 +96,7 @@ public class Bibliotecario extends JFrame {
         
       }
     });
-    btnModificarDatosUsuario.setBounds(249, 188, 183, 14);
+    btnModificarDatosUsuario.setBounds(249, 86, 183, 14);
     contentPane.add(btnModificarDatosUsuario);
     
     
@@ -110,7 +110,7 @@ public class Bibliotecario extends JFrame {
     		
     	}
     });
-    b.setBounds(20, 191, 183, 14);
+    b.setBounds(20, 86, 183, 14);
     contentPane.add(b);
     
     
@@ -127,7 +127,7 @@ public class Bibliotecario extends JFrame {
         
       }
     });
-    btnBajaUsuario.setBounds(20, 141, 183, 14);
+    btnBajaUsuario.setBounds(249, 36, 183, 14);
     contentPane.add(btnBajaUsuario);
     
     JButton btnEliminarUsuario = new JButton("Dar de baja profesor");
@@ -141,7 +141,7 @@ public class Bibliotecario extends JFrame {
         
       }
     });
-    btnEliminarUsuario.setBounds(20, 115, 183, 14);
+    btnEliminarUsuario.setBounds(20, 61, 183, 14);
     contentPane.add(btnEliminarUsuario);
 
     JButton btn= new JButton("Dar de baja alumno");
@@ -155,7 +155,7 @@ public class Bibliotecario extends JFrame {
         
       }
     });
-    btn.setBounds(20, 166, 183, 14);
+    btn.setBounds(249, 61, 183, 14);
     contentPane.add(btn);
     
     JButton btnAyuda = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
@@ -187,15 +187,11 @@ Bibliotecario.this.dispose(); //hago "invisible la clase login"
             
           }
         });
-      btnFicha.setBounds(249, 90, 183, 14);
+      btnFicha.setBounds(249, 111, 183, 14);
       contentPane.add(btnFicha);
       
-      JButton btnEjemplares = new JButton("N\u00BA Ejemplares");
-      btnEjemplares.setBounds(249, 115, 183, 14);
-      contentPane.add(btnEjemplares);
-      
       JButton btnSalas = new JButton("Alquiler de salas");
-      btnSalas.setBounds(249, 141, 183, 14);
+      btnSalas.setBounds(249, 136, 183, 14);
       contentPane.add(btnSalas);
       
      // JButton button = new JButton("Dar de alta profesor");
@@ -213,7 +209,7 @@ Bibliotecario.this.dispose(); //hago "invisible la clase login"
           
         }
       });
-       button.setBounds(20, 90, 183, 14);
+       button.setBounds(20, 36, 183, 14);
        contentPane.add(button);
        
        JButton button_1 = new JButton("Acceder ficha profesor");
@@ -226,21 +222,64 @@ Bibliotecario.this.dispose(); //hago "invisible la clase login"
        		
        	}
        });
-       button_1.setBounds(249, 163, 183, 14);
+       button_1.setBounds(20, 111, 183, 14);
        contentPane.add(button_1);
        
-       JButton button_2 = new JButton("Materiales");
+       JButton button_2 = new JButton("Ejemplares");
        button_2.addActionListener(new ActionListener() {
        	public void actionPerformed(ActionEvent arg0) {
        		
-       		new Materiales().setVisible(true);
+       		new  MaterialesBiblio().setVisible(true);
             Bibliotecario.this.dispose();
             System.out.println("Voy a acceder a los materiales");
        		
        	}
        });
-       button_2.setBounds(20, 216, 183, 14);
+       button_2.setBounds(135, 161, 183, 14);
        contentPane.add(button_2);
+       
+       JButton button_3 = new JButton("Alquilar libro a usuario");
+       button_3.addActionListener(new ActionListener() {
+       	public void actionPerformed(ActionEvent e) {
+       		new AlquilerLibro().setVisible(true);
+            Bibliotecario.this.dispose();
+       	}
+       });
+       button_3.setBounds(20, 186, 183, 14);
+       contentPane.add(button_3);
+       
+       JButton button_4 = new JButton("Alquilar tablet a usuario");
+       button_4.addActionListener(new ActionListener() {
+          	public void actionPerformed(ActionEvent e) {
+          		new AlquilerTablet().setVisible(true);
+               Bibliotecario.this.dispose();
+          	}
+          });
+       button_4.setBounds(249, 186, 183, 14);
+       contentPane.add(button_4);
+       
+       JButton button_5 = new JButton("Devolver tablet de usuario");
+       button_5.addActionListener(new ActionListener() {
+         	public void actionPerformed(ActionEvent e) {
+         		new DevolverTablet().setVisible(true);
+              Bibliotecario.this.dispose();
+         	}
+         });
+       
+       button_5.setBounds(249, 211, 183, 14);
+       contentPane.add(button_5);
+       
+       JButton button_6 = new JButton("Devolver libro de usuario");
+       button_6.addActionListener(new ActionListener() {
+       
+             	public void actionPerformed(ActionEvent e) {
+             		new DevolverLibro().setVisible(true);
+                  Bibliotecario.this.dispose();
+       		
+       	}
+       });
+       button_6.setBounds(20, 211, 183, 14);
+       contentPane.add(button_6);
        
       
       

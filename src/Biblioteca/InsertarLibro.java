@@ -36,8 +36,8 @@ public class InsertarLibro extends JFrame {
 	private JTextField titulo;
 	private JTextField autor;
 	private JTextField signature;
-	private JTextField id;
 	private JTextField reserva;
+	private JTextField asignatura;
    
 	/**
 	 * Launch the application.
@@ -75,12 +75,12 @@ public class InsertarLibro extends JFrame {
 		JLabel label = new JLabel("TITULO");
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label.setForeground(Color.WHITE);
-		label.setBounds(74, 42, 46, 14);
+		label.setBounds(75, 100, 46, 14);
 		contentPane.add(label);
 		
 		titulo = new JTextField();
 		titulo.setColumns(10);
-		titulo.setBounds(206, 42, 114, 14);
+		titulo.setBounds(206, 100, 114, 14);
 		contentPane.add(titulo);
 	
 		
@@ -88,23 +88,25 @@ public class InsertarLibro extends JFrame {
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				String nasignatura = asignatura.getText();
 				String ntitulo= titulo.getText();
-				
 				String nautor = autor.getText();
-				String nreservas = reserva.getText();
 				String nsignatura =signature.getText();
-				String nid = id.getText();
+				String nreservas = "NO";
+				
+				
+				
 			
 
 				
-				if(ntitulo.length()>0 &&  nautor.length()>0 &&  nsignatura.length()>0&& nid.length()>0) { 
+				if(nasignatura.length()>0 && ntitulo.length()>0 &&  nautor.length()>0 &&  nsignatura.length()>0) { 
 					
 		
 						
 							try{
 							
 					
-								funciones.anadirLibros(ntitulo, nautor, nsignatura, nreservas, nid);							
+								funciones.anadirLibros(nasignatura,ntitulo, nautor, nsignatura, nreservas);							
 								//new Usuario().setVisible(true);
 								//	ModificarUsuario1.this.dispose();
 								
@@ -148,7 +150,7 @@ public class InsertarLibro extends JFrame {
 		lblApellidos.setForeground(Color.WHITE);
 		lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		//lblApellidos.setPrompt("Escriba aquí",20);
-		lblApellidos.setBounds(74, 68, 69, 14);
+		lblApellidos.setBounds(74, 125, 69, 14);
 		contentPane.add(lblApellidos);
 		
 	
@@ -171,14 +173,14 @@ public class InsertarLibro extends JFrame {
 		JLabel lblPermisos = new JLabel("SIGNATURE");
 		lblPermisos.setForeground(Color.WHITE);
 		lblPermisos.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPermisos.setBounds(74, 96, 69, 14);
+		lblPermisos.setBounds(74, 158, 69, 14);
 		contentPane.add(lblPermisos);
 		
 		
 		
 		autor = new JTextField();
 		autor.setColumns(10);
-		autor.setBounds(206, 68, 114, 14);
+		autor.setBounds(206, 125, 114, 14);
 		contentPane.add(autor);
 		
 		
@@ -195,15 +197,9 @@ public class InsertarLibro extends JFrame {
 		button.setBounds(370, 11, 24, 23);
 		contentPane.add(button);
 		
-		JLabel lblPassword = new JLabel("ID");
-		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPassword.setForeground(Color.WHITE);
-		lblPassword.setBounds(74, 146, 69, 14);
-		contentPane.add(lblPassword);
-		
 		signature = new JTextField();
 		
-		signature.setBounds(206, 96, 114, 14);
+		signature.setBounds(206, 158, 114, 14);
 		contentPane.add(signature);
 		signature.setColumns(10);
 		
@@ -212,24 +208,30 @@ public class InsertarLibro extends JFrame {
 	    //Fondo
 	    ((JPanel)getContentPane()).setOpaque(false);
 	    
-	    id = new JTextField();
-	    id.setColumns(10);
-	    id.setBounds(206, 146, 114, 14);
-	    contentPane.add(id);
-	    
 	    JLabel label_1 = new JLabel("RESERVA");
 	    label_1.setForeground(Color.WHITE);
 	    label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-	    label_1.setBounds(74, 121, 69, 14);
+	    label_1.setBounds(74, 183, 69, 14);
 	    contentPane.add(label_1);
 	    
 	    reserva = new JTextField();
-	    reserva.setBounds(206, 121, 114, 14);
+	    reserva.setBounds(206, 183, 114, 14);
 	    reserva.setEditable(false);
 		reserva.setText("NO");
 	    contentPane.add(reserva);
 	    
 	    reserva.setColumns(10);
+	    
+	    asignatura = new JTextField();
+	    asignatura.setColumns(10);
+	    asignatura.setBounds(206, 73, 114, 14);
+	    contentPane.add(asignatura);
+	    
+	    JLabel label_2 = new JLabel("ASIGNATURA");
+	    label_2.setForeground(Color.WHITE);
+	    label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+	    label_2.setBounds(75, 73, 46, 14);
+	    contentPane.add(label_2);
 	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
 	    JLabel fondo= new JLabel(); 
 	    fondo.setIcon(uno); 

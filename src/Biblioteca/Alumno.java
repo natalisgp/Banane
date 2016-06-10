@@ -85,7 +85,7 @@ public class Alumno extends JFrame {
 				Alumno.this.dispose(); //hago "invisible la clase login"
 			}
 		});
-		button.setBounds(111, 195, 183, 23);
+		button.setBounds(111, 189, 183, 23);
 		contentPane.add(button);
 		
 		JButton btnLogout = new JButton("Logout");
@@ -98,7 +98,7 @@ public class Alumno extends JFrame {
 				
 			}
 		});
-		btnLogout.setBounds(111, 229, 183, 23);
+		btnLogout.setBounds(111, 223, 183, 23);
 		contentPane.add(btnLogout);
 		
 		JButton ayuda = new JButton(new ImageIcon(getClass().getResource("/Imagenes/ayuda.jpg")));
@@ -121,11 +121,11 @@ public class Alumno extends JFrame {
 	    //Fondo
 	    ((JPanel)getContentPane()).setOpaque(false);
 	    
-	    JButton button_1 = new JButton("Alquiler Libro");
+	    JButton button_1 = new JButton("Disponibilidad Libro");
 	    button_1.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		
-	    		new AlquilerLibro().setVisible(true); //Voy a crear usuario
+	    		new DisponiLibro().setVisible(true); //Voy a crear usuario
 				Alumno.this.dispose(); //hago "invisible la clase login"
 	    		
 	    		
@@ -134,25 +134,17 @@ public class Alumno extends JFrame {
 	    button_1.setBounds(111, 80, 183, 23);
 	    contentPane.add(button_1);
 	    
-	    JButton button_2 = new JButton("Devolver libro");
-	    button_2.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    	}
-	    });
-	    button_2.setBounds(111, 161, 183, 23);
-	    contentPane.add(button_2);
-	    
-	    JButton button_3 = new JButton("Alquiler Tablet");
+	    JButton button_3 = new JButton("Disponibilidad Tablet");
 	    button_3.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		
-	    		new AlquilerTablet().setVisible(true); //Voy a crear usuario
+	    		new DisponiTablet().setVisible(true); //Voy a crear usuario
 				Alumno.this.dispose(); //hago "invisible la clase login"
 	    		
 	    		
 	    	}
 	    });
-	    button_3.setBounds(111, 127, 183, 23);
+	    button_3.setBounds(111, 114, 183, 23);
 	    contentPane.add(button_3);
 	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
 	    JLabel fondo= new JLabel(); 

@@ -1,5 +1,4 @@
-
-	package Biblioteca;
+package Biblioteca;
 
 	import java.awt.BorderLayout;
 	import java.awt.EventQueue;
@@ -27,15 +26,17 @@
 	import java.awt.event.MouseEvent;
 
 
-	public class AlquilerTablet extends JFrame {
+	public class DevolverTablet extends JFrame {
 
 		private JPanel contentPane;
 		private JTextField textField;
 		private JTextField textField_1;
 		public static String ndni;
 		 Calendar calendario = new GregorianCalendar();
-			int hora,minutos,segundos;
-			String reloj;
+			int horaAct,minutos,segundos;
+			String relojActual;
+			String minutosActual;
+		
 			String suma;
 		 String tablet ;
 		
@@ -47,7 +48,7 @@
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						AlquilerLibro frame = new AlquilerLibro();
+						DevolverTablet frame = new DevolverTablet();
 						frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -59,7 +60,7 @@
 		/**
 		 * Create the frame.
 		 */
-		public AlquilerTablet() {
+		public DevolverTablet() {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 450, 300);
 			contentPane = new JPanel();
@@ -74,7 +75,7 @@
 				public void mouseClicked(MouseEvent e) {
 					
 					new Bibliotecario().setVisible(true);
-					AlquilerTablet.this.dispose(); //hago "invisible la clase login"
+					DevolverTablet.this.dispose(); //hago "invisible la clase login"
 					
 				}
 			});
@@ -84,7 +85,7 @@
 			label_2.setBounds(377, 212, 26, 14);
 			contentPane.add(label_2);
 			
-			JLabel lblEliminarUsuario = new JLabel("Alquilar tablet");
+			JLabel lblEliminarUsuario = new JLabel("Devolver tablet");
 			lblEliminarUsuario.setForeground(Color.BLACK);
 			lblEliminarUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
 			lblEliminarUsuario.setBounds(139, 11, 161, 20);
@@ -102,7 +103,7 @@
 				public void actionPerformed(ActionEvent e) {
 					
 					new AyudaEliminarUsuario().setVisible(true); //Voy a crear usuario
-					AlquilerTablet.this.dispose(); //hago "invisible la clase login"
+					DevolverTablet.this.dispose(); //hago "invisible la clase login"
 				}
 			});
 			button.setBounds(377, 22, 26, 23);
@@ -113,7 +114,7 @@
 			textField.setBounds(186, 120, 114, 20);
 			contentPane.add(textField);
 			
-			JButton btnEliminar = new JButton("Alquilar");
+			JButton btnEliminar = new JButton("Devolver");
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -134,7 +135,6 @@
 						solucion="SI";
 						//JOptionPane.showMessageDialog(null, "EL LIBRO ESTA DISPONIBLE");
 				    }else if(reserva.equals("SI")){
-				    	reserva.equals("NO");
 				    	solucion="NO";
 				    	//JOptionPane.showMessageDialog(null, "EL LIBRO NO ESTA DISPONIBLE");
 				    }
@@ -158,57 +158,98 @@
 							
 							//hora
 
-							hora =calendario.get(Calendar.HOUR_OF_DAY);
+							horaAct =calendario.get(Calendar.HOUR_OF_DAY);
 							minutos = calendario.get(Calendar.MINUTE);
 							segundos = calendario.get(Calendar.SECOND);
 							
+							//horaActual =Integer.toString(hora);
+							minutosActual =Integer.toString(minutos);
+							System.out.println(horaAct);
+							
 						
-						    reloj = Integer.toString(hora)+":"+Integer.toString(minutos);
+						    //relojActual = Integer.toString(hora)+":"+Integer.toString(minutos);
 							
 							//Alumno	
 							if(ndni.equals(alumno[2])){ //El permiso 2 para el administrador  	
 								
-								if(alumno[6]==null){
+							    //leo la hora y si se ha pasado multa
+								String hora = alumno[8];
+								
+								int inicio = hora.indexOf(":");
+								int horaPasa=Integer.parseInt(hora.substring(0, inicio));
+								horaPasa+=2;
+								System.out.println(horaPasa);
+								
+								if(horaAct>horaPasa){
+									
+									//Le pongo una multa porque ha entregado la tablet tarde
+									tablet="";
+									String ho= "";
+									String multa = "SI";
+									funciones.devolverTabletAl(tablet,ho,multa,alumno[2]);
+									
+									//le mando un correo porque le he puesto una multa
+									String emailA=alumno[5];
+									System.out.println(emailA);
+									String asunto="MULTA";
+									String texto = "Se le ha multado por no entregar el ejemplar alquilado a tiempo. En un periodo de tres dias no podra realizar un alquiler";
+									funciones m = new funciones();
+									m.SendMail(texto,emailA,asunto);
+									
+									
+									
+								}else{
+									tablet="";
+									String ho= "";
+									String multa = "NO";
+									
+									funciones.devolverTabletAl(tablet,ho,multa,alumno[2]);
+								}
+									
+								//}
+								//String horaPasada = 
+								
 								
 									//pongo la reserva del alumno a si
-								
-									funciones.alquilaAlumnoLibro(tablet, reloj, alumno[2]);
-								}else{
-									solucion="NO";
-									try {
-										funciones.cambiarTablet(solucion,tablet);
-									} catch (SQLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-									
-									
-									JOptionPane.showMessageDialog(null, "Ya tiene alguna reserva y no se puede realizar otra");
-								}
-								//le paso la signatura del libro a reservas y la hora
-								
-								
+									//funciones.alquilaAlumnoLibro(tablet, reloj, alumno[2]);
 							}	
 							//Profesor
 							if(ndni.equals(profesor[2])){ //El permiso 2 para el administrador
 								
-								if(profesor[6]==null){
+								String hora = profesor[8];
 								
-								 //funciones.horaReseProfe(fecha, ndni);
-									funciones.alquilaProfeLibro(tablet, reloj, ndni);
+								int inicio = hora.indexOf(":");
+								int horaPasa=Integer.parseInt(hora.substring(0, inicio));
+								horaPasa+=2;
+								System.out.println(horaPasa);
+								
+								if(horaAct>horaPasa){
+									
+									tablet="";
+									String ho= "";
+									String multa = "SI";
+									funciones.devolverTabletProfe(tablet,ho,multa,profesor[2]);
+									
+									//le mando un correo porque le he puesto una multa
+									String emailProfesor=profesor[5];
+									System.out.println(emailProfesor);
+									String asunto="MULTA";
+									String texto = "Se le ha multado por no entregar el ejemplar alquilado a tiempo. En un periodo de tres dias no podra realizar un alquiler";
+									funciones m = new funciones();
+									m.SendMail(texto,emailProfesor,asunto);
+									
+									
 								}else{
-									solucion="NO";
-									try {
-										funciones.cambiarTablet(solucion,tablet);
-									} catch (SQLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
+									tablet="";
+									String ho= "";
+									String multa = "NO";
 									
+									funciones.devolverTabletProfe(tablet,ho,multa,profesor[2]);
 									
-									JOptionPane.showMessageDialog(null, "Ya tiene alguna reserva y no se puede realizar otra");
+									//le mando un correo porque le he puesto una multa
 								}
-						
+									
+								
 						    }	
 							
 				} catch (SQLException e1) {
