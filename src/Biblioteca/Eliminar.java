@@ -80,7 +80,7 @@ public class Eliminar extends JFrame {
 		JLabel lblAdministrador = new JLabel("Elegir usuario a eliminar");
 		lblAdministrador.setForeground(Color.BLACK);
 		lblAdministrador.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAdministrador.setBounds(167, 11, 102, 14);
+		lblAdministrador.setBounds(136, 20, 151, 14);
 		contentPane.add(lblAdministrador);
 		
 		JButton btnModificarDatosUsuario = new JButton("PROFESOR");

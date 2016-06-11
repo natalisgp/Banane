@@ -120,9 +120,11 @@ public class login extends JFrame {
 									
 									//new nombredelaclase.setVisible(true);
 									System.out.println("Hola soy el administrador");
+								}	
+								}else{	
+									JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");	
 								}
-							}	
-							JOptionPane.showMessageDialog(null, "La contraseña es incorrecta.");
+							
 						
 							
 						}

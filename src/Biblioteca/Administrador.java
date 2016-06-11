@@ -139,28 +139,6 @@ public class Administrador extends JFrame {
 		btnBajaUsuario.setBounds(20, 36, 183, 14);
 		contentPane.add(btnBajaUsuario);
 		
-		JButton btnCargarBackupUsuario = new JButton("Cargar copia seguridad usuario");
-		btnCargarBackupUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				JFileChooser chooser = new JFileChooser("Cargar Backup");
-				chooser.showOpenDialog(null);
-				File archivo2 = chooser.getSelectedFile();
-				
-				try {
-					funciones.cargarBackupAlumno(archivo2);
-				} catch (IOException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				
-				
-			}
-		});
-		btnCargarBackupUsuario.setBounds(20, 175, 186, 14);
-		contentPane.add(btnCargarBackupUsuario);
-		
 		JButton btnAyuda = new JButton(new ImageIcon (this.getClass().getResource("/Imagenes/ayuda.jpg")));
 		btnAyuda.setBorderPainted(false);
 		btnAyuda.addActionListener(new ActionListener() {
@@ -227,14 +205,6 @@ public class Administrador extends JFrame {
 	    button_3.setBounds(229, 114, 183, 14);
 	    contentPane.add(button_3);
 	    
-	    JButton button_4 = new JButton("Cargar copia bibliotecario");
-	    button_4.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    	}
-	    });
-	    button_4.setBounds(20, 200, 186, 14);
-	    contentPane.add(button_4);
-	    
 	    JButton button_6 = new JButton("Enviar email usuario");
 	    button_6.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
@@ -249,7 +219,7 @@ public class Administrador extends JFrame {
 	    contentPane.add(button_6);
 	    
 	    JButton button_7 = new JButton("Ejemplares");
-	    button_7.setBounds(20, 150, 183, 14);
+	    button_7.setBounds(20, 171, 183, 14);
 	    button_7.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		
