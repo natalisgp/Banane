@@ -146,6 +146,19 @@ public class Alumno extends JFrame {
 	    });
 	    button_3.setBounds(111, 114, 183, 23);
 	    contentPane.add(button_3);
+	    
+	    JButton button_2 = new JButton("Alquilar Sala");
+	    button_2.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		
+	    		new DisponiTablet().setVisible(true); //Voy a crear usuario
+				Alumno.this.dispose(); //hago "invisible la clase login"
+	    		
+	    		
+	    	}
+	    });
+	    button_2.setBounds(111, 148, 183, 23);
+	    contentPane.add(button_2);
 	    ImageIcon uno=new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg")); 
 	    JLabel fondo= new JLabel(); 
 	    fondo.setIcon(uno); 

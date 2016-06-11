@@ -113,6 +113,12 @@ public class AnadirProfe extends JFrame {
 								funciones.anadirNuevoProfesor(ndni, nnombre, napellidos, nusername, npermisos, npassword,nemail);							
 								//new Usuario().setVisible(true);
 								//	ModificarUsuario1.this.dispose();
+								String texto ="Buenos días usted se ha dado de alta con exito en el servicio de alta bibliotecario BANANE";
+								String asunto = "Alta en BIBLIOBANANE";
+								funciones m = new funciones();
+								String correo = email.getText();
+								m.SendMail(texto,correo,asunto);
+								
 								System.out.println("Estoy modificando los datos del profesor");
 							
 								JOptionPane.showMessageDialog(null, "Se ha creado un nuevo profesor");

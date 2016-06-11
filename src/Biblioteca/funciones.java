@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -36,6 +38,10 @@ public class funciones {
 	static String gid;
 	static String gcantidad;
 	static Connection db = Connect("BANANE6", "natalia3");
+	
+	static Calendar calendario = new GregorianCalendar();
+	static int hora,minutos,segundos;
+	static String reloj;
   
 	public static Connection Connect(String username, String password){
 		Connection connection=null;
@@ -1421,7 +1427,96 @@ public static void cargarBackupAdm(File archivo2) throws IOException, SQLExcepti
 }
 
 
+static String[][] getSalasTabla() throws SQLException{
+    
+    
+    String query= "Select count(NOMBRE) from SALASTRABAJO";
+    ResultSet rs = ejecutar(query, db);
+    rs.next();
+    int n = rs.getInt("count(NOMBRE)");
+    //rs.next();
+    query="SELECT * FROM SALASTRABAJO";
+    rs = ejecutar(query, db);
+    String caract[][] = new String [n][5];
+    System.out.println(n);
+    
+    int i =0;
+    
+    while (rs.next()){
+      caract[i][0] = rs.getString("Nombre");
+      caract[i][1] = rs.getString("Alumnos");
+      caract[i][2] = rs.getString("Reserva");
+      caract[i][3] = rs.getString("Numero_Reservas");
+      caract[i][4] = rs.getString("Tiempo");
+      i++;
+    }
+    return caract;
+    
+  }
+  
+  //Funcion que coge los datos de la base de datos de la tabla libros
+  static void reservarSalas(String nombre) throws SQLException{
+    int suma = 0;
+    int horaExpira;
+    hora = calendario.get(Calendar.HOUR_OF_DAY);
+    
+      minutos = calendario.get(Calendar.MINUTE);
+     
+      segundos = calendario.get(Calendar.SECOND);
+      System.out.println(hora +" "+ minutos +" "+ segundos);
+     
+      if(hora==22){
+          horaExpira = 0;
+      }else if(hora==23){
+        horaExpira = 1;
+      }else if(hora==24){
+        horaExpira = 2;
+      }else{
+        horaExpira = hora+2;
+      }
+     
+      reloj = Integer.toString(horaExpira)+":"+Integer.toString(minutos);
 
+    boolean flag;
+    
+    String query="SELECT RESERVA FROM SALASTRABAJO WHERE NOMBRE ='"+nombre+"'";
+    String query2="SELECT RESERVA FROM SALASTRABAJO WHERE NOMBRE ='"+nombre+"'";
+    ResultSet rs = ejecutar(query, db);
+    rs.next();
+    
+    String res = rs.getString("RESERVA");
+    
+    if(res.equals("NO"))
+      flag = false;
+    else
+      flag = true;
+    
+    //RESERVADA NO
+    if(!flag){ // !flag  flag == false
+    
+      //String query="UPDATE BIBLIOTECARIO SET NOMBRE = '"+nombre+"', APELLIDOS= '"+apellidos+"', USERNAME= '"+username+"', PERMISOS= "+permisos+" , PASSWORD= '"+password+"' WHERE DNI= '"+dni+"'";
+      String v = "SI";
+      System.out.println(nombre);
+      query="UPDATE SALASTRABAJO SET RESERVA = '"+v+"'WHERE NOMBRE ='"+nombre+"'";
+      
+      query2="UPDATE SALASTRABAJO SET TIEMPO = '"+reloj+"'WHERE NOMBRE ='"+nombre+"'";
+      
+      rs = ejecutar(query, db);
+      rs = ejecutar(query2, db);
+      rs.next();
+    }else{
+      
+      query="SELECT NUMERO_RESERVAS FROM SALASTRABAJO WHERE NOMBRE ='"+nombre+"'";
+      rs = ejecutar(query, db);
+      rs.next();
+      
+      int n = rs.getInt("NUMERO_RESERVAS");
+      suma = n+1;
+      query="UPDATE SALASTRABAJO SET NUMERO_RESERVAS = '"+suma+"'WHERE NOMBRE ='"+nombre+"'";
+      rs = ejecutar(query, db);
+      rs.next();
+    }
+  }
 
 
 
